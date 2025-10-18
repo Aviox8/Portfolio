@@ -1,4 +1,4 @@
-# Developer Portfolio
+# Portfolio
 
 [![Live Demo](https://img.shields.io/badge/demo-live-brightgreen)](https://dev-portfolio.vercel.app)
 [![Vercel](https://img.shields.io/badge/Vercel-Deployed-black?logo=vercel)](https://dev-portfolio.vercel.app)
