@@ -1,82 +1,1105 @@
-/* Animated gradient background utility */
-.animated-gradient-bg {
-  background: linear-gradient(120deg, #00D9FF, #00FF88, #8B5CF6, #F59E0B, #EC4899, #00D9FF);
-  background-size: 200% 200%;
-  animation: gradient-move 8s ease-in-out infinite;
-}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:wght@700;800&display=swap');
 
-@keyframes gradient-move {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Animated gradient divider utility */
-.animated-gradient-divider {
-  height: 4px;
-  width: 100%;
-  border-radius: 2px;
-  background: linear-gradient(90deg, #00D9FF, #00FF88, #8B5CF6, #F59E0B, #EC4899, #00D9FF);
-  background-size: 300% 100%;
-  animation: gradient-divider-move 6s linear infinite;
-}
-
-@keyframes gradient-divider-move {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
-}
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
+/* ============================================================================
+   THEME VARIABLES - BLACK & WHITE WITH ACCENT COLORS
+   ========================================================================== */
 
 :root {
+  /* Light theme */
+  --bg-light: #ffffff;
+  --bg-light-secondary: #f8f9fa;
+  --text-light: #000000;
+  --text-light-muted: #666666;
+  --border-light: #e0e0e0;
+  --accent-light: #0066ff;
+  --accent-secondary-light: #00cc66;
+  
+  /* Dark theme */
+  --bg-dark: #000000;
+  --bg-dark-secondary: #0a0a0a;
+  --text-dark: #ffffff;
+  --text-dark-muted: #999999;
+  --border-dark: #333333;
+  --accent-dark: #00d9ff;
+  --accent-secondary-dark: #00ff88;
+}
+
+[data-theme="light"] {
+  --bg: var(--bg-light);
+  --bg-secondary: var(--bg-light-secondary);
+  --text: var(--text-light);
+  --text-muted: var(--text-light-muted);
+  --border: var(--border-light);
+  --accent: var(--accent-light);
+  --accent-secondary: var(--accent-secondary-light);
+}
+
+[data-theme="dark"] {
+  --bg: var(--bg-dark);
+  --bg-secondary: var(--bg-dark-secondary);
+  --text: var(--text-dark);
+  --text-muted: var(--text-dark-muted);
+  --border: var(--border-dark);
+  --accent: var(--accent-dark);
+  --accent-secondary: var(--accent-secondary-dark);
+}
+
+/* Animated gradient background utility - black & white with subtle accent */
+.animated-gradient-bg {
+  background: linear-gradient(120deg, #00d9ff, #ffffff, #00d9ff);
+  background-size: 200% 200%;
+  animation: gradient-move-bw 12s ease-in-out infinite;
+}
+
+@keyframes gradient-move-bw {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Animated gradient divider utility - minimalist */
+.animated-gradient-divider {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  animation: pulse-line 3s ease-in-out infinite;
+}
+
+@keyframes pulse-line {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+}
+
+/* ============================================================================
+   ENHANCED ANIMATION SYSTEM - SMOOTH & PROFESSIONAL
+   ========================================================================== */
+
+/* Fade & Entrance Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleInStagger {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Text reveal animation */
+@keyframes textReveal {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+/* Enhanced Glow & Hover Effects */
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 40px var(--accent), 0 0 60px var(--accent);
+    opacity: 0.9;
+  }
+}
+
+@keyframes glowPulseSoft {
+  0%, 100% {
+    box-shadow: 0 0 10px var(--accent);
+    opacity: 0.6;
+  }
+  50% {
+    box-shadow: 0 0 20px var(--accent);
+    opacity: 0.8;
+  }
+}
+
+@keyframes hoverGlow {
+  from {
+    filter: drop-shadow(0 0 0px var(--accent));
+  }
+  to {
+    filter: drop-shadow(0 0 15px var(--accent));
+  }
+}
+
+@keyframes neonGlow {
+  0%, 100% {
+    text-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
+  }
+  50% {
+    text-shadow: 0 0 20px var(--accent), 0 0 40px var(--accent);
+  }
+}
+
+/* Button micro-interactions */
+@keyframes buttonPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes buttonPulseMini {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+  100% { transform: scale(1); }
+}
+
+@keyframes buttonShine {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+/* Scroll & Parallax Effects */
+@keyframes parallaxDepth {
+  0% {
+    transform: translateZ(0) translateY(0);
+  }
+  100% {
+    transform: translateZ(20px) translateY(-20px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Rotation & Spin Effects */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spinReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes rotate45 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(45deg); }
+}
+
+/* Gradient animations */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes borderPulse {
+  0%, 100% {
+    border-color: var(--border);
+  }
+  50% {
+    border-color: var(--accent);
+  }
+}
+
+/* Line animations */
+@keyframes lineDraw {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Blink animation */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Loading animations */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+/* Scale animations */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* Parallax scroll effect */
+@keyframes parallaxDepth {
+  from {
+    transform: translateZ(-50px);
+  }
+  to {
+    transform: translateZ(50px);
+  }
+}
+
+/* Utility animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.7s ease-out forwards;
+}
+
+.animate-fade-in-down {
+  animation: fadeInDown 0.7s ease-out forwards;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.7s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.7s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* ============================================================================
+   COMPONENT-SPECIFIC ENHANCEMENTS
+   ========================================================================== */
+
+/* Hover glow effect for interactive elements */
+.hover-glow {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hover-glow:hover {
+  filter: drop-shadow(0 0 8px var(--accent));
+}
+
+/* Enhanced animation utility classes */
+.animate-bounce-slow {
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 3s linear infinite;
+}
+
+.animate-pulse-accent {
+  animation: glowPulseSoft 2s ease-in-out infinite;
+}
+
+.animate-neon-glow {
+  animation: neonGlow 2.5s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, var(--bg) 0%, var(--bg-secondary) 50%, var(--bg) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* ============================================================================
+   ENHANCED RESPONSIVENESS & INTERACTIVE STATES
+   ========================================================================== */
+
+/* Smooth transitions for all interactive elements */
+button, a, [role="button"] {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+button:focus-visible, a:focus-visible, [role="button"]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Enhanced form elements */
+input, textarea, select {
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent);
+  opacity: 0.1;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Enhanced card hover effects */
+.card-hover {
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth text transitions */
+.smooth-transition {
+  transition: all 0.3s ease;
+}
+
+/* Scale on hover */
+.hover-scale {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-scale-sm:hover {
+  transform: scale(1.02);
+}
+
+/* Opacity transitions */
+.hover-opacity {
+  transition: opacity 0.3s ease;
+}
+
+.hover-opacity:hover {
+  opacity: 0.8;
+}
+
+/* Color transitions */
+.hover-color-transition {
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN ENHANCEMENTS
+   ========================================================================== */
+
+/* Mobile-first responsive utilities */
+@media (max-width: 640px) {
+  :root {
+    font-size: 14px;
+  }
+  
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  .hide-on-mobile {
+    display: none !important;
+  }
+  
+  .text-center-mobile {
+    text-align: center;
+  }
+  
+  .px-mobile-sm {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hide-on-tablet {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .show-on-desktop {
+    display: block !important;
+  }
+  
+  .hover-lift {
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-12px);
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  button, a, [role="button"] {
+    min-height: 48px;
+    min-width: 48px;
+    padding: 12px 16px;
+  }
+  
+  .hover-glow:active {
+    filter: drop-shadow(0 0 12px var(--accent));
+  }
+}
+
+/* High-contrast mode support */
+@media (prefers-contrast: more) {
+  :root {
+    --text: #000000;
+    --bg: #ffffff;
+    --border: #000000;
+  }
+  
+  [data-theme="dark"] {
+    --text: #ffffff;
+    --bg: #000000;
+    --border: #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+  .bg-gradient-dark {
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+  }
+}
+
+/* Light mode enhancements */
+@media (prefers-color-scheme: light) {
+  .bg-gradient-light {
+    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+  }
+}
+
+.hover-glow:hover {
+  filter: drop-shadow(0 0 15px var(--primary));
+}
+
+/* Lift effect on hover */
+.hover-lift {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Focus states for accessibility */
+.focus-glow:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 10px var(--primary);
+}
+
+/* Smooth transitions */
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.smooth-transition-fast {
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.smooth-transition-slow {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Text effects */
+.text-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--foreground),
+    var(--primary),
+    var(--foreground)
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: buttonShine 3s linear infinite;
+}
+
+/* Accent color system for deep blue highlights */
+.accent-deep-blue {
+  color: var(--primary);
+}
+
+.accent-deep-blue-bg {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.accent-deep-blue-border {
+  border-color: var(--primary);
+}
+
+.accent-deep-blue-shadow {
+  box-shadow: 0 0 20px rgba(0, 102, 255, 0.3);
+}
+
+/* ============================================================================
+   TYPOGRAPHY & READABILITY
+   ========================================================================== */
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -0.5px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  line-height: 1.2;
+}
+
+p {
+  line-height: 1.6;
+}
+
+code, pre {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ============================================================================
+   ACCESSIBILITY ENHANCEMENTS
+   ========================================================================== */
+
+/* High contrast outline for focus states */
+@media (prefers-contrast: high) {
+  *:focus-visible {
+    outline: 3px solid var(--primary) !important;
+    outline-offset: 3px !important;
+  }
+}
+
+/* Ensure adequate color contrast */
+@media (prefers-contrast: more) {
+  body {
+    --foreground: #000000;
+    --card: #f0f0f0;
+  }
+}
+
+/* Keyboard navigation highlighting */
+*:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* ============================================================================
+   INTERACTIVE ELEMENT ENHANCEMENTS
+   ========================================================================== */
+
+/* Enhanced link styles */
+a {
+  color: var(--primary);
+  transition: color 0.2s ease-out;
+  text-decoration: none;
+  position: relative;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* Form field enhancements */
+input[type="text"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+  background-color: var(--input-background);
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius);
+  font-size: inherit;
+  transition: all 0.2s ease-out;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary, #0066ff)20;
+}
+
+input[type="text"]:disabled,
+input[type="email"]:disabled,
+textarea:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Checkbox & radio enhancements */
+input[type="checkbox"],
+input[type="radio"] {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+/* ============================================================================
+   SECTION & CONTAINER ENHANCEMENTS
+   ========================================================================== */
+
+section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Section separators */
+section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border),
+    transparent
+  );
+}
+
+/* Staggered animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* ============================================================================
+   RESPONSIVE DESIGN UTILITIES
+   ========================================================================== */
+
+/* Container queries fallback */
+@supports not (container-type: inline-size) {
+  @container (min-width: 768px) {
+    .md-container\\:flex {
+      display: flex;
+    }
+  }
+}
+
+/* Safe spacing for mobile devices */
+@media (max-width: 640px) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-bottom {
+    margin-bottom: env(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print,
+  .no-print * {
+    display: none !important;
+  }
+  
+  body {
+    background-color: white;
+    color: black;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+}
+
+/* ============================================================================
+   DARK MODE & LIGHT MODE SPECIFIC ENHANCEMENTS
+   ========================================================================== */
+
+/* Smooth backdrop blur for glass morphism */
+.backdrop-blur-glass {
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+}
+
+/* Enhanced selection for readability */
+html[data-theme="light"]::selection {
+  background-color: var(--primary);
+  color: white;
+}
+
+html[data-theme="dark"]::selection {
+  background-color: var(--primary);
+  color: black;
+}
+
+/* ============================================================================
+   SCROLLBAR STYLING
+   ========================================================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+  transition: background 0.2s ease-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-color: var(--primary) var(--background);
+  scrollbar-width: thin;
+}
+
+/* ============================================================================
+   ANIMATION PERFORMANCE & OPTIMIZATION
+   ========================================================================== */
+
+/* GPU acceleration for smooth animations */
+.will-animate {
+  will-change: transform, opacity;
+}
+
+.will-animate-transform {
+  will-change: transform;
+}
+
+.will-animate-opacity {
+  will-change: opacity;
+}
+
+/* Backface visibility for 3D transforms */
+.preserve-3d {
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+}
+
+
+:root, :host {
   --font-size: 16px;
-  --background: #0A0A0A;
+  --radius: 0.75rem;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  
+  /* Default dark theme colors */
+  --background: #000000;
   --foreground: #ffffff;
-  --card: #1A1A1A;
+  --card: #0a0a0a;
   --card-foreground: #ffffff;
-  --popover: #1A1A1A;
+  --popover: #0a0a0a;
   --popover-foreground: #ffffff;
   --primary: #00D9FF;
-  --primary-foreground: #0A0A0A;
+  --primary-foreground: #000000;
   --secondary: #00FF88;
-  --secondary-foreground: #0A0A0A;
-  --muted: #2A2A2A;
+  --secondary-foreground: #000000;
+  --muted: #1a1a1a;
   --muted-foreground: #888888;
   --accent: #00D9FF;
-  --accent-foreground: #0A0A0A;
+  --accent-foreground: #000000;
   --destructive: #ff3366;
   --destructive-foreground: #ffffff;
   --border: rgba(255, 255, 255, 0.1);
   --input: rgba(255, 255, 255, 0.05);
-  --input-background: #1A1A1A;
-  --switch-background: #2A2A2A;
-  --font-weight-medium: 500;
-  --font-weight-normal: 400;
+  --input-background: #0a0a0a;
+  --switch-background: #1a1a1a;
   --ring: #00D9FF;
   --chart-1: #00D9FF;
   --chart-2: #00FF88;
   --chart-3: #8B5CF6;
   --chart-4: #F59E0B;
   --chart-5: #EC4899;
-  --radius: 0.75rem;
-  --sidebar: #1A1A1A;
+  --sidebar: #0a0a0a;
   --sidebar-foreground: #ffffff;
   --sidebar-primary: #00D9FF;
-  --sidebar-primary-foreground: #0A0A0A;
-  --sidebar-accent: #2A2A2A;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #1a1a1a;
   --sidebar-accent-foreground: #ffffff;
   --sidebar-border: rgba(255, 255, 255, 0.1);
   --sidebar-ring: #00D9FF;
+}
+
+/* Light theme */
+html[data-theme="light"], 
+html[data-theme="light"] * {
+  --background: #ffffff !important;
+  --foreground: #000000 !important;
+  --card: #f8f8f8 !important;
+  --card-foreground: #000000 !important;
+  --popover: #ffffff !important;
+  --popover-foreground: #000000 !important;
+  --primary: #0066ff !important;
+  --primary-foreground: #ffffff !important;
+  --secondary: #00cc66 !important;
+  --secondary-foreground: #ffffff !important;
+  --muted: #f0f0f0 !important;
+  --muted-foreground: #666666 !important;
+  --accent: #0066ff !important;
+  --accent-foreground: #ffffff !important;
+  --destructive: #ff0033 !important;
+  --destructive-foreground: #ffffff !important;
+  --border: rgba(0, 0, 0, 0.1) !important;
+  --input: rgba(0, 0, 0, 0.05) !important;
+  --input-background: #f8f8f8 !important;
+  --switch-background: #e8e8e8 !important;
+  --ring: #0066ff !important;
+  --chart-1: #0066ff !important;
+  --chart-2: #00cc66 !important;
+  --chart-3: #8B5CF6 !important;
+  --chart-4: #F59E0B !important;
+  --chart-5: #ff0066 !important;
+  --sidebar: #f8f8f8 !important;
+  --sidebar-foreground: #000000 !important;
+  --sidebar-primary: #0066ff !important;
+  --sidebar-primary-foreground: #ffffff !important;
+  --sidebar-accent: #f0f0f0 !important;
+  --sidebar-accent-foreground: #000000 !important;
+  --sidebar-border: rgba(0, 0, 0, 0.1) !important;
+  --sidebar-ring: #0066ff !important;
+}
+
+/* Dark theme (explicit) */
+html[data-theme="dark"],
+html[data-theme="dark"] * {
+  --background: #000000 !important;
+  --foreground: #ffffff !important;
+  --card: #0a0a0a !important;
+  --card-foreground: #ffffff !important;
+  --popover: #0a0a0a !important;
+  --popover-foreground: #ffffff !important;
+  --primary: #00D9FF !important;
+  --primary-foreground: #000000 !important;
+  --secondary: #00FF88 !important;
+  --secondary-foreground: #000000 !important;
+  --muted: #1a1a1a !important;
+  --muted-foreground: #888888 !important;
+  --accent: #00D9FF !important;
+  --accent-foreground: #000000 !important;
+  --destructive: #ff3366 !important;
+  --destructive-foreground: #ffffff !important;
+  --border: rgba(255, 255, 255, 0.1) !important;
+  --input: rgba(255, 255, 255, 0.05) !important;
+  --input-background: #0a0a0a !important;
+  --switch-background: #1a1a1a !important;
+  --ring: #00D9FF !important;
+  --chart-1: #00D9FF !important;
+  --chart-2: #00FF88 !important;
+  --chart-3: #8B5CF6 !important;
+  --chart-4: #F59E0B !important;
+  --chart-5: #EC4899 !important;
+  --sidebar: #0a0a0a !important;
+  --sidebar-foreground: #ffffff !important;
+  --sidebar-primary: #00D9FF !important;
+  --sidebar-primary-foreground: #000000 !important;
+  --sidebar-accent: #1a1a1a !important;
+  --sidebar-accent-foreground: #ffffff !important;
+  --sidebar-border: rgba(255, 255, 255, 0.1) !important;
+  --sidebar-ring: #00D9FF !important;
 }
 
 html[data-theme] {
@@ -93,15 +1116,22 @@ html[data-theme] {
 /* Base styles come from Tailwind output (index.css). Removing Tailwind-specific @layer/@apply. */
 
 /* Glassmorphism utility */
-
 .glass {
   position: relative;
-  background: rgba(26, 26, 26, 0.45);
-  border: 1.5px solid rgba(255, 255, 255, 0.13);
-  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18), 0 1.5px 8px 0 rgba(0,217,255,0.04);
-  backdrop-filter: blur(18px) saturate(1.2);
-  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  background: rgba(10, 10, 10, 0.5);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.2), 0 1.5px 8px 0 rgba(0,217,255,0.05);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
   overflow: hidden;
+}
+
+[data-theme="light"] .glass {
+  background: rgba(248, 248, 248, 0.7);
+  border: 1.5px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.08), 0 1.5px 8px 0 rgba(0,102,255,0.05);
+  backdrop-filter: blur(20px) saturate(1.2);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
 }
 .glass::before {
   content: '';
@@ -133,21 +1163,22 @@ html[data-theme] {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0A0A0A;
+  background: var(--background);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #2A2A2A;
-  border-radius: 4px;
+  background: var(--muted);
+  border-radius: 6px;
+  border: 2px solid var(--background);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #00D9FF;
+  background: var(--primary);
 }
 
 /* Enhanced focus states for accessibility */
@@ -176,8 +1207,8 @@ a:focus-visible,
 
 /* Improved text selection */
 ::selection {
-  background-color: rgba(0, 217, 255, 0.3);
-  color: #ffffff;
+  background-color: var(--primary);
+  color: var(--primary-foreground);
 }
 
 /* High contrast mode support */
@@ -191,14 +1222,18 @@ a:focus-visible,
 /* Mobile-first responsive optimizations */
 html {
   font-size: var(--font-size);
-  -webkit-tap-highlight-color: rgba(0, 217, 255, 0.2);
+  -webkit-tap-highlight-color: transparent;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 body {
   overscroll-behavior-y: none; /* Prevent pull-to-refresh on mobile */
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 /* Touch-friendly tap targets (minimum 44x44px for accessibility) */

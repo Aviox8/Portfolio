@@ -10,25 +10,43 @@ interface ThemeContextProps {
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>('system');
-
-  useEffect(() => {
-    // Load from localStorage
+  const [theme, setThemeState] = useState<Theme>(() => {
+    // Initialize from localStorage or default to 'system'
     const stored = localStorage.getItem('theme') as Theme | null;
-    if (stored) setThemeState(stored);
-  }, []);
+    return stored || 'system';
+  });
 
   useEffect(() => {
-    let applied = theme;
+    const applyTheme = () => {
+      let applied = theme;
+      if (theme === 'system') {
+        const mq = window.matchMedia('(prefers-color-scheme: dark)');
+        applied = mq.matches ? 'dark' : 'light';
+      }
+      
+      // Apply theme to HTML element
+      document.documentElement.setAttribute('data-theme', applied);
+      console.log('🎨 Theme applied:', applied, 'from mode:', theme);
+      console.log('📍 data-theme attribute:', document.documentElement.getAttribute('data-theme'));
+    };
+
+    // Apply immediately on mount
+    applyTheme();
+    localStorage.setItem('theme', theme);
+
+    // Listen for system theme changes when in system mode
     if (theme === 'system') {
       const mq = window.matchMedia('(prefers-color-scheme: dark)');
-      applied = mq.matches ? 'dark' : 'light';
+      const handleChange = () => applyTheme();
+      mq.addEventListener('change', handleChange);
+      return () => mq.removeEventListener('change', handleChange);
     }
-    document.documentElement.setAttribute('data-theme', applied);
-    localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const setTheme = (t: Theme) => setThemeState(t);
+  const setTheme = (t: Theme) => {
+    console.log('🔄 Setting theme to:', t);
+    setThemeState(t);
+  };
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>

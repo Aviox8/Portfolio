@@ -1,7 +1,7 @@
 {
       "name": "dev-portfolio",
-      "version": "1.0.0",
-      "description": "Modern developer portfolio built with React, TypeScript, Vite, and Three.js",
+      "version": "1.1.0",
+      "description": "Modern developer portfolio built with React, TypeScript, Vite, and Three.js with theme switching support",
       "author": "Gaurav Yadav <gauravramyadav@gmail.com>",
       "license": "MIT",
       "repository": {
@@ -23,7 +23,10 @@
             "3d",
             "webgl",
             "vercel",
-            "pwa"
+            "pwa",
+            "theme-switcher",
+            "dark-mode",
+            "light-mode"
       ],
       "private": false,
       "type": "module",
@@ -94,7 +97,9 @@
             "build": "vite build",
             "preview": "vite preview",
             "lint": "tsc --noEmit",
-            "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\""
+            "format": "prettier --write \"src/**/*.{ts,tsx,css,md}\"",
+            "type-check": "tsc --noEmit",
+            "clean": "rimraf dist"
       },
       "engines": {
             "node": ">=18.0.0",

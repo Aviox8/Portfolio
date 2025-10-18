@@ -4,6 +4,7 @@ import { Card } from './ui/card';
 import { BookOpen, Award, MapPin, Briefcase, Code2, Shield } from 'lucide-react';
 import profileImage from '../assets/gaurav.png';
 import { Button } from './ui/button';
+import { useTheme } from '../theme';
 import type { LucideIcon } from 'lucide-react';
 
 // ==================== CONSTANTS ====================
@@ -72,6 +73,7 @@ InfoItem.displayName = 'InfoItem';
 
 // ==================== MAIN COMPONENT ====================
 export function BentoAbout() {
+  const { theme } = useTheme();
   const prefersReducedMotion = useReducedMotion();
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
@@ -163,11 +165,16 @@ export function BentoAbout() {
               )}
 
               <motion.div 
-                className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/95 via-[#0A0A0A]/30 to-transparent z-20"
+                className="absolute inset-0 z-20"
                 initial={{ opacity: 0.8 }}
                 whileHover={{ opacity: 1 }}
                 transition={{ duration: 0.3 }}
                 aria-hidden="true"
+                style={{
+                  background: theme === 'light'
+                    ? 'linear-gradient(to top, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.3) 40%, transparent 100%)'
+                    : 'linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.3) 40%, transparent 100%)'
+                }}
               />
               
               <div className="absolute bottom-0 left-0 right-0 p-6 z-30">

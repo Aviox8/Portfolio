@@ -77,7 +77,7 @@ export function Navigation() {
           </motion.button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
@@ -189,7 +189,8 @@ export function Navigation() {
                   aria-modal="true"
                 >
                   <div className="flex flex-col h-full">
-                    <div className="flex justify-end mb-4">
+                    <div className="flex justify-between items-center mb-6">
+                      <h2 className="text-lg font-semibold">Menu</h2>
                       <ThemeToggle />
                     </div>
                 {/* Close button - Touch optimized */}

@@ -6,9 +6,10 @@ import { motion, useMotionValue, animate } from 'framer-motion';
 import { Button } from './ui/button';
 import { Github, Linkedin, Mail, ArrowDown, Sparkles, Code2, Shield } from 'lucide-react';
 import { getDevicePerformance, isMobile, isTouchDevice } from '../utils/deviceDetection';
+import { useTheme } from '../theme';
 
 // Morphing mesh with mouse-follow light (optimized for performance)
-const AnimatedSphere = memo(({ performance }: { performance: 'low' | 'medium' | 'high' }) => {
+const AnimatedSphere = memo(({ performance, primaryColor = "#00D9FF", secondaryColor = "#00FF88" }: { performance: 'low' | 'medium' | 'high'; primaryColor?: string; secondaryColor?: string }) => {
   const meshRef = useRef<any>(null);
   const lightRef = useRef<any>(null);
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
@@ -56,7 +57,7 @@ const AnimatedSphere = memo(({ performance }: { performance: 'low' | 'medium' | 
       <mesh ref={meshRef} scale={performance === 'low' ? 2 : 2.5}>
         <icosahedronGeometry args={[1, geometryDetail]} />
         <MeshDistortMaterial
-          color="#00D9FF"
+          color={primaryColor}
           attach="material"
           distort={0.5}
           speed={1.9}
@@ -65,7 +66,7 @@ const AnimatedSphere = memo(({ performance }: { performance: 'low' | 'medium' | 
         />
       </mesh>
       {/* Mouse-follow light */}
-      <pointLight ref={lightRef} intensity={1.2} distance={8} color="#00FF88" position={[0,0,3]} />
+      <pointLight ref={lightRef} intensity={1.2} distance={8} color={secondaryColor} position={[0,0,3]} />
     </Float>
   );
 });
@@ -115,13 +116,13 @@ const Particles = memo(({ performance }: { performance: 'low' | 'medium' | 'high
 
 Particles.displayName = 'Particles';
 
-const Scene = memo(({ performance }: { performance: 'low' | 'medium' | 'high' }) => (
+const Scene = memo(({ performance, primaryColor = "#00D9FF", secondaryColor = "#00FF88" }: { performance: 'low' | 'medium' | 'high'; primaryColor?: string; secondaryColor?: string }) => (
   <>
     <ambientLight intensity={0.5} />
     <directionalLight position={[10, 10, 5]} intensity={1} />
-    <pointLight position={[-10, -10, -5]} intensity={0.5} color="#00FF88" />
+    <pointLight position={[-10, -10, -5]} intensity={0.5} color={secondaryColor} />
     <Particles performance={performance} />
-    <AnimatedSphere performance={performance} />
+    <AnimatedSphere performance={performance} primaryColor={primaryColor} secondaryColor={secondaryColor} />
     <OrbitControls 
       enableZoom={false} 
       enablePan={false} 
@@ -136,12 +137,17 @@ const Scene = memo(({ performance }: { performance: 'low' | 'medium' | 'high' })
 Scene.displayName = 'Scene';
 
 export function Hero3D() {
+  const { theme } = useTheme();
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [devicePerformance, setDevicePerformance] = useState<'low' | 'medium' | 'high'>('medium');
   const [shouldRender3D, setShouldRender3D] = useState(true);
   const words = ['Secure', 'Scalable', 'Modern', 'Interactive'];
+  
+  // Determine colors based on theme
+  const primaryColor = theme === 'light' ? '#0066ff' : '#00D9FF';
+  const secondaryColor = theme === 'light' ? '#00cc66' : '#00FF88';
   
   const count = useMotionValue(0);
 
@@ -229,13 +235,20 @@ export function Hero3D() {
               depth: true
             }}
           >
-            <Scene performance={devicePerformance} />
+            <Scene performance={devicePerformance} primaryColor={primaryColor} secondaryColor={secondaryColor} />
           </Canvas>
         </div>
       )}
 
       {/* Gradient Overlay for readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0A0A0A]/70 via-[#0A0A0A]/80 to-[#0A0A0A] z-10" />
+      <div 
+        className="absolute inset-0 z-10" 
+        style={{
+          background: theme === 'light'
+            ? 'linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.8) 30%, rgba(255,255,255,0.8) 70%, rgba(255,255,255,1) 100%)'
+            : 'linear-gradient(to bottom, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.8) 30%, rgba(10,10,10,0.8) 70%, rgba(10,10,10,1) 100%)'
+        }}
+      />
 
       {/* Content */}
       <div className="relative z-20 max-w-7xl mx-auto px-6 text-center pt-20">

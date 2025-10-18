@@ -187,8 +187,7 @@ export function TerminalContact() {
                   href="mailto:gauravramyadav@gmail.com" 
                   className="text-primary hover:underline focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background rounded"
                 >
-                  contact@example.com
-                </a>
+                  gauravramyadav@gmail.com   </a>
               </p>
               <p className="text-muted-foreground pl-4">
                 → GitHub:{' '}

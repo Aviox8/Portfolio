@@ -1,16 +1,24 @@
 import * as React from "react";
+import { motion } from "framer-motion";
 
 import { cn } from "./utils";
 
 function Card({ className, ...props }: React.ComponentProps<"div">) {
+  const { ref, ...rest } = props as any;
   return (
-    <div
+    <motion.div
+      ref={ref}
       data-slot="card"
       className={cn(
-        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border",
+        "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border border-border smooth-transition hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10",
         className,
       )}
-      {...props}
+      whileHover={{ y: -4 }}
+      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      {...rest}
     />
   );
 }

@@ -1,8 +1,10 @@
 import { Github, Linkedin, Mail, Heart, ArrowUp } from 'lucide-react';
 import { Button } from './ui/button';
 import { motion } from 'framer-motion';
+import { useTheme } from '../theme';
 
 export function Footer() {
+  const { theme } = useTheme();
   const year = new Date().getFullYear();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -24,7 +26,14 @@ export function Footer() {
       />
 
       {/* Let's Build Together Section */}
-      <div className="py-20 px-6 bg-gradient-to-b from-transparent to-[#0A0A0A]">
+      <div 
+        style={{
+          background: theme === 'light'
+            ? 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.5))'
+            : 'linear-gradient(to bottom, transparent, rgba(10,10,10,1))'
+        }}
+        className="py-20 px-6"
+      >
         <div className="max-w-5xl mx-auto text-center">
           <motion.h2 
             className="gradient-text inline-block text-4xl font-bold"

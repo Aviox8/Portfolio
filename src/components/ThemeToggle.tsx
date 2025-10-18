@@ -1,33 +1,52 @@
 import { useTheme, Theme } from '../theme';
 import { Sun, Moon, Monitor } from 'lucide-react';
 
-const icons = {
-  light: <Sun className="w-5 h-5" />, 
-  dark: <Moon className="w-5 h-5" />, 
-  system: <Monitor className="w-5 h-5" />
-};
-
-const labels = {
-  light: 'Light',
-  dark: 'Dark',
-  system: 'System'
-};
+const themeConfig = [
+  { value: 'light' as Theme, icon: Sun, label: 'Light' },
+  { value: 'dark' as Theme, icon: Moon, label: 'Dark' },
+  { value: 'system' as Theme, icon: Monitor, label: 'System' }
+];
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme();
 
+  const handleThemeChange = (newTheme: Theme) => {
+    console.log('🎨 Theme changing to:', newTheme);
+    setTheme(newTheme);
+  };
+
   return (
-    <div className="flex items-center gap-1">
-      {(['light', 'dark', 'system'] as Theme[]).map((t) => (
-        <button
-          key={t}
-          aria-label={`Switch to ${labels[t]} theme`}
-          className={`p-2 rounded-full border border-white/10 bg-white/5 hover:bg-primary/10 transition-all focus-visible:ring-2 focus-visible:ring-primary ${theme === t ? 'ring-2 ring-primary' : ''}`}
-          onClick={() => setTheme(t)}
-        >
-          {icons[t]}
-        </button>
-      ))}
+    <div 
+      className="flex items-center gap-0.5 p-1.5 rounded-lg border transition-all duration-200"
+      style={{ 
+        backgroundColor: 'var(--muted)',
+        borderColor: 'var(--border)'
+      }}
+      role="group" 
+      aria-label="Theme switcher"
+    >
+      {themeConfig.map(({ value, icon: Icon, label }) => {
+        const isActive = theme === value;
+        return (
+          <button
+            key={value}
+            aria-label={`Switch to ${label} theme`}
+            aria-pressed={isActive}
+            title={`${label} Mode`}
+            onClick={() => handleThemeChange(value)}
+            type="button"
+            className="p-2 rounded transition-all duration-200 hover:scale-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2"
+            style={{
+              backgroundColor: isActive ? 'var(--primary)' : 'var(--background)',
+              color: isActive ? 'var(--primary-foreground)' : 'var(--foreground)',
+              opacity: isActive ? 1 : 0.65,
+              boxShadow: isActive ? '0 2px 8px var(--primary)' : 'none'
+            }}
+          >
+            <Icon className="w-4 h-4" strokeWidth={2.5} />
+          </button>
+        );
+      })}
     </div>
   );
 }
