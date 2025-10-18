@@ -1,0 +1,29 @@
+{
+  "name": "Gaurav - Developer Portfolio",
+  "short_name": "Gaurav",
+  "description": "Modern developer portfolio showcasing projects, experience, and skills. Built with React, TypeScript, Three.js, and cutting-edge web technologies.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#00D9FF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["portfolio", "technology", "developer"],
+  "lang": "en-US",
+  "dir": "ltr",
+  "prefer_related_applications": false
+}

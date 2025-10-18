@@ -1,0 +1,267 @@
+/* Animated gradient background utility */
+.animated-gradient-bg {
+  background: linear-gradient(120deg, #00D9FF, #00FF88, #8B5CF6, #F59E0B, #EC4899, #00D9FF);
+  background-size: 200% 200%;
+  animation: gradient-move 8s ease-in-out infinite;
+}
+
+@keyframes gradient-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Animated gradient divider utility */
+.animated-gradient-divider {
+  height: 4px;
+  width: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #00D9FF, #00FF88, #8B5CF6, #F59E0B, #EC4899, #00D9FF);
+  background-size: 300% 100%;
+  animation: gradient-divider-move 6s linear infinite;
+}
+
+@keyframes gradient-divider-move {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+
+:root {
+  --font-size: 16px;
+  --background: #0A0A0A;
+  --foreground: #ffffff;
+  --card: #1A1A1A;
+  --card-foreground: #ffffff;
+  --popover: #1A1A1A;
+  --popover-foreground: #ffffff;
+  --primary: #00D9FF;
+  --primary-foreground: #0A0A0A;
+  --secondary: #00FF88;
+  --secondary-foreground: #0A0A0A;
+  --muted: #2A2A2A;
+  --muted-foreground: #888888;
+  --accent: #00D9FF;
+  --accent-foreground: #0A0A0A;
+  --destructive: #ff3366;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.05);
+  --input-background: #1A1A1A;
+  --switch-background: #2A2A2A;
+  --font-weight-medium: 500;
+  --font-weight-normal: 400;
+  --ring: #00D9FF;
+  --chart-1: #00D9FF;
+  --chart-2: #00FF88;
+  --chart-3: #8B5CF6;
+  --chart-4: #F59E0B;
+  --chart-5: #EC4899;
+  --radius: 0.75rem;
+  --sidebar: #1A1A1A;
+  --sidebar-foreground: #ffffff;
+  --sidebar-primary: #00D9FF;
+  --sidebar-primary-foreground: #0A0A0A;
+  --sidebar-accent: #2A2A2A;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: rgba(255, 255, 255, 0.1);
+  --sidebar-ring: #00D9FF;
+}
+
+html[data-theme] {
+  transition: background 0.4s, color 0.4s, border-color 0.4s, box-shadow 0.4s;
+}
+
+/* Smooth transition for all color variables */
+* {
+  transition: color 0.3s, background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Tokens are defined in Tailwind's generated index.css; removing unsupported @theme block. */
+
+/* Base styles come from Tailwind output (index.css). Removing Tailwind-specific @layer/@apply. */
+
+/* Glassmorphism utility */
+
+.glass {
+  position: relative;
+  background: rgba(26, 26, 26, 0.45);
+  border: 1.5px solid rgba(255, 255, 255, 0.13);
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.18), 0 1.5px 8px 0 rgba(0,217,255,0.04);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+  overflow: hidden;
+}
+.glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(120deg, rgba(255,255,255,0.08) 0%, rgba(0,217,255,0.04) 100%);
+  z-index: 1;
+}
+.glass::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.18;
+  z-index: 2;
+  background-image: url('data:image/svg+xml;utf8,<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch"/></filter><rect width="120" height="120" filter="url(%23noiseFilter)"/></svg>');
+  background-size: 200px 200px;
+  background-repeat: repeat;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #00D9FF 0%, #00FF88 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2A2A2A;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00D9FF;
+}
+
+/* Enhanced focus states for accessibility */
+*:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring), transparent 60%);
+  border-color: color-mix(in oklab, var(--ring), transparent 70%);
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Improved text selection */
+::selection {
+  background-color: rgba(0, 217, 255, 0.3);
+  color: #ffffff;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass {
+    background: rgba(26, 26, 26, 0.95);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+  }
+}
+
+/* Mobile-first responsive optimizations */
+html {
+  font-size: var(--font-size);
+  -webkit-tap-highlight-color: rgba(0, 217, 255, 0.2);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  overscroll-behavior-y: none; /* Prevent pull-to-refresh on mobile */
+}
+
+/* Touch-friendly tap targets (minimum 44x44px for accessibility) */
+.touch-manipulation {
+  touch-action: manipulation; /* Prevents double-tap zoom */
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Improved mobile viewport handling */
+@supports (height: 100dvh) {
+  .min-h-screen {
+    min-height: 100dvh; /* Dynamic viewport height for mobile browsers */
+  }
+}
+
+/* Safe area insets for notched devices */
+@supports (padding: env(safe-area-inset-top)) {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Performance optimization: GPU acceleration for animations */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* Smooth scrolling for modern browsers */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Optimize for low bandwidth */
+@media (prefers-reduced-data: reduce) {
+  .animated-gradient-bg {
+    animation: none;
+    background: linear-gradient(120deg, #00D9FF, #00FF88);
+  }
+  
+  .animated-gradient-divider {
+    animation: none;
+  }
+}
+
+/* Responsive typography scaling */
+@media (max-width: 640px) {
+  :root {
+    --font-size: 14px;
+  }
+}
+
+@media (min-width: 1920px) {
+  :root {
+    --font-size: 18px;
+  }
+}
