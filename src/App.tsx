@@ -1,6 +1,6 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ThemeProvider } from './theme';
+import { ThemeProvider, useTheme } from './theme';
 import { Navigation } from './components/Navigation';
 import { ScrollProgress } from './components/ScrollProgress';
 import { Toaster } from './components/ui/sonner';
@@ -18,13 +18,17 @@ const BackToTop = lazy(() => import('./components/BackToTop').then(module => ({ 
 // Loading fallback component
 const LoadingFallback = () => (
   <div className="flex items-center justify-center min-h-[200px]">
-    <div className="w-8 h-8 border-2 border-[#00D9FF] border-t-transparent rounded-full animate-spin" />
+    <div className="w-8 h-8 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
   </div>
 );
 
-export default function App() {
+const AppContent = () => {
+  const { theme } = useTheme();
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  
+  // Determine cursor color based on theme
+  const cursorColor = theme === 'light' ? '#0066ff' : '#00D9FF';
 
   useEffect(() => {
     // Set meta tags for SEO
@@ -62,8 +66,13 @@ export default function App() {
   }, []);
 
   return (
-    <ThemeProvider>
-      <div className="min-h-screen bg-[#0A0A0A] text-white relative overflow-hidden">
+    <div 
+      className="min-h-screen relative overflow-hidden"
+      style={{
+        backgroundColor: 'var(--background)',
+        color: 'var(--foreground)'
+      }}
+    >
   {/* Scroll Progress Bar */}
       <ScrollProgress />
       
@@ -76,7 +85,7 @@ export default function App() {
           className="fixed pointer-events-none z-50 w-96 h-96 rounded-full opacity-20 blur-3xl hidden md:block"
           animate={{ x: cursorPosition.x - 192, y: cursorPosition.y - 192 }}
           transition={{ type: 'spring', stiffness: 140, damping: 18, mass: 0.5 }}
-          style={{ background: 'radial-gradient(circle, #00D9FF 0%, transparent 70%)' }}
+          style={{ background: `radial-gradient(circle, ${cursorColor} 0%, transparent 70%)` }}
         />
       )}
 
@@ -88,7 +97,8 @@ export default function App() {
             linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)
           `,
-          backgroundSize: '50px 50px'
+          backgroundSize: '50px 50px',
+          opacity: 0.05
         }}
       />
 
@@ -185,13 +195,20 @@ export default function App() {
         position="bottom-right" 
         toastOptions={{
           style: {
-            background: '#1A1A1A',
-            color: '#ffffff',
-            border: '1px solid rgba(255, 255, 255, 0.1)'
+            background: 'var(--card)',
+            color: 'var(--card-foreground)',
+            border: '1px solid var(--border)'
           }
         }}
       />
     </div>
+  );
+};
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <AppContent />
     </ThemeProvider>
   );
 }
