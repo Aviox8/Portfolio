@@ -5,11 +5,16 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
 
-const iconMap: Record<string, React.ReactNode> = {
-  github: <Github size={20} />,
-  linkedin: <Linkedin size={20} />,
-  mail: <Mail size={20} />,
-  twitter: <ExternalLink size={20} />,
+type IconKey = 'github' | 'linkedin' | 'mail' | 'twitter';
+
+const getIcon = (key: IconKey) => {
+  const icons: Record<IconKey, React.ReactNode> = {
+    github: <Github size={20} />,
+    linkedin: <Linkedin size={20} />,
+    mail: <Mail size={20} />,
+    twitter: <ExternalLink size={20} />,
+  };
+  return icons[key];
 };
 
 export const SocialLinks = () => {
@@ -41,7 +46,7 @@ export const SocialLinks = () => {
               repeat: Infinity,
             }}
           >
-            {iconMap[social.icon]}
+            {getIcon(social.icon as IconKey)}
           </motion.div>
         </motion.a>
       ))}
