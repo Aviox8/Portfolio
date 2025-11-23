@@ -38,7 +38,7 @@ export const useAntigravityPhysics = (config: Partial<FloatingElementConfig> = {
   }, []);
 
   const unregisterElement = useCallback((element: HTMLElement) => {
-    elementsRef.current = elementsRef.current.filter((e) => e !== element);
+    elementsRef.current = elementsRef.current.filter((e: HTMLElement) => e !== element);
     velocityRef.current.delete(element);
     basePositionRef.current.delete(element);
   }, []);
@@ -77,7 +77,7 @@ export const useAntigravityPhysics = (config: Partial<FloatingElementConfig> = {
     const cursorY = isTouch ? touchY : mouseY;
 
     const animate = () => {
-      elementsRef.current.forEach((element) => {
+      elementsRef.current.forEach((element: HTMLElement) => {
         const rect = element.getBoundingClientRect();
         const elementCenterX = rect.left + rect.width / 2;
         const elementCenterY = rect.top + rect.height / 2;
