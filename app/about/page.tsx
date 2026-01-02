@@ -1,6 +1,5 @@
 'use client';
 
-import { Navbar } from '@/components/Navbar';
 import { SocialLinks } from '@/components/SocialLinks';
 import { motion } from 'framer-motion';
 
@@ -35,17 +34,15 @@ export default function AboutPage() {
 
   return (
     <>
-      <Navbar />
-
-      <main className="pt-32 pb-20 px-6">
+      <main className="pt-32 pb-32 px-6">
         <div className="max-w-4xl mx-auto space-y-20">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center space-y-4"
           >
-            <h1 className="text-5xl md:text-6xl font-black">
-              The Story <span className="text-cyan">Behind</span> the Code
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
+              The Story Behind the Code
             </h1>
             <p className="text-xl text-gray-400">From curiosity to production systems in 18 months.</p>
           </motion.div>
@@ -55,24 +52,21 @@ export default function AboutPage() {
             {sections.map((section, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="glass-effect rounded-xl p-8 md:p-12 border-cyan/30 hover:border-cyan/60 transition-colors group"
+                viewport={{ once: true }}
+                className="bg-[#0A0A0A] border border-white/5 rounded-[2rem] p-8 md:p-12 hover:border-white/10 transition-colors group relative overflow-hidden"
               >
-                <h2 className="text-2xl md:text-3xl font-bold text-cyan mb-6 group-hover:text-white transition-colors">
+                <h2 className="text-2xl md:text-3xl font-bold mb-6 group-hover:translate-x-1 transition-transform">
                   {section.title}
                 </h2>
-                <p className="text-lg text-gray-300 leading-relaxed">{section.content}</p>
+                <p className="text-lg text-gray-400 leading-relaxed">{section.content}</p>
 
                 {/* Floating accent */}
-                <motion.div
-                  className="absolute top-6 right-6 text-cyan/20 text-4xl font-black"
-                  animate={{ y: [0, 20, 0], opacity: [0.2, 0.4, 0.2] }}
-                  transition={{ duration: 4, repeat: Infinity, delay: index * 0.5 }}
-                >
+                <div className="absolute top-6 right-8 text-white/5 text-6xl font-black select-none">
                   {index + 1}
-                </motion.div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -81,7 +75,8 @@ export default function AboutPage() {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="grid md:grid-cols-4 gap-6 py-12"
+            viewport={{ once: true }}
+            className="grid md:grid-cols-4 gap-4 py-12"
           >
             {[
               { label: 'Projects Shipped', value: '15+' },
@@ -91,11 +86,11 @@ export default function AboutPage() {
             ].map((stat, i) => (
               <motion.div
                 key={i}
-                whileHover={{ scale: 1.05 }}
-                className="glass-effect rounded-lg p-6 text-center border-cyan/30"
+                whileHover={{ y: -5 }}
+                className="bg-[#0A0A0A] border border-white/5 rounded-2xl p-6 text-center"
               >
-                <div className="text-3xl font-black text-cyan mb-2">{stat.value}</div>
-                <div className="text-sm text-gray-400">{stat.label}</div>
+                <div className="text-3xl font-bold mb-1">{stat.value}</div>
+                <div className="text-xs text-gray-500 uppercase tracking-widest font-semibold">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
@@ -104,9 +99,10 @@ export default function AboutPage() {
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="text-center space-y-6"
+            viewport={{ once: true }}
+            className="text-center space-y-8"
           >
-            <p className="text-xl text-gray-300">Ready to build something legendary together?</p>
+            <p className="text-xl text-gray-400">Ready to build something legendary together?</p>
             <SocialLinks />
           </motion.div>
         </div>

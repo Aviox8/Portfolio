@@ -1,94 +1,87 @@
 'use client';
 
-import { Navbar } from '@/components/Navbar';
 import { SocialLinks } from '@/components/SocialLinks';
 import { ContactForm } from '@/components/ContactForm';
 import { motion } from 'framer-motion';
 import { contactEmail } from '@/lib/socials';
-import { Button } from '@nextui-org/react';
+import { Mail, Calendar } from 'lucide-react';
 import Link from 'next/link';
 
 export default function ContactPage() {
   return (
-    <>
-      <Navbar />
+    <main className="pt-32 pb-32 px-6">
+      <div className="max-w-4xl mx-auto w-full">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center space-y-8"
+        >
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight">
+            Let's Build Together
+          </h1>
 
-      <main className="pt-32 pb-20 px-6 min-h-screen flex items-center">
-        <div className="max-w-4xl mx-auto w-full">
+          <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            Have a project in mind? Want to collaborate? Or just want to chat about tech, security, and building products?
+          </p>
+
+          {/* Contact Form Container */}
+          <div className="py-12">
+            <ContactForm />
+          </div>
+
+          {/* Quick Contact Methods */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center space-y-8"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="space-y-8"
           >
-            <h1 className="text-5xl md:text-6xl font-black">
-              Let's Build <span className="text-cyan">Together</span>
-            </h1>
+            <div className="text-gray-500 text-sm uppercase tracking-widest font-bold">Or reach out directly</div>
 
-            <p className="text-xl text-gray-300">
-              Have a project in mind? Want to collaborate? Or just want to chat about tech, security, and building legendary products?
-            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a
+                href={`mailto:${contactEmail}`}
+                className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#0A0A0A] border border-white/5 hover:border-white/10 transition-colors font-semibold"
+              >
+                <Mail className="w-5 h-5 text-gray-400" />
+                <span>Send Email</span>
+              </a>
 
-            {/* Contact Form */}
-            <div className="py-12">
-              <ContactForm />
+              <a
+                href="https://calendly.com/gauravyadav"
+                target="_blank"
+                className="flex items-center gap-3 px-8 py-4 rounded-2xl bg-[#0A0A0A] border border-white/5 hover:border-white/10 transition-colors font-semibold"
+              >
+                <Calendar className="w-5 h-5 text-gray-400" />
+                <span>Schedule Call</span>
+              </a>
             </div>
-
-            {/* Quick Contact Methods */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              className="space-y-6"
-            >
-              <div className="text-gray-400 text-sm">Or reach out directly:</div>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Button
-                  as="a"
-                  href={`mailto:${contactEmail}`}
-                  className="bg-cyan/20 text-cyan border border-cyan/50 font-semibold"
-                  variant="bordered"
-                  size="lg"
-                >
-                  📧 Send Email
-                </Button>
-
-                <Button
-                  as="a"
-                  href="https://calendly.com/gauravyadav"
-                  target="_blank"
-                  className="bg-magenta/20 text-magenta border border-magenta/50 font-semibold"
-                  variant="bordered"
-                  size="lg"
-                >
-                  📅 Schedule Call
-                </Button>
-              </div>
-            </motion.div>
-
-            {/* Social proof */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="space-y-6"
-            >
-              <p className="text-gray-400">Or connect via social media:</p>
-              <SocialLinks />
-            </motion.div>
-
-            {/* Closing statement */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              className="glass-effect rounded-xl p-8 border-gray-700 mt-12"
-            >
-              <p className="text-lg text-gray-300 leading-relaxed">
-                I'm always interested in ambitious projects that push boundaries. Whether it's a startup looking for a technical cofounder, a company needing a full-stack engineer, or just a fellow builder wanting to collaborate—let's talk.
-              </p>
-            </motion.div>
           </motion.div>
-        </div>
-      </main>
-    </>
+
+          {/* Social proof */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+            className="space-y-8 pt-12"
+          >
+            <p className="text-gray-500 text-sm uppercase tracking-widest font-bold">Social Media</p>
+            <SocialLinks />
+          </motion.div>
+
+          {/* Closing statement */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="bg-[#0A0A0A] border border-white/5 rounded-3xl p-8 md:p-12 mt-12 text-left"
+          >
+            <p className="text-lg text-gray-400 leading-relaxed italic">
+              "I'm always interested in ambitious projects that push boundaries. Whether it's a startup looking for a technical cofounder, a company needing a full-stack engineer, or just a fellow builder wanting to collaborate—let's talk."
+            </p>
+          </motion.div>
+        </motion.div>
+      </div>
+    </main>
   );
 }

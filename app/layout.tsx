@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { Dock } from '@/components/Dock';
 
 export const metadata: Metadata = {
   title: 'Gaurav Yadav | First-Year Cybersecurity Student & Builder',
@@ -23,21 +24,15 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="dark">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-      </head>
-      <body className="bg-black text-white antialiased overflow-x-hidden">
+      <body className="bg-[#050505] text-white antialiased overflow-x-hidden selection:bg-white/10 selection:text-white">
         <div className="relative min-h-screen">
-          {/* Animated background gradient */}
-          <div className="fixed inset-0 -z-10">
-            <div className="absolute inset-0 bg-gradient-to-br from-black via-blue-900/20 to-black" />
-            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-cyan/10 rounded-full blur-3xl opacity-20 animate-pulse" />
-            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-magenta/10 rounded-full blur-3xl opacity-20 animate-pulse" />
-          </div>
-
+          {/* Subtle noise/grid background if needed, but keeping it clean for now */}
+          <div className="fixed inset-0 -z-10 bg-[radial-gradient(#ffffff08_1px,transparent_1px)] [background-size:20px_20px]" />
+          
           {/* Main content */}
           {children}
+          
+          <Dock />
         </div>
       </body>
     </html>

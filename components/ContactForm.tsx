@@ -1,9 +1,8 @@
 'use client';
 
-import { Input, Button, Textarea } from '@nextui-org/react';
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { Mail, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 
 interface ContactFormProps {
   onSubmit?: (data: { name: string; email: string; message: string }) => void;
@@ -34,75 +33,46 @@ export const ContactForm = ({ onSubmit }: ContactFormProps) => {
     <motion.form
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
       onSubmit={handleSubmit}
-      className="glass-effect rounded-2xl p-8 md:p-12 border-cyan/30 space-y-6 max-w-2xl mx-auto hover:border-cyan/60 transition-colors duration-300"
+      className="space-y-4 max-w-xl mx-auto"
     >
-      <div className="flex items-center gap-3 mb-8">
-        <div className="p-3 bg-cyan/20 rounded-lg">
-          <Mail className="text-cyan" size={24} />
-        </div>
-        <h2 className="text-2xl font-bold text-white">Send a Message</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <input
+          type="text"
+          placeholder="Name"
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+          className="w-full bg-[#0A0A0A] border border-white/5 rounded-2xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-white/10 transition-colors"
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+          className="w-full bg-[#0A0A0A] border border-white/5 rounded-2xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-white/10 transition-colors"
+          required
+        />
       </div>
-
-      <Input
-        type="text"
-        label="Name"
-        placeholder="Your name"
-        value={formData.name}
-        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        className="bg-black/30 rounded-lg"
-        classNames={{
-          label: 'text-cyan font-semibold',
-          input: 'text-white placeholder-gray-500 bg-black/50',
-          inputWrapper: 'border-cyan/30 hover:border-cyan/60 focus-within:border-cyan transition-colors duration-200',
-        }}
-        required
-        size="lg"
-      />
-
-      <Input
-        type="email"
-        label="Email"
-        placeholder="your@email.com"
-        value={formData.email}
-        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-        className="bg-black/30 rounded-lg"
-        classNames={{
-          label: 'text-cyan font-semibold',
-          input: 'text-white placeholder-gray-500 bg-black/50',
-          inputWrapper: 'border-cyan/30 hover:border-cyan/60 focus-within:border-cyan transition-colors duration-200',
-        }}
-        required
-        size="lg"
-      />
-
-      <Textarea
-        label="Message"
-        placeholder="Your message..."
+      <textarea
+        placeholder="How can I help you?"
         value={formData.message}
         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-        className="bg-black/30 rounded-lg min-h-32"
-        classNames={{
-          label: 'text-cyan font-semibold',
-          input: 'text-white placeholder-gray-500 bg-black/50 resize-none',
-          inputWrapper: 'border-cyan/30 hover:border-cyan/60 focus-within:border-cyan transition-colors duration-200',
-        }}
+        className="w-full bg-[#0A0A0A] border border-white/5 rounded-3xl px-6 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-white/10 transition-colors min-h-[160px] resize-none"
         required
-        size="lg"
       />
-
-      <Button
+      <button
         type="submit"
-        isLoading={isSubmitting}
-        className="w-full bg-gradient-to-r from-cyan to-blue text-black font-bold py-6 text-lg shadow-lg shadow-cyan/50 hover:shadow-cyan/70 transition-shadow duration-200"
-        endContent={!isSubmitting && <Send size={20} />}
+        disabled={isSubmitting}
+        className="w-full bg-white text-black font-bold py-4 rounded-2xl hover:bg-gray-200 transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
       >
-        {isSubmitting ? 'Sending...' : 'Send Message'}
-      </Button>
-
-      <p className="text-xs text-gray-400 text-center">
-        Or email me directly at <span className="text-cyan font-semibold hover:text-blue transition-colors">gaurav@zocav.com</span>
-      </p>
+        {isSubmitting ? 'Sending...' : (
+          <>
+            Send Message <Send className="w-4 h-4" />
+          </>
+        )}
+      </button>
     </motion.form>
   );
 };
