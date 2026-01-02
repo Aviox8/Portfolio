@@ -3,21 +3,21 @@ import './globals.css';
 import { Dock } from '@/components/Dock';
 
 export const metadata: Metadata = {
-  title: 'Gaurav Yadav | First-Year Cybersecurity Student & Builder',
+  title: 'Gaurav Yadav | Cybersecurity Student & Full-Stack Developer',
   description:
-    'Legendary portfolio of Gaurav Yadav. SIH 2025 Qualifier. Full-stack developer shipping production apps weekly. Building Zocav digital agency.',
-  authors: [{ name: 'Gaurav Yadav', url: 'https://archduke.is-a.dev' }],
+    'Portfolio of Gaurav Yadav. SIH 2025 Qualifier. Full-stack developer building production apps. Founder of Zocav digital agency.',
+  authors: [{ name: 'Gaurav Yadav', url: 'https://gaurav.me' }],
   openGraph: {
-    title: 'Gaurav Yadav | Builder & Founder',
-    description: 'First-year student. Already SIH-qualified. Already freelancing. Already building startup.',
-    url: 'https://archduke.is-a.dev',
+    title: 'Gaurav Yadav | Cybersecurity & Full-Stack Builder',
+    description: 'SIH 2025 Qualifier. Full-stack developer. Building Zocav.',
+    url: 'https://gaurav.me',
     siteName: 'Gaurav Yadav Portfolio',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Gaurav Yadav | First-Year Developer',
-    description: 'SIH 2025 External Qualifier. Full-stack developer. Building Zocav.',
+    title: 'Gaurav Yadav | Builder',
+    description: 'SIH 2025 Qualifier. Full-stack developer. Building Zocav.',
   },
 };
 

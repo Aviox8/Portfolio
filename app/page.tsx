@@ -72,7 +72,7 @@ export default function Home() {
             <Mail className="w-6 h-6" />
           </Link>
           <Link href="/contact" className="flex items-center justify-center bg-white/5 rounded-2xl hover:bg-white/10 transition-colors text-xs font-bold uppercase">
-            CV
+            Hire
           </Link>
         </BentoCard>
 
