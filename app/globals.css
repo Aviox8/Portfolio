@@ -1,6 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
 @import "tailwindcss";
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 @layer base {
   html {
@@ -8,8 +7,9 @@
   }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #050505;
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+    background: #000000;
     color: #ffffff;
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
@@ -75,12 +75,20 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(to bottom, rgba(0, 238, 255, 0.4), rgba(255, 0, 255, 0.4));
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 238, 255, 0.4),
+    rgba(255, 0, 255, 0.4)
+  );
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(to bottom, rgba(0, 238, 255, 0.7), rgba(255, 0, 255, 0.7));
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 238, 255, 0.7),
+    rgba(255, 0, 255, 0.7)
+  );
 }
 
 /* Text selection */
@@ -90,7 +98,11 @@
 }
 
 /* Smooth transitions */
-a, button, input, textarea, select {
+a,
+button,
+input,
+textarea,
+select {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
