@@ -1,66 +1,103 @@
 import { Briefcase } from "lucide-react";
 
 export default function ExperiencePage() {
+  const experiences = [
+    {
+      role: "Co-Founder",
+      company: "Zocav",
+      date: "2026",
+      description: "Focused on learning and early-stage exploration of product development and security architecture.",
+      color: "bg-blue-100 dark:bg-blue-900/30",
+      dotColor: "bg-blue-600 dark:bg-blue-500",
+      accentColor: "text-blue-600 dark:text-blue-400"
+    },
+    {
+      role: "Head of Technical Operations",
+      company: "Mind Mesh Club, ADYPU",
+      date: "2025",
+      description: "Leading technical initiatives and managing infrastructure for the university's tech community.",
+      color: "bg-purple-100 dark:bg-purple-900/30",
+      dotColor: "bg-purple-600 dark:bg-purple-500",
+      accentColor: "text-purple-600 dark:text-purple-400"
+    },
+    {
+      role: "Exam Operations Manager & Server Administrator",
+      company: "MHTCET 2025 Exams | Maharashtra Government",
+      date: "2025",
+      description: "Managed exam operations and server infrastructure for MHTCET 2025, ensuring smooth execution across multiple centers.",
+      location: "Pimpri Chinchwad University, Talegaon",
+      color: "bg-amber-100 dark:bg-amber-900/30",
+      dotColor: "bg-amber-600 dark:bg-amber-500",
+      accentColor: "text-amber-600 dark:text-amber-400"
+    },
+    {
+      role: "Marketing Associate",
+      company: "JioCinema | IPL Field Marketing",
+      date: "2023",
+      description: "Executed field marketing and promotional campaigns for IPL across malls, public attractions, and high-density areas to drive brand awareness.",
+      color: "bg-green-100 dark:bg-green-900/30",
+      dotColor: "bg-green-600 dark:bg-green-500",
+      accentColor: "text-green-600 dark:text-green-400"
+    }
+  ];
+
   return (
-    <main className="min-h-screen bg-white text-apple-900 font-sans selection:bg-blue-100 selection:text-apple-900">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+    <main className="min-h-screen bg-gradient-to-br from-white via-apple-50 to-white dark:from-apple-950 dark:via-apple-900 dark:to-apple-950 text-apple-900 dark:text-apple-50 font-sans selection:bg-blue-100 dark:selection:bg-blue-900 selection:text-apple-900 dark:selection:text-white transition-colors duration-500">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-32">
         <section id="experience" className="scroll-mt-24">
-          <div className="mb-12">
-            <div className="inline-flex items-center gap-3 mb-6">
-              <div className="p-3 rounded-xl bg-amber-100">
-                <Briefcase size={24} className="text-amber-600" />
+          {/* Header */}
+          <div className="mb-16">
+            <div className="inline-flex items-center gap-3 mb-6 animate-fade-in">
+              <div className={`p-3 rounded-xl bg-amber-100 dark:bg-amber-900/30`}>
+                <Briefcase size={24} className="text-amber-600 dark:text-amber-400" />
               </div>
-              <h1 className="text-4xl sm:text-5xl font-bold text-apple-900">Experience</h1>
+              <h1 className="text-5xl sm:text-6xl font-bold text-apple-900 dark:text-white">Experience</h1>
             </div>
-            <p className="text-lg text-apple-600 max-w-2xl">My professional journey and key roles that shaped my expertise.</p>
+            <p className="text-lg sm:text-xl text-apple-600 dark:text-apple-300 max-w-3xl leading-relaxed animate-slide-up animate-delay-100">
+              My professional journey shaped by diverse roles and meaningful contributions.
+            </p>
           </div>
           
+          {/* Timeline */}
           <div className="space-y-6">
-            <div className="apple-card relative pl-8 border-l-4 border-blue-600 before:hidden">
-              <div className="absolute left-[-14px] top-6 w-6 h-6 rounded-full bg-blue-600 border-4 border-white shadow-apple-sm" />
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 mb-2">
-                <h3 className="text-lg font-bold text-apple-900">Co-Founder</h3>
-                <span className="text-xs font-bold text-apple-600 uppercase tracking-widest">2026 · Zocav</span>
+            {experiences.map((exp, idx) => (
+              <div 
+                key={exp.role}
+                className="apple-card-elevated group hover:shadow-elevation-3 transition-smooth border-l-4 border-transparent hover:border-blue-600 pl-6 animate-slide-up"
+                style={{ 
+                  borderLeftColor: 'var(--accent-color)',
+                  '--accent-color': exp.accentColor === 'text-blue-600' ? '#2563eb' : exp.accentColor === 'text-purple-600' ? '#9333ea' : exp.accentColor === 'text-amber-600' ? '#b45309' : '#16a34a'
+                } as any}
+              >
+                {/* Timeline Dot */}
+                <div className={`absolute -left-4 top-6 w-7 h-7 rounded-full border-4 border-white dark:border-apple-900 shadow-md transition-transform group-hover:scale-125 ${exp.dotColor}`} />
+                
+                {/* Content */}
+                <div className="space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
+                    <h3 className="text-xl font-bold text-apple-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-smooth">
+                      {exp.role}
+                    </h3>
+                    <span className={`text-xs font-bold uppercase tracking-widest shrink-0 ${exp.accentColor}`}>
+                      {exp.date}
+                    </span>
+                  </div>
+                  
+                  <div className="flex items-baseline gap-2">
+                    <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${exp.accentColor.replace('text-', 'bg-').replace('dark:text-', 'dark:bg-')}`} />
+                    <p className="font-semibold text-apple-900 dark:text-apple-100">{exp.company}</p>
+                  </div>
+                  
+                  {exp.location && (
+                    <p className="text-sm text-apple-500 dark:text-apple-400">{exp.location}</p>
+                  )}
+                  
+                  <p className="text-apple-600 dark:text-apple-300 leading-relaxed pt-1">
+                    {exp.description}
+                  </p>
+                </div>
               </div>
-              <p className="text-apple-600 leading-relaxed">
-                Focused on learning and early-stage exploration of product development and security architecture.
-              </p>
-            </div>
-
-            <div className="apple-card relative pl-8 border-l-4 border-apple-400 before:hidden">
-              <div className="absolute left-[-14px] top-6 w-6 h-6 rounded-full bg-apple-300 border-4 border-white shadow-apple-sm" />
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 mb-2">
-                <h3 className="text-lg font-bold text-apple-900">Head of Technical Operations</h3>
-                <span className="text-xs font-bold text-apple-600 uppercase tracking-widest">2025 · Mind Mesh Club, ADYPU</span>
-              </div>
-              <p className="text-apple-600 leading-relaxed">
-                Leading technical initiatives and managing infrastructure for the university's tech community.
-              </p>
-            </div>
-
-            <div className="apple-card relative pl-8 border-l-4 border-blue-600 before:hidden">
-              <div className="absolute left-[-14px] top-6 w-6 h-6 rounded-full bg-blue-600 border-4 border-white shadow-apple-sm" />
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 mb-2">
-                <h3 className="text-lg font-bold text-apple-900">Exam Operations Manager & Server Administrator</h3>
-                <span className="text-xs font-bold text-apple-600 uppercase tracking-widest">2025</span>
-              </div>
-              <p className="text-apple-900 font-semibold mb-1">MHTCET 2025 Exams | Maharashtra Government | Pimpri Chinchwad University, Talegaon</p>
-              <p className="text-apple-600 leading-relaxed">
-                Managed exam operations and server infrastructure for MHTCET 2025, ensuring smooth execution of Maharashtra's competitive entrance examinations across multiple centers.
-              </p>
-            </div>
-
-            <div className="apple-card relative pl-8 border-l-4 border-apple-400 before:hidden">
-              <div className="absolute left-[-14px] top-6 w-6 h-6 rounded-full bg-apple-300 border-4 border-white shadow-apple-sm" />
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-2 mb-2">
-                <h3 className="text-lg font-bold text-apple-900">Marketing Associate</h3>
-                <span className="text-xs font-bold text-apple-600 uppercase tracking-widest">2023</span>
-              </div>
-              <p className="text-apple-900 font-semibold mb-1">JioCinema | IPL Field Marketing & Promotions</p>
-              <p className="text-apple-600 leading-relaxed">
-                Executed field marketing and promotional campaigns for IPL on JioCinema across malls, public attractions, and high-density populated areas to drive brand awareness and user engagement.
-              </p>
-            </div>
+            ))}
           </div>
         </section>
       </div>
