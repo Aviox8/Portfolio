@@ -25,14 +25,14 @@ When I'm not coding or studying security protocols, you can find me participatin
 
   // Custom Markdown Components for consistent styling
   const MarkdownComponents = {
-    p: ({ children }: { children: React.ReactNode }) => (
+    p: (props: any) => (
       <p className="text-apple-600 dark:text-apple-300 leading-relaxed mb-4 last:mb-0">
-        {children}
+        {props.children}
       </p>
     ),
-    strong: ({ children }: { children: React.ReactNode }) => (
+    strong: (props: any) => (
       <strong className="font-semibold text-apple-900 dark:text-apple-50">
-        {children}
+        {props.children}
       </strong>
     ),
   };
