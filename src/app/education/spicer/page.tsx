@@ -34,7 +34,7 @@ export default function SpicerPage() {
                 </span>
                 <span className="flex items-center gap-1">
                   <Calendar size={14} />
-                  2021 — 2023
+                  2010 — 2023
                 </span>
               </div>
             </div>

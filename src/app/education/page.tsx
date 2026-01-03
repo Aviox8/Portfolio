@@ -32,7 +32,7 @@ export default function EducationPage() {
       name: "Spicer Higher Secondary School",
       level: "Secondary School",
       location: "Pune, Maharashtra",
-      dates: "2021 — 2023",
+      dates: "2010 — 2023",
       link: "/education/spicer",
       accentColor: "text-purple-600 dark:text-purple-400",
       bgColor: "bg-purple-50 dark:bg-purple-900/20",
