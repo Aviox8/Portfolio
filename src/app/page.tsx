@@ -1,73 +1,138 @@
-import { Github, Linkedin, Mail, Code, User } from "lucide-react";
+'use client';
+
+import { Github, Linkedin, Mail, Code, User, ExternalLink } from "lucide-react";
+import { useEffect, useState } from "react";
+import Link from "next/link";
 
 export default function Home() {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    setIsLoaded(true);
+  }, []);
+
+  const socialLinks = [
+    {
+      name: "GitHub",
+      icon: Github,
+      href: "https://github.com/archduke1337",
+    },
+    {
+      name: "LinkedIn",
+      icon: Linkedin,
+      href: "https://www.linkedin.com/in/gurvv/",
+    },
+    {
+      name: "Email",
+      icon: Mail,
+      href: "mailto:gauravramyadav@gmail.com",
+    },
+  ];
+
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900">
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+    <main className="min-h-screen bg-white text-apple-900 selection:bg-blue-100 selection:text-apple-900">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-28">
         
-        {/* HEADER / IDENTITY */}
-        <section id="hero" className="mb-20 scroll-mt-24">
-          <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-4 text-slate-900">
-            Gaurav Yadav
-          </h1>
-          <p className="text-lg sm:text-xl text-slate-600 mb-8 font-medium max-w-2xl leading-relaxed">
-            BCA Cybersecurity Student @ ADYPU <span className="text-slate-300 mx-2">|</span> Web & Frontend Development
-          </p>
-          
-          <div className="flex flex-wrap gap-6 items-center">
-            <a
-              href="https://github.com/archduke1337"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 transition-colors font-medium group"
-            >
-              <Github size={20} className="group-hover:scale-110 transition-transform" />
-              <span className="text-sm">GitHub</span>
-            </a>
-            <a
-              href="https://www.linkedin.com/in/gurvv/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-slate-600 hover:text-blue-600 transition-colors font-medium group"
-            >
-              <Linkedin size={20} className="group-hover:scale-110 transition-transform" />
-              <span className="text-sm">LinkedIn</span>
-            </a>
-            <a
-              href="mailto:gauravramyadav@gmail.com"
-              className="inline-flex items-center gap-2 text-slate-600 hover:text-rose-600 transition-colors font-medium group"
-            >
-              <Mail size={20} className="group-hover:scale-110 transition-transform" />
-              <span className="text-sm">Email</span>
-            </a>
+        {/* HERO SECTION */}
+        <section id="hero" className={`mb-24 scroll-mt-24 transition-opacity duration-1000 ${isLoaded ? 'opacity-100' : 'opacity-0'}`}>
+          <div className="space-y-6 animate-fade-in">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-apple-900">
+              Gaurav Yadav
+            </h1>
+            <p className="text-lg sm:text-xl text-apple-600 font-medium max-w-2xl leading-relaxed animate-slide-up animate-delay-100">
+              BCA Cybersecurity Student @ ADYPU. Building secure, performant web experiences.
+            </p>
+            
+            {/* Social Links */}
+            <div className="flex flex-wrap gap-3 pt-4 animate-slide-up animate-delay-200">
+              {socialLinks.map((social, idx) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.name}
+                    href={social.href}
+                    target={social.name !== "Email" ? "_blank" : undefined}
+                    rel={social.name !== "Email" ? "noopener noreferrer" : undefined}
+                    className="apple-btn-secondary group"
+                    style={{ animationDelay: `${idx * 50}ms` }}
+                  >
+                    <Icon size={18} />
+                    {social.name}
+                  </a>
+                );
+              })}
+            </div>
           </div>
         </section>
 
-        {/* ABOUT */}
-        <section id="about" className="mb-20 scroll-mt-24">
-          <div className="flex items-center gap-3 mb-6">
-            <User size={20} className="text-blue-600" />
-            <h2 className="text-2xl font-bold text-slate-900">About</h2>
+        {/* ABOUT SECTION */}
+        <section id="about" className="mb-24 scroll-mt-24 animate-slide-up animate-delay-300">
+          <h2 className="section-title mb-8 text-apple-900">About</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="apple-card">
+              <h3 className="text-lg font-semibold text-apple-900 mb-3">Education</h3>
+              <p className="text-apple-600 leading-relaxed">
+                BCA Cybersecurity student at Ajeenkya DY Patil University (ADYPU), Pune (2025–2028), receiving industry-aligned training through SeamEdu.
+              </p>
+            </div>
+
+            <div className="apple-card animate-slide-up animate-delay-100">
+              <h3 className="text-lg font-semibold text-apple-900 mb-3">Focus</h3>
+              <p className="text-apple-600 leading-relaxed">
+                My academic focus lies at the intersection of cybersecurity fundamentals and modern web development, building secure and performant applications.
+              </p>
+            </div>
+
+            <div className="apple-card animate-slide-up animate-delay-200">
+              <h3 className="text-lg font-semibold text-apple-900 mb-3">Involvement</h3>
+              <p className="text-apple-600 leading-relaxed">
+                Actively participate in Hackathons & CTF challenges, continuously expanding my skillset and tackling real-world problems.
+              </p>
+            </div>
+
+            <div className="apple-card animate-slide-up animate-delay-300">
+              <h3 className="text-lg font-semibold text-apple-900 mb-3">Projects</h3>
+              <p className="text-apple-600 leading-relaxed">
+                Maintain a growing portfolio of web projects, documenting my journey through blogging and open-source contributions.
+              </p>
+            </div>
           </div>
-          <div className="space-y-4 text-slate-600 leading-relaxed text-lg">
-            <p>
-              I am a <span className="text-slate-900 font-medium">BCA Cybersecurity student</span> at Ajeenkya DY Patil University (ADYPU), Pune (2025–2028), 
-              receiving industry-aligned training through SeamEdu.
-            </p>
-            <p>
-              My academic focus lies at the intersection of <span className="text-slate-900 font-medium">cybersecurity fundamentals</span> and modern web development. 
-              I am passionate about building secure, performant, and user-centric frontend applications.
-            </p>
-            <p>
-              Beyond the classroom, I actively participate in <span className="text-slate-900 font-medium">Hackathons & CTF challenges</span> and maintain a growing portfolio 
-              of web projects, documenting my journey step-by-step.
-            </p>
+        </section>
+
+        {/* QUICK NAVIGATION */}
+        <section className="mb-24 animate-slide-up animate-delay-400">
+          <h2 className="section-title mb-8">Explore</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            {[
+              { title: "Projects", href: "/projects", icon: Code },
+              { title: "Experience", href: "/experience", icon: User },
+              { title: "Contact", href: "/contact", icon: Mail },
+            ].map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className="apple-card-hover group flex items-center justify-between"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-blue-50 group-hover:bg-blue-100 transition-colors">
+                      <Icon size={20} className="text-blue-600" />
+                    </div>
+                    <span className="font-medium text-apple-900">{item.title}</span>
+                  </div>
+                  <ExternalLink size={16} className="text-apple-400 group-hover:text-apple-600 transition-colors" />
+                </Link>
+              );
+            })}
           </div>
         </section>
 
         {/* FOOTER */}
-        <footer className="text-center text-xs text-slate-400 font-medium uppercase tracking-widest">
-          <p>© 2025 Gaurav Yadav. Built with Next.js & Tailwind CSS.</p>
+        <footer className="pt-12 border-t border-apple-200 text-center animate-fade-in" style={{ animationDelay: '600ms' }}>
+          <p className="text-sm text-apple-600 font-medium">
+            © {new Date().getFullYear()} Gaurav Yadav. Built with Next.js & Tailwind CSS.
+          </p>
         </footer>
       </div>
     </main>

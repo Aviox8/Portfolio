@@ -8,12 +8,62 @@
   }
 
   body {
-    @apply bg-slate-50 text-slate-900 antialiased;
+    @apply bg-white text-apple-900 antialiased font-sans;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight font-semibold;
+  }
+}
+
+@layer components {
+  .apple-btn {
+    @apply inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-medium transition-all duration-200 active:scale-95;
+  }
+
+  .apple-btn-primary {
+    @apply apple-btn bg-apple-900 text-white hover:bg-apple-800 shadow-apple-sm hover:shadow-apple-md;
+  }
+
+  .apple-btn-secondary {
+    @apply apple-btn bg-apple-100 text-apple-900 hover:bg-apple-200 shadow-apple-sm;
+  }
+
+  .apple-card {
+    @apply p-6 rounded-xl bg-apple-50 border border-apple-200 shadow-apple-sm transition-all duration-300 hover:shadow-apple-md;
+  }
+
+  .apple-card-hover {
+    @apply apple-card hover:-translate-y-1;
+  }
+
+  .apple-link {
+    @apply font-medium text-blue-600 hover:text-blue-700 transition-colors duration-200 cursor-pointer;
+  }
+
+  .section-title {
+    @apply text-3xl sm:text-4xl font-bold text-apple-900;
   }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+
+  .animate-delay-100 {
+    animation-delay: 100ms;
+  }
+
+  .animate-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animate-delay-300 {
+    animation-delay: 300ms;
+  }
+
+  .animate-delay-400 {
+    animation-delay: 400ms;
   }
 }
