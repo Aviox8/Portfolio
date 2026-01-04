@@ -1,4 +1,5 @@
-import { Search } from "lucide-react";
+import { Search, FileText } from "lucide-react";
+import Link from "next/link";
 
 export default function ResearchPage() {
   return (
@@ -18,20 +19,72 @@ export default function ResearchPage() {
             </p>
           </div>
           
-          {/* Research Section */}
-          <div className="apple-card-elevated p-12 text-center border-2 border-orange-200 dark:border-orange-800 border-opacity-30 animate-slide-up animate-delay-200">
-            <div className="w-20 h-20 bg-orange-50 dark:bg-orange-900/20 rounded-full flex items-center justify-center mx-auto mb-8">
-              <Search size={40} className="text-orange-600 dark:text-orange-400 opacity-50" />
+          {/* Research Grid */}
+          <div className="grid gap-8 animate-slide-up animate-delay-200">
+
+            {/* AI Patching Research Card */}
+            <Link href="/research/ai-powered-automated-patching" className="group relative block w-full">
+               <div className="relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                  <div className="flex flex-col md:flex-row h-full">
+                     {/* Graphic Side */}
+                     <div className="relative w-full md:w-1/3 min-h-[250px] bg-zinc-50 dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 flex items-center justify-center p-8">
+                        <div className="relative w-48 h-64 bg-white dark:bg-zinc-900 shadow-2xl border border-zinc-200 dark:border-zinc-800 rounded-sm flex flex-col p-4 group-hover:scale-105 transition-transform duration-500">
+                           <div className="h-2 w-full bg-zinc-100 dark:bg-zinc-800 mb-2"></div>
+                           <div className="h-2 w-3/4 bg-zinc-100 dark:bg-zinc-800 mb-6"></div>
+                           <div className="space-y-1.5">
+                              {[...Array(8)].map((_, i) => (
+                                 <div key={i} className="h-1.5 w-full bg-zinc-100 dark:bg-zinc-800 rounded-sm"></div>
+                              ))}
+                           </div>
+                           <div className="mt-auto flex justify-between items-center text-[10px] text-zinc-400 font-mono">
+                              <span>PAPER-2026</span>
+                              <FileText size={12} />
+                           </div>
+                           {/* Badge */}
+                           <div className="absolute -top-2 -right-2 px-2 py-0.5 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 text-[10px] font-bold uppercase tracking-wider rounded border border-blue-200 dark:border-blue-800 shadow-sm">
+                              Published
+                           </div>
+                        </div>
+                     </div>
+
+                     {/* Content Side */}
+                     <div className="flex-1 p-8 flex flex-col justify-center">
+                        <div className="flex items-center gap-3 mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                           <span className="px-2 py-1 bg-zinc-100 dark:bg-zinc-800 rounded-md">Research Paper</span>
+                           <span className="text-zinc-600 dark:text-zinc-400">Jan 2026</span>
+                        </div>
+                        
+                        <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-4 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                           AI-Powered Automated Patching for Software Vulnerabilities
+                        </h2>
+                        
+                        <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6 line-clamp-3">
+                           Investigating the feasibility of integrating Large Language Models (LLMs) into an automated vulnerability remediation pipeline. Analysis, risks, and future directions for secure software engineering.
+                        </p>
+                        
+                        <div className="flex items-center text-blue-600 dark:text-blue-400 font-semibold group-hover:gap-2 transition-all">
+                           Read Paper <span className="ml-2">→</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </Link>
+
+            {/* Placeholder for future research */}
+            <div className="apple-card-elevated p-12 text-center border-2 border-orange-200 dark:border-orange-800 border-opacity-30 border-dashed bg-transparent shadow-none">
+              <div className="w-16 h-16 bg-orange-50 dark:bg-orange-900/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Search size={32} className="text-orange-600 dark:text-orange-400 opacity-50" />
+              </div>
+              <h3 className="text-xl font-bold text-apple-900 dark:text-white mb-2">More Research Coming Soon</h3>
+              <p className="text-apple-600 dark:text-apple-300 max-w-lg mx-auto leading-relaxed text-sm mb-6">
+                I am actively conducting research in network defense strategies and emerging threats.
+              </p>
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-orange-50 dark:bg-orange-900/30 rounded-lg">
+                <div className="w-1.5 h-1.5 rounded-full bg-orange-600 dark:bg-orange-400 animate-pulse" />
+                <span className="text-[10px] font-bold text-orange-600 dark:text-orange-400 uppercase tracking-widest">In Progress</span>
+              </div>
             </div>
-            <h2 className="text-3xl font-bold text-apple-900 dark:text-white mb-4">Research In Progress</h2>
-            <p className="text-apple-600 dark:text-apple-300 max-w-lg mx-auto leading-relaxed text-lg mb-8">
-              I am actively working on foundational research in cybersecurity fundamentals, network defense strategies, and emerging threat landscapes. 
-              Academic findings and experiment results will be shared here.
-            </p>
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-50 dark:bg-orange-900/30 rounded-lg">
-              <div className="w-2 h-2 rounded-full bg-orange-600 dark:bg-orange-400 animate-pulse" />
-              <span className="text-xs font-bold text-orange-600 dark:text-orange-400 uppercase tracking-widest">Actively Researching</span>
-            </div>
+
           </div>
         </section>
       </div>

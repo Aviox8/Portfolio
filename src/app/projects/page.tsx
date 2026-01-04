@@ -1,5 +1,8 @@
+'use client';
+
 import { Code, ExternalLink, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function ProjectsPage() {
   const projects = [
@@ -9,8 +12,9 @@ export default function ProjectsPage() {
       tech: ["Next.js", "React 18", "Google Search API", "Tailwind CSS", "Vercel"],
       link: "https://github.com/archduke1337/SeekEngine",
       slug: "/projects/seekengine",
-      color: "bg-green-50 dark:bg-green-900/20",
-      accentColor: "text-green-600 dark:text-green-400"
+      color: "from-green-500/20 to-emerald-500/20",
+      iconColor: "bg-green-500",
+      accent: "text-green-600 dark:text-green-400"
     },
     {
       name: "Ro0m",
@@ -18,91 +22,104 @@ export default function ProjectsPage() {
       tech: ["Next.js", "React 18", "WebRTC", "Stream.io SDK", "Tailwind CSS"],
       link: "https://github.com/archduke1337/Ro0m",
       slug: "/projects/ro0m",
-      color: "bg-blue-50 dark:bg-blue-900/20",
-      accentColor: "text-blue-600 dark:text-blue-400"
+      color: "from-blue-500/20 to-indigo-500/20",
+      iconColor: "bg-blue-500",
+      accent: "text-blue-600 dark:text-blue-400"
     },
     {
       name: "Gil Project",
       description: "Professional diamond certification and verification platform with 3D gem analysis, secure admin panel, and comprehensive gemstone encyclopedia.",
-      tech: ["React 18", "Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "Framer Motion"],
+      tech: ["React 18", "Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL"],
       link: "https://github.com/archduke1337/Gil",
       slug: "/projects/gil",
-      color: "bg-rose-50 dark:bg-rose-900/20",
-      accentColor: "text-rose-600 dark:text-rose-400"
+      color: "from-rose-500/20 to-pink-500/20",
+      iconColor: "bg-rose-500",
+      accent: "text-rose-600 dark:text-rose-400"
     }
   ];
 
+  const containerVariants: any = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
+  };
+
+  const itemVariants: any = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0 }
+  };
+
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white via-apple-50 to-white dark:from-apple-950 dark:via-apple-900 dark:to-apple-950 text-apple-900 dark:text-apple-50 font-sans selection:bg-blue-100 dark:selection:bg-blue-900 selection:text-apple-900 dark:selection:text-white transition-colors duration-500">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-32">
-        <section id="projects" className="scroll-mt-24">
+    <main className="min-h-screen bg-apple-gradient text-zinc-900 dark:text-zinc-50">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
+        <section id="projects">
           {/* Header */}
           <div className="mb-16">
-            <div className="inline-flex items-center gap-3 mb-6 animate-fade-in">
-              <div className="p-3 rounded-xl bg-green-100 dark:bg-green-900/30 group-hover:scale-110 transition-smooth">
-                <Code size={24} className="text-green-600 dark:text-green-400" />
+            <motion.div 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center gap-3 mb-6"
+            >
+              <div className="p-3 rounded-2xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                <Code size={24} />
               </div>
-              <h1 className="text-5xl sm:text-6xl font-bold text-apple-900 dark:text-white">Projects</h1>
-            </div>
-            <p className="text-lg sm:text-xl text-apple-600 dark:text-apple-300 max-w-3xl leading-relaxed animate-slide-up animate-delay-100">
-              A collection of my work, showcasing full-stack development, creative problem-solving, and attention to user experience.
-            </p>
+              <h1 className="text-5xl sm:text-6xl font-bold tracking-tight">Projects</h1>
+            </motion.div>
+            <motion.p 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.2 }}
+              className="text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl leading-relaxed"
+            >
+              A collection of digital craftsmanship, focused on user experience and robust architecture.
+            </motion.p>
           </div>
           
           {/* Projects Grid */}
-          <div className="grid gap-8">
+          <motion.div 
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+          >
             {projects.map((project, idx) => (
-              <div 
+              <motion.div 
                 key={project.name} 
-                className="apple-card-elevated group hover:shadow-elevation-3 transition-smooth animate-slide-up"
-                style={{ animationDelay: `${idx * 100}ms` }}
+                variants={itemVariants}
+                className={`apple-card group relative overflow-hidden flex flex-col justify-between h-full bg-gradient-to-br ${project.color} ${idx === 2 ? 'md:col-span-2' : ''}`}
+                whileHover={{ y: -5, transition: { type: "spring", stiffness: 300 } }}
               >
-                <div className="flex items-start justify-between gap-6 mb-6">
-                  <div className="flex-1">
-                    <h3 className="text-2xl font-bold text-apple-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-smooth">
-                      {project.name}
-                    </h3>
-                    <p className="text-apple-600 dark:text-apple-300 mt-3 leading-relaxed">
-                      {project.description}
-                    </p>
+                <div className="relative z-10">
+                  <div className="flex justify-between items-start mb-4">
+                    <div className={`w-12 h-12 rounded-2xl ${project.iconColor} flex items-center justify-center text-white shadow-lg`}>
+                       <Code size={24} />
+                    </div>
+                    <a href={project.link} target="_blank" className="p-2 bg-white/50 dark:bg-black/20 rounded-full hover:bg-white dark:hover:bg-black/40 transition-colors">
+                      <ExternalLink size={20} className="text-zinc-700 dark:text-zinc-300" />
+                    </a>
                   </div>
-                  <a
-                    href={project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`p-3 rounded-lg transition-smooth shrink-0 ${project.color} ${project.accentColor} hover:scale-110`}
-                    title="View on GitHub"
-                  >
-                    <ExternalLink size={20} />
-                  </a>
-                </div>
-                
-                {/* Tech Stack and Link */}
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mt-8 pt-6 border-t border-apple-200 dark:border-apple-800">
-                  <div className="flex flex-wrap gap-2">
+                  
+                  <h3 className="text-3xl font-bold mb-2">{project.name}</h3>
+                  <p className="text-zinc-600 dark:text-zinc-300 mb-6 leading-relaxed">
+                    {project.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-8">
                     {project.tech.map((tech) => (
-                      <span 
-                        key={tech} 
-                        className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wider rounded-md transition-smooth ${project.color} ${project.accentColor}`}
-                      >
+                      <span key={tech} className="px-3 py-1 bg-white/60 dark:bg-black/20 rounded-full text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
                         {tech}
                       </span>
                     ))}
                   </div>
-                  
-                  {project.slug && (
-                    <Link 
-                      href={project.slug}
-                      className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:gap-3 transition-smooth whitespace-nowrap"
-                    >
-                      Details
-                      <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  )}
                 </div>
-              </div>
+
+                <div className="relative z-10 pt-4 border-t border-black/5 dark:border-white/5">
+                   <Link href={project.slug} className="flex items-center gap-2 font-semibold text-lg hover:gap-3 transition-all">
+                     View Case Study <ArrowRight size={20} />
+                   </Link>
+                </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
       </div>
     </main>
