@@ -1,4 +1,4 @@
-import { ArrowLeft, Github, ExternalLink } from "lucide-react";
+import { ArrowLeft, Github, ExternalLink, ShieldCheck, BookOpen, Minimize2, Settings } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -31,6 +31,17 @@ export default function GilProject() {
                   <Github size={20} />
                 </a>
               </div>
+            </div>
+
+            {/* Project Hero Image */}
+            <div className="relative w-full aspect-video mb-12 rounded-2xl overflow-hidden shadow-lg border border-zinc-100 dark:border-zinc-800 group">
+                <div className="absolute inset-0 bg-zinc-200 dark:bg-zinc-800 animate-pulse" />
+                <Image 
+                  src="/Project/Gil/img.png" 
+                  alt="Gil Project Interface" 
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                />
             </div>
 
             <div className="prose prose-zinc dark:prose-invert max-w-none mb-12">

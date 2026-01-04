@@ -1,4 +1,4 @@
-import { ArrowLeft, Github, ExternalLink } from "lucide-react";
+import { ArrowLeft, Github, ExternalLink, Search, Moon, Zap, Globe } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -33,6 +33,17 @@ export default function SeekEngineProject() {
               </div>
             </div>
 
+            {/* Project Hero Image */}
+            <div className="relative w-full aspect-video mb-12 rounded-2xl overflow-hidden shadow-lg border border-zinc-100 dark:border-zinc-800 group">
+                <div className="absolute inset-0 bg-zinc-200 dark:bg-zinc-800 animate-pulse" />
+                <Image 
+                  src="/Project/SeekEngine/img.png" 
+                  alt="SeekEngine Searching Interface" 
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                />
+            </div>
+
             <div className="prose prose-zinc dark:prose-invert max-w-none mb-12">
               <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed text-lg">
                 SeekEngine is a modern, open-source search engine powered by Google Custom Search API. It provides a clean, minimal, and highly responsive interface with theme-aware design, dark/light mode support, and a playful "teleport" discovery feature. Built for speed and accessibility, SeekEngine delivers Google-backed search results without the clutter.
@@ -43,20 +54,32 @@ export default function SeekEngineProject() {
               <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">Key Features</h2>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50">
-                  <h3 className="font-bold text-zinc-900 dark:text-white mb-3">Google-Powered Search</h3>
-                  <p className="text-zinc-600 dark:text-zinc-400">Leverages Google Custom Search API for accurate, up-to-date search results</p>
+                  <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4">
+                    <Search size={20} />
+                  </div>
+                  <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Google-Powered Search</h3>
+                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Leverages Google Custom Search API for accurate, up-to-date search results</p>
                 </div>
                 <div className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50">
-                  <h3 className="font-bold text-zinc-900 dark:text-white mb-3">Theme-Aware Design</h3>
-                  <p className="text-zinc-600 dark:text-zinc-400">Responsive UI with light/dark mode and system preference detection</p>
+                  <div className="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-4">
+                    <Moon size={20} />
+                  </div>
+                  <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Theme-Aware Design</h3>
+                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Responsive UI with light/dark mode and system preference detection</p>
                 </div>
                 <div className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50">
-                  <h3 className="font-bold text-zinc-900 dark:text-white mb-3">Teleport Discovery</h3>
-                  <p className="text-zinc-600 dark:text-zinc-400">Jump to curated, delightful corners of the web for random inspiration</p>
+                  <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400 mb-4">
+                    <Globe size={20} />
+                  </div>
+                  <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Teleport Discovery</h3>
+                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Jump to curated, delightful corners of the web for random inspiration</p>
                 </div>
                 <div className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50">
-                  <h3 className="font-bold text-zinc-900 dark:text-white mb-3">Fast & Minimal</h3>
-                  <p className="text-zinc-600 dark:text-zinc-400">Lightning-fast performance with clean interface and zero clutter</p>
+                  <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/30 rounded-lg flex items-center justify-center text-amber-600 dark:text-amber-400 mb-4">
+                    <Zap size={20} />
+                  </div>
+                  <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Fast & Minimal</h3>
+                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Lightning-fast performance with clean interface and zero clutter</p>
                 </div>
               </div>
             </div>
