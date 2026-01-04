@@ -31,6 +31,13 @@ export default function SeekEngineProject() {
                   <ExternalLink size={18} />
                   <span>Live Demo</span>
                 </a>
+                <Link 
+                  href="/research/seekengine" 
+                  className="p-3 bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 rounded-xl hover:bg-orange-200 dark:hover:bg-orange-900/50 transition-colors shadow-sm"
+                  title="View Research Paper"
+                >
+                  <Search size={20} />
+                </Link>
                 <a 
                   href="https://github.com/archduke1337/SeekEngine" 
                   target="_blank" 

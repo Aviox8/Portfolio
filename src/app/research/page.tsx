@@ -1,4 +1,4 @@
-import { Search, FileText } from "lucide-react";
+import { Search, FileText, Globe } from "lucide-react";
 import Link from "next/link";
 
 export default function ResearchPage() {
@@ -64,6 +64,62 @@ export default function ResearchPage() {
                         
                         <div className="flex items-center text-blue-600 dark:text-blue-400 font-semibold group-hover:gap-2 transition-all">
                            Read Paper <span className="ml-2">→</span>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </Link>
+
+            {/* SeekEngine Research Card */}
+            <Link href="/research/seekengine" className="group relative block w-full">
+               <div className="relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                  <div className="flex flex-col md:flex-row h-full">
+                     {/* Graphic Side */}
+                     <div className="relative w-full md:w-1/3 min-h-[250px] bg-orange-50 dark:bg-orange-900/10 border-r border-zinc-200 dark:border-zinc-800 flex items-center justify-center p-8">
+                        <div className="relative w-48 h-64 bg-white dark:bg-zinc-900 shadow-2xl border border-zinc-200 dark:border-zinc-800 rounded-sm flex flex-col p-4 group-hover:scale-105 transition-transform duration-500">
+                           <div className="flex items-center gap-2 mb-4">
+                              <Search size={16} className="text-orange-600" />
+                              <div className="h-2 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full"></div>
+                           </div>
+                           <div className="space-y-3">
+                              <div className="h-2 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full"></div>
+                              <div className="h-2 w-5/6 bg-zinc-100 dark:bg-zinc-800 rounded-full"></div>
+                              <div className="h-2 w-4/6 bg-zinc-100 dark:bg-zinc-800 rounded-full"></div>
+                           </div>
+                           <div className="mt-8 p-3 rounded-lg bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/50">
+                              <div className="h-1.5 w-full bg-blue-200 dark:bg-blue-800 rounded-full mb-2"></div>
+                              <div className="h-1.5 w-3/4 bg-blue-200 dark:bg-blue-800 rounded-full"></div>
+                           </div>
+                           <div className="mt-auto flex justify-between items-center text-[10px] text-zinc-400 font-mono">
+                              <span>SEEK-2026</span>
+                              <div className="flex gap-1">
+                                 <div className="w-1 h-1 rounded-full bg-green-500 animate-pulse"></div>
+                                 <Globe size={12} />
+                              </div>
+                           </div>
+                           <div className="absolute -top-2 -right-2 px-2 py-0.5 bg-orange-100 dark:bg-orange-900/50 text-orange-700 dark:text-orange-300 text-[10px] font-bold uppercase tracking-wider rounded border border-orange-200 dark:border-orange-800 shadow-sm">
+                              Independent
+                           </div>
+                        </div>
+                     </div>
+
+                     {/* Content Side */}
+                     <div className="flex-1 p-8 flex flex-col justify-center">
+                        <div className="flex items-center gap-3 mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500">
+                           <span className="px-2 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-md">Research Note</span>
+                           <span className="text-zinc-600 dark:text-zinc-400">Jan 2026</span>
+                        </div>
+                        
+                        <h2 className="text-2xl sm:text-3xl font-bold text-zinc-900 dark:text-white mb-4 group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
+                           SeekEngine: A Hybrid RAG Approach to Truthful Search
+                        </h2>
+                        
+                        <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6 line-clamp-3">
+                           A messy yet effective attempt at combining Google Custom Search with LLMs to reduce AI hallucinations. Real-world testing shows a 40% reduction in misinformation through grounded generation.
+                        </p>
+                        
+                        <div className="flex items-center text-orange-600 dark:text-orange-400 font-semibold group-hover:gap-2 transition-all">
+                           Explore Research <span className="ml-2">→</span>
                         </div>
                      </div>
                   </div>
