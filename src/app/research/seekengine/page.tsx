@@ -295,10 +295,10 @@ Fork it, break it, make it better. Hit me up if you want to chat code or just ve
                  <div className="flex items-center gap-6 mt-2">
                    <div className="flex items-center gap-2 text-sm text-zinc-500">
                       <Calendar size={14} />
-                      <span>January 04, 2026</span>
+                      <span>January 01, 2026</span>
                    </div>
-                   <Link href="mailto:gaurav@seekengine.dev" className="flex items-center gap-2 text-sm text-blue-600 hover:underline">
-                      gaurav@seekengine.dev
+                   <Link href="mailto:gauravramyadav@gmail.com" className="flex items-center gap-2 text-sm text-blue-600 hover:underline">
+                      gauravramyadav@gmail.com
                    </Link>
                  </div>
               </div>
