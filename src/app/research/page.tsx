@@ -1,4 +1,4 @@
-import { Search, FileText, Globe } from "lucide-react";
+import { Search, FileText, Globe, Shield } from "lucide-react";
 import Link from "next/link";
 
 export default function ResearchPage() {
@@ -27,13 +27,23 @@ export default function ResearchPage() {
                <div className="relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
                   <div className="flex flex-col md:flex-row h-full">
                      {/* Graphic Side */}
-                     <div className="relative w-full md:w-1/3 min-h-[250px] bg-zinc-50 dark:bg-zinc-950 border-r border-zinc-200 dark:border-zinc-800 flex items-center justify-center p-8">
+                     <div className="relative w-full md:w-1/3 min-h-[250px] bg-blue-50 dark:bg-blue-900/10 border-r border-zinc-200 dark:border-zinc-800 flex items-center justify-center p-8">
                         <div className="relative w-48 h-64 bg-white dark:bg-zinc-900 shadow-2xl border border-zinc-200 dark:border-zinc-800 rounded-sm flex flex-col p-4 group-hover:scale-105 transition-transform duration-500">
-                           <div className="h-2 w-full bg-zinc-100 dark:bg-zinc-800 mb-2"></div>
-                           <div className="h-2 w-3/4 bg-zinc-100 dark:bg-zinc-800 mb-6"></div>
-                           <div className="space-y-1.5">
-                              {[...Array(8)].map((_, i) => (
-                                 <div key={i} className="h-1.5 w-full bg-zinc-100 dark:bg-zinc-800 rounded-sm"></div>
+                           <div className="flex items-center gap-2 mb-4">
+                              <Shield size={16} className="text-blue-600" />
+                              <div className="h-2 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full"></div>
+                           </div>
+                           <div className="space-y-3">
+                              <div className="h-1.5 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full"></div>
+                              <div className="h-1.5 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full"></div>
+                              <div className="h-1.5 w-3/4 bg-zinc-100 dark:bg-zinc-800 rounded-full"></div>
+                           </div>
+                           <div className="mt-6 space-y-2">
+                              {[...Array(3)].map((_, i) => (
+                                 <div key={i} className="flex items-center gap-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-green-500"></div>
+                                    <div className="h-1 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full"></div>
+                                 </div>
                               ))}
                            </div>
                            <div className="mt-auto flex justify-between items-center text-[10px] text-zinc-400 font-mono">

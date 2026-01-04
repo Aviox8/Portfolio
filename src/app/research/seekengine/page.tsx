@@ -50,6 +50,9 @@ Deployment? Vercel, one-click from GitHub. .env.local with the keys—GOOGLE_API
 
 The flow's simple on paper: user types query → two parallel fetches → fuse on results page. But getting it reliable? That's where the blood (metaphorical) went.
 
+\`\`\`mermaid_rag
+\`\`\`
+
 1. **Retrieval (The Reliable Part)**: \`/api/search/route.ts\` hits Google's JSON API. Basic fetch, but I added encoding and error wrapping because queries with Hindi words or special chars were bombing out.
 
 \`\`\`ts
@@ -214,6 +217,63 @@ SeekEngine's my small win against the noise. It's not fancy, but it's mine—bui
 Fork it, break it, make it better. Hit me up if you want to chat code or just vent about bad AIs.
 `;
 
+    const RagDiagram = () => (
+      <div className="my-12 p-8 bg-zinc-50 dark:bg-zinc-900/50 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-inner overflow-hidden relative">
+        <div className="flex flex-col md:flex-row items-center justify-center gap-8 relative z-10">
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-20 h-20 rounded-2xl bg-white dark:bg-zinc-800 flex items-center justify-center shadow-xl border border-zinc-100 dark:border-zinc-700">
+               <div className="flex flex-col gap-1.5">
+                  <div className="w-8 h-1 bg-blue-500 rounded-full"></div>
+                  <div className="w-6 h-1 bg-zinc-300 dark:bg-zinc-600 rounded-full"></div>
+                  <div className="w-10 h-1 bg-zinc-300 dark:bg-zinc-600 rounded-full"></div>
+               </div>
+            </div>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-500">User Query</span>
+          </div>
+          
+          <div className="hidden md:block text-zinc-300 dark:text-zinc-700 scale-150">→</div>
+          
+          <div className="flex flex-col items-center gap-4">
+             <div className="flex gap-4">
+                <motion.div 
+                  animate={{ y: [0, -5, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="px-4 py-3 bg-orange-100 dark:bg-orange-900/30 text-orange-600 rounded-xl border border-orange-200 dark:border-orange-800 flex items-center gap-2"
+                >
+                   <Globe size={16} />
+                   <span className="text-[10px] font-bold uppercase">Google Search</span>
+                </motion.div>
+                <motion.div 
+                  animate={{ y: [0, 5, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 0.5 }}
+                  className="px-4 py-3 bg-purple-100 dark:bg-purple-900/30 text-purple-600 rounded-xl border border-purple-200 dark:border-purple-800 flex items-center gap-2"
+                >
+                   <Code size={16} />
+                   <span className="text-[10px] font-bold uppercase">OpenRouter AI</span>
+                </motion.div>
+             </div>
+             <div className="w-full h-px bg-zinc-200 dark:bg-zinc-800 relative">
+                <div className="absolute left-1/2 -translate-x-1/2 -top-2 px-3 bg-zinc-50 dark:bg-zinc-900 text-[8px] font-mono text-zinc-400">Fusion Layer</div>
+             </div>
+          </div>
+
+          <div className="hidden md:block text-zinc-300 dark:text-zinc-700 scale-150">→</div>
+
+          <div className="flex flex-col items-center gap-3">
+             <div className="w-20 h-20 rounded-full bg-blue-600 flex items-center justify-center shadow-2xl shadow-blue-500/30">
+                <Shield size={32} className="text-white" />
+             </div>
+             <span className="text-[10px] font-bold uppercase tracking-widest text-blue-600">Grounded Answer</span>
+          </div>
+        </div>
+        {/* Background Gradients */}
+        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+           <div className="absolute top-10 left-10 w-32 h-32 bg-blue-500 rounded-full blur-3xl"></div>
+           <div className="absolute bottom-10 right-10 w-32 h-32 bg-orange-500 rounded-full blur-3xl"></div>
+        </div>
+      </div>
+    );
+
   const MarkdownComponents = {
     h1: ({ children }: any) => <h1 className="text-3xl font-bold mt-10 mb-6 text-zinc-900 dark:text-white border-b pb-2 border-zinc-200 dark:border-zinc-800">{children}</h1>,
     h2: ({ children }: any) => <h2 className="text-2xl font-bold mt-10 mb-4 text-zinc-900 dark:text-white uppercase tracking-wide">{children}</h2>,
@@ -223,6 +283,10 @@ Fork it, break it, make it better. Hit me up if you want to chat code or just ve
     ol: ({ children }: any) => <ol className="list-decimal list-inside space-y-2 mb-6 text-lg text-zinc-700 dark:text-zinc-300 ml-4">{children}</ol>,
     li: ({ children }: any) => <li className="pl-2">{children}</li>,
     code: ({ node, inline, className, children, ...props }: any) => {
+      const childrenStr = String(children);
+      if (childrenStr.includes('mermaid_rag')) {
+        return <RagDiagram />;
+      }
       const match = /language-(\w+)/.exec(className || '');
       return !inline && match ? (
         <div className="relative group my-6">
