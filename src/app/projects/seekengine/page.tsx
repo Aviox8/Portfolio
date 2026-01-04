@@ -23,6 +23,15 @@ export default function SeekEngineProject() {
               </div>
               <div className="flex gap-3">
                 <a 
+                  href="https://seekengine.vercel.app" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl transition-colors shadow-sm font-semibold text-sm"
+                >
+                  <ExternalLink size={18} />
+                  <span>Live Demo</span>
+                </a>
+                <a 
                   href="https://github.com/archduke1337/SeekEngine" 
                   target="_blank" 
                   rel="noopener noreferrer"
