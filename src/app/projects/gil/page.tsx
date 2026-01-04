@@ -43,20 +43,32 @@ export default function GilProject() {
               <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">Key Features</h2>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50">
-                  <h3 className="font-bold text-zinc-900 dark:text-white mb-3">Certificate Verification</h3>
-                  <p className="text-zinc-600 dark:text-zinc-400">Verify authentic diamond certificates using reference numbers with instant results</p>
+                  <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4">
+                    <ShieldCheck size={20} />
+                  </div>
+                  <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Certificate Verification</h3>
+                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Verify authentic diamond certificates using reference numbers with instant results</p>
                 </div>
                 <div className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50">
-                  <h3 className="font-bold text-zinc-900 dark:text-white mb-3">Gem Encyclopedia</h3>
-                  <p className="text-zinc-600 dark:text-zinc-400">Comprehensive database with detailed information on 200+ gemstone varieties</p>
+                  <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400 mb-4">
+                    <BookOpen size={20} />
+                  </div>
+                  <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Gem Encyclopedia</h3>
+                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Comprehensive database with detailed information on 200+ gemstone varieties</p>
                 </div>
                 <div className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50">
-                  <h3 className="font-bold text-zinc-900 dark:text-white mb-3">Analysis & Grading</h3>
-                  <p className="text-zinc-600 dark:text-zinc-400">Professional 3D gem visualization and GIA-standard testing methods</p>
+                  <div className="w-10 h-10 bg-cyan-100 dark:bg-cyan-900/30 rounded-lg flex items-center justify-center text-cyan-600 dark:text-cyan-400 mb-4">
+                    <Minimize2 size={20} />
+                  </div>
+                  <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Analysis & Grading</h3>
+                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Professional 3D gem visualization and GIA-standard testing methods</p>
                 </div>
                 <div className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50">
-                  <h3 className="font-bold text-zinc-900 dark:text-white mb-3">Admin Dashboard</h3>
-                  <p className="text-zinc-600 dark:text-zinc-400">Secure management interface for certificate uploads and bulk operations</p>
+                  <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/30 rounded-lg flex items-center justify-center text-amber-600 dark:text-amber-400 mb-4">
+                    <Settings size={20} />
+                  </div>
+                  <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Admin Dashboard</h3>
+                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Secure management interface for certificate uploads and bulk operations</p>
                 </div>
               </div>
             </div>
