@@ -136,7 +136,7 @@ export default function ContactPage() {
                         name="user_name" 
                         id="user_name"
                         required
-                        className="w-full pl-11 pr-4 py-3 rounded-xl bg-white dark:bg-black/20 border border-apple-200 dark:border-apple-800 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all placeholder:text-apple-300 dark:placeholder:text-apple-700"
+                        className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/60 dark:bg-black/30 backdrop-blur-md border border-apple-200 dark:border-apple-800 hover:border-blue-400/50 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all duration-300 placeholder:text-apple-400/70 dark:placeholder:text-apple-600"
                         placeholder="Your Name"
                       />
                     </div>
@@ -153,7 +153,7 @@ export default function ContactPage() {
                         name="user_email" 
                         id="user_email"
                         required
-                        className="w-full pl-11 pr-4 py-3 rounded-xl bg-white dark:bg-black/20 border border-apple-200 dark:border-apple-800 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all placeholder:text-apple-300 dark:placeholder:text-apple-700"
+                        className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/60 dark:bg-black/30 backdrop-blur-md border border-apple-200 dark:border-apple-800 hover:border-blue-400/50 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all duration-300 placeholder:text-apple-400/70 dark:placeholder:text-apple-600"
                         placeholder="name@example.com"
                       />
                     </div>
@@ -170,7 +170,7 @@ export default function ContactPage() {
                         id="message" 
                         rows={4}
                         required
-                        className="w-full pl-11 pr-4 py-3 rounded-xl bg-white dark:bg-black/20 border border-apple-200 dark:border-apple-800 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all placeholder:text-apple-300 dark:placeholder:text-apple-700 resize-none"
+                        className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/60 dark:bg-black/30 backdrop-blur-md border border-apple-200 dark:border-apple-800 hover:border-blue-400/50 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all duration-300 placeholder:text-apple-400/70 dark:placeholder:text-apple-600 resize-none"
                         placeholder="How can we help you?"
                       />
                     </div>
@@ -180,7 +180,7 @@ export default function ContactPage() {
                     type="submit" 
                     disabled={status === 'loading' || status === 'success'}
                     className={`
-                      w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all duration-300
+                      w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all duration-300 active:scale-[0.98]
                       ${status === 'success' 
                         ? 'bg-green-500 text-white shadow-lg shadow-green-500/30' 
                         : status === 'error'
@@ -212,7 +212,7 @@ export default function ContactPage() {
                   )}
                   {status === 'success' && (
                     <p className="text-xs text-green-500 text-center font-medium">
-                      Thanks for reaching out! I'll get back to you soon.
+                      Thanks for reaching out! I&apos;ll get back to you soon.
                     </p>
                   )}
                 </form>
