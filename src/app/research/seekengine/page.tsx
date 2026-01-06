@@ -772,7 +772,7 @@ retrieval-augmented generation, hybrid search systems, large language models, ha
 
 ---
 
-## I. Introduction: The Hallucination Problem
+## I. Introduction: The Hallucination Problem <a id="abstract"></a>
 
 The modern web faces a growing challenge of &quot;confident misinformation&quot; from AI systems. Large Language Models (LLMs), while capable of sophisticated synthesis, inherently prioritize probabilistic fluency over factual accuracy. A developer requesting a secure JWT implementation may receive syntactically valid code that references deprecated libraries or contains subtle race conditions.
 
@@ -780,7 +780,7 @@ SeekEngine emerged from this observation. The objective was not to build the mos
 
 ---
 
-## II. System Architecture
+## II. System Architecture <a id="architecture"></a>
 
 Built on **Next.js 14**, SeekEngine employs server-side route handlers as security proxies between client interfaces and sensitive API endpoints. The interface itself is treated as an experimental surface for communicating system trust and verification state.
 
@@ -832,7 +832,7 @@ All external inputs—including search results and user queries—are treated as
 
 ---
 
-## V. Comparative Evaluation: Grounded vs. Ungrounded Output
+## V. Comparative Evaluation: Grounded vs. Ungrounded Output <a id="benchmarks"></a>
 
 The qualitative difference between grounded and ungrounded responses is observable in real-time factual queries. The following comparison illustrates SeekEngine's source-referenced synthesis versus standard LLM hallucination patterns.
 
@@ -964,111 +964,85 @@ export default function SeekEngineResearch() {
   };
 
   return (
-    <main className="min-h-screen pt-24 pb-32 bg-white dark:bg-zinc-950 font-serif selection:bg-blue-100 selection:text-blue-900 dark:selection:bg-blue-900/40 dark:selection:text-blue-200">
-      <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12 text-zinc-900 dark:text-zinc-100">
-        
-        {/* Navigation & Actions */}
-        <motion.div 
-           initial={{ opacity: 0, y: -10 }}
-           animate={{ opacity: 1, y: 0 }}
-           className="flex items-center justify-between mb-16 font-sans"
-        >
-          <Link href="/research" className="inline-flex items-center gap-2.5 text-zinc-500 hover:text-blue-600 transition-all group">
-            <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-            <span className="font-semibold text-sm">Return to Repository</span>
+    <main className="min-h-screen bg-white dark:bg-zinc-950 font-serif selection:bg-blue-100 selection:text-blue-900 dark:selection:bg-blue-900/40 dark:selection:text-blue-200">
+      
+      {/* Scroll Progress & Sticky Nav */}
+      <motion.div 
+        className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ delay: 0.5 }}
+      >
+        <div className="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between font-sans text-xs font-bold uppercase tracking-widest text-zinc-500">
+          <Link href="/research" className="hover:text-blue-600 transition-colors">
+            ← Repository
           </Link>
-          <div className="flex gap-4">
-             <button className="p-2.5 text-zinc-500 hover:text-zinc-900 dark:hover:text-white bg-zinc-50 dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 transition-all" title="Export as PDF">
-                <Download size={18} />
-             </button>
-             <button className="p-2.5 text-zinc-500 hover:text-zinc-900 dark:hover:text-white bg-zinc-50 dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 transition-all" title="Share Research">
-                <Share2 size={18} />
-             </button>
+          <div className="flex gap-6">
+            <a href="#abstract" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Papers</a>
+            <a href="#architecture" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Architecture</a>
+            <a href="#benchmarks" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Benchmarks</a>
           </div>
-        </motion.div>
+        </div>
+      </motion.div>
 
+      <div className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12 pt-32 pb-32 text-zinc-900 dark:text-zinc-100">
+        
         {/* Paper Header */}
-        <article className="animate-fade-in">
-           <header className="mb-20 text-center font-sans relative">
-              <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-40 h-40 bg-blue-500/10 dark:bg-blue-500/5 blur-[100px] pointer-events-none"></div>
-              
-              <div className="inline-block px-5 py-2 mb-8 text-[11px] font-black underline-offset-4 tracking-[0.2em] text-orange-600 uppercase bg-orange-50/50 dark:bg-orange-950/30 border border-orange-200/50 dark:border-orange-800/30 rounded-2xl">
-                 Published Independent Research
+        <article className="animate-fade-in relative">
+           
+           <header className="mb-24 font-sans text-center">
+              <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">
+                <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
+                Independent Research
               </div>
               
-              <h1 className="text-5xl sm:text-6xl font-black text-zinc-900 dark:text-white mb-10 leading-[1.05] tracking-tight">
-                 SeekEngine: A Hybrid RAG <br className="hidden sm:block"/> Approach to Truthful Search
+              <h1 className="text-4xl sm:text-6xl font-black text-zinc-900 dark:text-white mb-8 leading-[1.1] tracking-tight">
+                 SeekEngine: Hybrid RAG for Truthful Search
               </h1>
               
-              <div className="flex flex-col items-center justify-center gap-6 text-zinc-600 dark:text-zinc-400 mb-12">
-                 <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                      <User size={20} className="text-zinc-800 dark:text-zinc-200" />
-                    </div>
-                    <div className="text-left">
-                      <span className="font-black text-zinc-900 dark:text-white block leading-none">Gaurav Yadav</span>
-                      <span className="text-[10px] uppercase font-bold tracking-widest text-blue-600 dark:text-blue-400">Independent Researcher, Secure AI Systems</span>
-                    </div>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-sm font-medium text-zinc-600 dark:text-zinc-400">
+                 <div className="flex items-center gap-2">
+                    <User size={16} />
+                    <span>Gaurav Yadav</span>
                  </div>
-                 
-                 <div className="text-sm max-w-sm text-center leading-relaxed font-medium">
-                    BCA Cybersecurity, Ajeenkya DY Patil University, Pune <br/>
-                    <span className="text-zinc-400 dark:text-zinc-600">January 01, 2026 — Pune, India</span>
+                 <div className="flex items-center gap-2">
+                    <Calendar size={16} />
+                    <span>Jan 2026</span>
                  </div>
-
-                 <Link href="mailto:gauravramyadav@gmail.com" className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 rounded-full text-xs font-bold hover:bg-blue-100 transition-colors border border-blue-200/50 dark:border-blue-800/30">
-                    gauravramyadav@gmail.com
-                 </Link>
+                 <div className="flex items-center gap-2">
+                    <Shield size={16} />
+                    <span>Systems Security</span>
+                 </div>
               </div>
 
-               {/* Links */}
-               <div className="flex flex-wrap justify-center gap-5 mb-12">
-                  <Link href="https://seekengine.vercel.app" target="_blank" className="group relative inline-flex items-center gap-2.5 px-8 py-4 bg-zinc-900 dark:bg-white text-white dark:text-zinc-950 rounded-2xl transition-all shadow-2xl hover:scale-[1.02] active:scale-[0.98] font-sans text-sm font-black overflow-hidden">
-                    <Globe size={18} /> 
-                    <span>ACCESS LIVE ENGINE</span>
-                    <ExternalLink size={14} className="opacity-50" />
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-white/10 to-blue-500/0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+              <div className="mt-10 flex justify-center gap-4">
+                  <Link href="https://seekengine.vercel.app" target="_blank" className="px-6 py-2.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-lg text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform">
+                    Live Demo
                   </Link>
-                  <Link href="https://github.com/archduke1337/SeekEngine" target="_blank" className="inline-flex items-center gap-2.5 px-8 py-4 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white rounded-2xl transition-all border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-xl font-sans text-sm font-black active:scale-[0.98]">
-                    <Terminal size={18} /> 
-                    <span>DOWNLOAD REPO</span>
+                  <Link href="https://github.com/archduke1337/SeekEngine" target="_blank" className="px-6 py-2.5 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors">
+                    Source Code
                   </Link>
-               </div>
-
-                {/* Tags */}
-                <div className="flex flex-wrap justify-center gap-3">
-                   {["RAG Pipeline", "Hybrid Indexing", "Next.js 14", "Secure Inference", "Cybersecurity"].map((tag) => (
-                       <span key={tag} className="px-3.5 py-1.5 bg-zinc-50 dark:bg-zinc-900/50 text-zinc-500 dark:text-zinc-500 text-[10px] font-black uppercase tracking-[0.1em] rounded-xl border border-zinc-200 dark:border-zinc-800/50">
-                           {tag}
-                       </span>
-                   ))}
-                </div>
+              </div>
            </header>
 
-           <hr className="my-16 border-zinc-100 dark:border-zinc-900" />
+           <hr className="my-16 border-zinc-100 dark:border-zinc-900 w-24 mx-auto" />
 
            {/* Paper Body */}
-           <div className="prose prose-lg dark:prose-invert max-w-none prose-p:font-serif prose-p:opacity-90 prose-p:leading-loose">
+           <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-sans prose-headings:tracking-tight prose-p:font-serif prose-p:text-lg prose-p:opacity-80 prose-p:leading-8 prose-li:text-lg prose-figure:my-12">
               <ReactMarkdown components={MarkdownComponents}>
                  {content}
               </ReactMarkdown>
            </div>
            
            {/* BibTeX Citation Section */}
-           <div className="mt-24 pt-12 border-t border-zinc-200 dark:border-zinc-900 font-sans">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-1.5 h-6 bg-blue-600 rounded-full"></div>
-                <p className="font-black uppercase tracking-[0.2em] text-xs text-zinc-500">Scholarly Citation (BibTeX)</p>
-              </div>
-              <div className="group bg-zinc-50 dark:bg-zinc-900/30 p-8 rounded-[2rem] font-mono text-[11px] sm:text-xs overflow-x-auto border border-zinc-100 dark:border-zinc-800 shadow-inner group transition-all hover:bg-zinc-100 dark:hover:bg-zinc-900/50">
-                 <pre className="text-zinc-600 dark:text-zinc-400 leading-relaxed font-mono">
+           <div className="mt-32 pt-12 border-t border-zinc-200 dark:border-zinc-900 font-sans">
+              <h3 className="font-bold text-sm uppercase tracking-widest text-zinc-500 mb-6">Citation</h3>
+              <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-xl border border-zinc-100 dark:border-zinc-800 overflow-x-auto">
+                 <pre className="text-xs text-zinc-600 dark:text-zinc-400 font-mono leading-relaxed">
 {`@article{yadav2026seekengine,
-  title={SeekEngine: A Hybrid RAG Approach to Truthful Search},
+  title={SeekEngine: hybrid RAG for Truthful Search},
   author={Yadav, Gaurav},
-  journal={Independent Research - Cybersecurity},
   year={2026},
-  location={Pune, India},
-  institution={Ajeenkya DY Patil University},
   url={https://seekengine.vercel.app}
 }`}
                  </pre>
@@ -1076,33 +1050,12 @@ export default function SeekEngineResearch() {
            </div>
 
            {/* Personal Footer */}
-           <div className="mt-24 pt-16 font-sans text-center border-t border-dashed border-zinc-200 dark:border-zinc-900 relative">
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 bg-white dark:bg-zinc-950">
-                 <Shield size={24} className="text-zinc-200 dark:text-zinc-800" />
-              </div>
-              
-              <p className="italic text-lg text-zinc-500 dark:text-zinc-400 max-w-lg mx-auto leading-relaxed">
-                &quot;Grounding is not a feature—it&apos;s a design constraint we choose to enforce.&quot;
+           <div className="mt-24 pt-16 text-center border-t border-dashed border-zinc-200 dark:border-zinc-900">
+              <p className="font-serif italic text-zinc-500 dark:text-zinc-400 text-lg">
+                &quot;Grounding is not a feature—it&apos;s a constraint.&quot;
               </p>
-              
-              <div className="mt-12 flex justify-center gap-10">
-                 {[
-                   { name: 'GitHub', url: 'https://github.com/archduke1337' },
-                   { name: 'LinkedIn', url: 'https://linkedin.com/in/gurvv' },
-                   { name: 'Twitter', url: 'https://twitter.com/archduke1337' }
-                 ].map((social) => (
-                   <Link 
-                    key={social.name} 
-                    href={social.url} 
-                    className="text-xs font-black uppercase tracking-widest text-zinc-400 hover:text-blue-600 transition-all relative group"
-                   >
-                     {social.name}
-                     <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all group-hover:w-full"></span>
-                   </Link>
-                 ))}
-              </div>
-              <div className="mt-16 text-[9px] font-bold text-zinc-300 dark:text-zinc-800 uppercase tracking-[0.5em]">
-                 © 2026 GAURAV YADAV • ARCHDUKE
+              <div className="mt-8 text-[10px] font-bold text-zinc-300 dark:text-zinc-700 uppercase tracking-[0.3em]">
+                 Archduke Research • 2026
               </div>
            </div>
 
