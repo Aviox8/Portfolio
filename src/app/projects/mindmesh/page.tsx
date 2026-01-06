@@ -110,7 +110,7 @@ export default function MindMeshProject() {
                   The Collaboration Story
                 </h3>
                 <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed italic text-lg relative z-10">
-                  "This project was a defining chapter in my engineering journey, co-architected with my close friend and peer, <strong>Sahil Mane</strong>. As B.Tech peers in the same year, we treated MindMesh as our developmental playground. We didn't just write code; we debated architecture, optimized database schemas late into the night, and learned the nuances of full-stack collaboration. Working with Sahil taught me that the best software is built when there's trust, shared ambition, and a healthy dose of peer-to-peer challenge."
+                  "This project was a defining chapter in my college journey, co-architected with my close friend and peer, <strong>Sahil Mane</strong>. As peers in the same year, we treated MindMesh as our developmental playground. We didn't just write code; we debated architecture, optimized database schemas late into the night, and learned the nuances of full-stack collaboration. Working with Sahil taught me that the best software is built when there's trust, shared ambition, and a healthy dose of peer-to-peer collaboration."
                 </p>
               </div>
             </div>
