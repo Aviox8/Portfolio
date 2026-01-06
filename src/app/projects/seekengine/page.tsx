@@ -62,7 +62,7 @@ export default function SeekEngineProject() {
 
             <div className="prose prose-zinc dark:prose-invert max-w-none mb-12">
               <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed text-lg">
-                SeekEngine is a modern, open-source search engine powered by Google Custom Search API. It provides a clean, minimal, and highly responsive interface with theme-aware design, dark/light mode support, and a playful "teleport" discovery feature. Built for speed and accessibility, SeekEngine delivers Google-backed search results without the clutter.
+                SeekEngine is a modern, open-source search engine powered by Google Custom Search API. It provides a clean, minimal, and highly responsive interface with theme-aware design, dark/light mode support, and a playful &quot;teleport&quot; discovery feature. Built for speed and accessibility, SeekEngine delivers Google-backed search results without the clutter.
               </p>
             </div>
 

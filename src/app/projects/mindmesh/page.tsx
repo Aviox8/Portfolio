@@ -98,7 +98,7 @@ export default function MindMeshProject() {
 
             <div className="prose prose-zinc dark:prose-invert max-w-none mb-12">
               <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed text-lg">
-                MindMesh Club is the flagship digital platform for ADYPU's Innovation Cell. It's more than just a website; it's a living ecosystem designed to bridge the gap between abstract ideas and tangible projects. Built from the ground up to support a growing community of student innovators, the platform handles everything from lightning-fast event registrations to knowledge sharing through its high-performance markdown engine.
+                MindMesh Club is the flagship digital platform for ADYPU&apos;s Innovation Cell. It&apos;s more than just a website; it&apos;s a living ecosystem designed to bridge the gap between abstract ideas and tangible projects. Built from the ground up to support a growing community of student innovators, the platform handles everything from lightning-fast event registrations to knowledge sharing through its high-performance markdown engine.
               </p>
               
               <div className="my-12 p-8 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/10 dark:to-indigo-900/10 rounded-3xl border border-purple-100 dark:border-purple-900/20 relative overflow-hidden group">
@@ -110,7 +110,7 @@ export default function MindMeshProject() {
                   The Collaboration Story
                 </h3>
                 <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed italic text-lg relative z-10">
-                  &quot;This project was a defining chapter in my college journey, co-architected with my close friend and peer, <strong>Sahil Mane</strong>. As peers in the same year, we treated MindMesh as our developmental playground. We didn't just write code; we debated architecture, optimized database schemas late into the night, and learned the nuances of full-stack collaboration. Working with Sahil taught me that the best software is built when there's trust, shared ambition, and a healthy dose of peer-to-peer collaboration.&quot;
+                  &quot;This project was a defining chapter in my college journey, co-architected with my close friend and peer, <strong>Sahil Mane</strong>. As peers in the same year, we treated MindMesh as our developmental playground. We didn&apos;t just write code; we debated architecture, optimized database schemas late into the night, and learned the nuances of full-stack collaboration. Working with Sahil taught me that the best software is built when there&apos;s trust, shared ambition, and a healthy dose of peer-to-peer collaboration.&quot;
                 </p>
               </div>
             </div>
@@ -150,7 +150,7 @@ export default function MindMeshProject() {
                       <Box size={24} />
                     </div>
                     <h3 className="font-bold text-zinc-900 dark:text-white mb-2 text-lg">Serverless Architecture</h3>
-                    <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Utilized Appwrite's robust suite for Auth, Realtime Databases, and Storage, enabling a scalable backend without the overhead of traditional servers.</p>
+                    <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Utilized Appwrite&apos;s robust suite for Auth, Realtime Databases, and Storage, enabling a scalable backend without the overhead of traditional servers.</p>
                   </motion.div>
                   <motion.div 
                     variants={featureVariants}

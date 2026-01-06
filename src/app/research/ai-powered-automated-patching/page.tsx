@@ -1370,7 +1370,7 @@ This work is informed by publicly available industry research on AI-assisted vul
             </div>
             
             <p className="italic text-lg text-zinc-500 dark:text-zinc-400 max-w-lg mx-auto leading-relaxed">
-              "Human authority is not a constraint on AI—it is the foundation of trustworthy automation."
+              &quot;Human authority is not a constraint on AI—it is the foundation of trustworthy automation.&quot;
             </p>
             
             <p className="mt-6 text-[10px] text-zinc-400 dark:text-zinc-600 max-w-md mx-auto">

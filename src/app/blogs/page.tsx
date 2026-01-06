@@ -55,7 +55,7 @@ export default function BlogsPage() {
                        </h2>
                        
                        <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6 line-clamp-3">
-                         A deep dive into Bun — the modern JavaScript runtime built for speed, simplicity, and full-stack development. Learn why it's changing the tooling landscape.
+                         A deep dive into Bun — the modern JavaScript runtime built for speed, simplicity, and full-stack development. Learn why it&apos;s changing the tooling landscape.
                        </p>
                        
                        <div className="flex items-center text-blue-600 dark:text-blue-400 font-semibold group-hover:gap-2 transition-all">
