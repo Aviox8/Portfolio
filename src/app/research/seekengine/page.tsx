@@ -1082,7 +1082,7 @@ export default function SeekEngineResearch() {
               </div>
               
               <p className="italic text-lg text-zinc-500 dark:text-zinc-400 max-w-lg mx-auto leading-relaxed">
-                "Grounding is not a feature—it's a design constraint we choose to enforce."
+                &quot;Grounding is not a feature—it&apos;s a design constraint we choose to enforce.&quot;
               </p>
               
               <div className="mt-12 flex justify-center gap-10">
