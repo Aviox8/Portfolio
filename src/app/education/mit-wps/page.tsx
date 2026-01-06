@@ -12,11 +12,11 @@ export default function MITWPSPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900">
+    <main className="min-h-screen bg-gradient-to-br from-white via-apple-50 to-white dark:from-apple-950 dark:via-apple-900 dark:to-apple-950 text-apple-900 dark:text-apple-50 font-sans selection:bg-blue-100 dark:selection:bg-blue-900 selection:text-apple-900 dark:selection:text-white transition-colors duration-500">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <Link 
           href="/education" 
-          className="inline-flex items-center gap-2 text-slate-500 hover:text-blue-600 transition-colors mb-8 group"
+          className="inline-flex items-center gap-2 text-apple-500 dark:text-apple-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-8 group"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           <span className="text-sm font-medium">Back to Education</span>
@@ -25,8 +25,8 @@ export default function MITWPSPage() {
         <section className="mb-12">
           <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900 mb-2">MIT World Peace School</h1>
-              <div className="flex flex-wrap gap-4 text-slate-500 text-sm">
+              <h1 className="text-3xl font-bold text-apple-900 dark:text-white mb-2">MIT World Peace School</h1>
+              <div className="flex flex-wrap gap-4 text-apple-500 dark:text-apple-400 text-sm">
                 <span className="flex items-center gap-1">
                   <MapPin size={14} />
                   Alandi, Pune
@@ -37,14 +37,14 @@ export default function MITWPSPage() {
                 </span>
               </div>
             </div>
-            <span className="px-4 py-1.5 bg-slate-100 text-slate-600 text-xs font-bold rounded-full uppercase tracking-wider">
+            <span className="px-4 py-1.5 bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-xs font-bold rounded-full uppercase tracking-wider">
               High School
             </span>
           </div>
 
-          <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-4">
+          <div className="prose prose-slate dark:prose-invert max-w-none text-apple-600 dark:text-apple-300 leading-relaxed space-y-4">
             <p>
-              My time at <span className="text-slate-900 font-semibold">MIT World Peace School</span> in Alandi was a period of significant growth. 
+              My time at <span className="text-apple-900 dark:text-white font-semibold">MIT World Peace School</span> in Alandi was a period of significant growth. 
               The school&apos;s emphasis on holistic development and value-based education helped me build a strong foundation for my future studies.
             </p>
             <p>
@@ -55,13 +55,13 @@ export default function MITWPSPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-            <GraduationCap size={20} className="text-blue-600" />
+          <h2 className="text-xl font-bold text-apple-900 dark:text-white mb-6 flex items-center gap-2">
+            <GraduationCap size={20} className="text-blue-600 dark:text-blue-400" />
             School Memories
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {images.map((image, index) => (
-              <div key={index} className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <div key={index} className="group overflow-hidden rounded-2xl border border-apple-200 dark:border-apple-800 bg-white dark:bg-apple-900/20 shadow-sm dark:shadow-none hover:shadow-md dark:hover:shadow-none transition-shadow">
                 <div className="relative aspect-square overflow-hidden">
                   <Image 
                     src={image.src} 
@@ -71,7 +71,7 @@ export default function MITWPSPage() {
                   />
                 </div>
                 <div className="p-4">
-                  <p className="text-sm text-slate-600 font-medium">{image.caption}</p>
+                  <p className="text-sm text-apple-600 dark:text-apple-300 font-medium">{image.caption}</p>
                 </div>
               </div>
             ))}

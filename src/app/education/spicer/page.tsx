@@ -13,11 +13,11 @@ export default function SpicerPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900 font-sans selection:bg-blue-100 selection:text-blue-900">
+    <main className="min-h-screen bg-gradient-to-br from-white via-apple-50 to-white dark:from-apple-950 dark:via-apple-900 dark:to-apple-950 text-apple-900 dark:text-apple-50 font-sans selection:bg-blue-100 dark:selection:bg-blue-900 selection:text-apple-900 dark:selection:text-white transition-colors duration-500">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
         <Link 
           href="/education" 
-          className="inline-flex items-center gap-2 text-slate-500 hover:text-blue-600 transition-colors mb-8 group"
+          className="inline-flex items-center gap-2 text-apple-500 dark:text-apple-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors mb-8 group"
         >
           <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
           <span className="text-sm font-medium">Back to Education</span>
@@ -26,8 +26,8 @@ export default function SpicerPage() {
         <section className="mb-12">
           <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6">
             <div>
-              <h1 className="text-3xl font-bold text-slate-900 mb-2">Spicer Higher Secondary School</h1>
-              <div className="flex flex-wrap gap-4 text-slate-500 text-sm">
+              <h1 className="text-3xl font-bold text-apple-900 dark:text-white mb-2">Spicer Higher Secondary School</h1>
+              <div className="flex flex-wrap gap-4 text-apple-500 dark:text-apple-400 text-sm">
                 <span className="flex items-center gap-1">
                   <MapPin size={14} />
                   Pune, Maharashtra
@@ -38,14 +38,14 @@ export default function SpicerPage() {
                 </span>
               </div>
             </div>
-            <span className="px-4 py-1.5 bg-slate-100 text-slate-400 text-xs font-bold rounded-full uppercase tracking-wider">
+            <span className="px-4 py-1.5 bg-purple-100 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 text-xs font-bold rounded-full uppercase tracking-wider">
               Secondary School
             </span>
           </div>
 
-          <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-4">
+          <div className="prose prose-slate dark:prose-invert max-w-none text-apple-600 dark:text-apple-300 leading-relaxed space-y-4">
             <p>
-              <span className="text-slate-900 font-semibold">Spicer Higher Secondary School</span> is where my academic journey truly began to take shape. 
+              <span className="text-apple-900 dark:text-white font-semibold">Spicer Higher Secondary School</span> is where my academic journey truly began to take shape. 
               The school provided a nurturing environment that encouraged curiosity and a love for learning.
             </p>
             <p>
@@ -56,13 +56,13 @@ export default function SpicerPage() {
         </section>
 
         <section>
-          <h2 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2">
-            <GraduationCap size={20} className="text-blue-600" />
+          <h2 className="text-xl font-bold text-apple-900 dark:text-white mb-6 flex items-center gap-2">
+            <GraduationCap size={20} className="text-blue-600 dark:text-blue-400" />
             School Memories
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {images.map((image, index) => (
-              <div key={index} className="group overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+              <div key={index} className="group overflow-hidden rounded-2xl border border-apple-200 dark:border-apple-800 bg-white dark:bg-apple-900/20 shadow-sm dark:shadow-none hover:shadow-md dark:hover:shadow-none transition-shadow">
                 <div className="relative aspect-square overflow-hidden">
                   <Image 
                     src={image.src} 
@@ -72,7 +72,7 @@ export default function SpicerPage() {
                   />
                 </div>
                 <div className="p-4">
-                  <p className="text-sm text-slate-600 font-medium">{image.caption}</p>
+                  <p className="text-sm text-apple-600 dark:text-apple-300 font-medium">{image.caption}</p>
                 </div>
               </div>
             ))}
