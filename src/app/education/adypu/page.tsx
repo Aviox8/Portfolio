@@ -44,7 +44,7 @@ export default function ADYPUPage() {
               giving me exposure to real-world security challenges and modern defense strategies.
             </p>
             <p>
-              I've also had the opportunity to represent the technical community here, participating in events like the <span className="text-slate-900 font-semibold">Smart India Hackathon (SIH)</span>, 
+              I&apos;ve also had the opportunity to represent the technical community here, participating in events like the <span className="text-slate-900 font-semibold">Smart India Hackathon (SIH)</span>, 
               where we worked on solving complex problems under pressure.
             </p>
           </div>
@@ -67,7 +67,7 @@ export default function ADYPUPage() {
               </div>
               <div className="p-4">
                 <h3 className="font-bold text-slate-900">Smart India Hackathon (SIH)</h3>
-                <p className="text-sm text-slate-500 mt-1">Participating in one of India's biggest hackathons, focusing on cybersecurity solutions.</p>
+                <p className="text-sm text-slate-500 mt-1">Participating in one of India&apos;s biggest hackathons, focusing on cybersecurity solutions.</p>
               </div>
             </div>
           </div>
