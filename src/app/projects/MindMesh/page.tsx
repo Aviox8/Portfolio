@@ -80,7 +80,7 @@ export default function MindMeshProject() {
               </div>
             </div>
 
-            {/* Project Hero Image Placeholder */}
+            {/* Project Hero Image */}
             <motion.div 
                initial={{ opacity: 0, scale: 0.9 }}
                animate={{ opacity: 1, scale: 1 }}
@@ -88,9 +88,12 @@ export default function MindMeshProject() {
                className="relative w-full aspect-video mb-12 rounded-2xl overflow-hidden shadow-lg border border-zinc-100 dark:border-zinc-800 group"
             >
                 <div className="absolute inset-0 bg-zinc-200 dark:bg-zinc-800 animate-pulse" />
-                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-blue-500/20 flex items-center justify-center">
-                    <Box size={64} className="text-purple-500 opacity-50" />
-                </div>
+                <Image 
+                  src="/Project/mindmesh/img.png" 
+                  alt="MindMesh Club Interface" 
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                />
             </motion.div>
 
             <div className="prose prose-zinc dark:prose-invert max-w-none mb-12">
