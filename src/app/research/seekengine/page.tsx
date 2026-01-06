@@ -135,7 +135,7 @@ const SecurityEncryption = () => (
               <XCircle size={10} className="text-red-500" />
             </div>
             <code className="text-[11px] text-zinc-400 block font-mono bg-zinc-950 p-2 rounded border border-red-900/20">
-              const API_KEY = "sk-..." // LEAK DETECTED
+              const API_KEY = &quot;sk-...&quot; // LEAK DETECTED
             </code>
           </div>
           <motion.div 
@@ -212,7 +212,7 @@ const HallucinationComparison = () => {
                 <span className="text-xs font-bold uppercase">Hallucination Detected</span>
               </div>
               <p className="font-serif text-lg text-zinc-600 animate-pulse italic">
-                "The current stock price of Apple is $245.30, showing a strong 2% growth since this morning's opening..."
+                &quot;The current stock price of Apple is $245.30, showing a strong 2% growth since this morning&apos;s opening...&quot;
               </p>
               <div className="text-[10px] font-mono text-zinc-400 bg-zinc-50 dark:bg-zinc-900 p-2 rounded">
                 (Note: LLM is using training data from 2024 to guess 2026 prices)
@@ -231,7 +231,7 @@ const HallucinationComparison = () => {
                 <span className="text-xs font-bold uppercase">Source-Referenced Synthesis</span>
               </div>
               <p className="font-serif text-lg text-zinc-900 dark:text-white font-bold leading-relaxed">
-                "As of Jan 05, 2026, Apple (AAPL) is trading at $192.42. Source: Google Finance Index [1]."
+                &quot;As of Jan 05, 2026, Apple (AAPL) is trading at $192.42. Source: Google Finance Index [1].&quot;
               </p>
               <div className="flex gap-2">
                 <span className="px-2 py-0.5 bg-blue-100 text-blue-700 text-[9px] font-bold rounded">SOURCE REFERENCED</span>
@@ -307,7 +307,7 @@ const LatencyCompare = () => (
       ))}
     </div>
     <div className="mt-8 text-center text-[10px] font-mono text-zinc-400 italic">
-      The "Truth Penalty": SeekEngine trades additional latency for improved factual consistency.
+      The &quot;Truth Penalty&quot;: SeekEngine trades additional latency for improved factual consistency.
     </div>
   </div>
 );
@@ -774,7 +774,7 @@ retrieval-augmented generation, hybrid search systems, large language models, ha
 
 ## I. Introduction: The Hallucination Problem
 
-The modern web faces a growing challenge of "confident misinformation" from AI systems. Large Language Models (LLMs), while capable of sophisticated synthesis, inherently prioritize probabilistic fluency over factual accuracy. A developer requesting a secure JWT implementation may receive syntactically valid code that references deprecated libraries or contains subtle race conditions.
+The modern web faces a growing challenge of &quot;confident misinformation&quot; from AI systems. Large Language Models (LLMs), while capable of sophisticated synthesis, inherently prioritize probabilistic fluency over factual accuracy. A developer requesting a secure JWT implementation may receive syntactically valid code that references deprecated libraries or contains subtle race conditions.
 
 SeekEngine emerged from this observation. The objective was not to build the most creative AI assistant, but to develop a **grounding-first** search agent that treats factual verification as a primary constraint rather than a post-processing concern.
 
