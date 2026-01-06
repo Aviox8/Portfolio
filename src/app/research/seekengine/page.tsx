@@ -1055,7 +1055,7 @@ export default function SeekEngineResearch() {
                 &quot;Grounding is not a feature—it&apos;s a constraint.&quot;
               </p>
               <div className="mt-8 text-[10px] font-bold text-zinc-300 dark:text-zinc-700 uppercase tracking-[0.3em]">
-                 Archduke Research • 2026
+                  Research • 2026
               </div>
            </div>
 
