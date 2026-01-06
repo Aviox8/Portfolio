@@ -89,7 +89,7 @@ export default function MindMeshProject() {
             >
                 <div className="absolute inset-0 bg-zinc-200 dark:bg-zinc-800 animate-pulse" />
                 <Image 
-                  src="/Project/mindmesh/img.png" 
+                  src="/Project/mindmesh/hero.png" 
                   alt="MindMesh Club Interface" 
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-[1.02]"
