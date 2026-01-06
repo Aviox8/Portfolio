@@ -772,7 +772,7 @@ retrieval-augmented generation, hybrid search systems, large language models, ha
 
 ---
 
-## I. Introduction: The Hallucination Problem <a id="abstract"></a>
+## I. Introduction: The Hallucination Problem
 
 The modern web faces a growing, systemic challenge of "confident misinformation" propagated by probabilistic AI systems. Large Language Models (LLMs), while capable of sophisticated syntactic synthesis, inherently prioritize probabilistic fluency over factual accuracy. They operate as stochastic engines, predicting the next likely token based on training distribution rather than querying a verifiable knowledge base. Consequently, a developer requesting a secure JWT implementation may receive syntactically valid code that references deprecated libraries, contains subtle race conditions, or hallucinates non-existent API methods.
 
@@ -780,7 +780,7 @@ This phenomenon is not merely a "glitch" but a fundamental property of the trans
 
 ---
 
-## II. System Architecture <a id="architecture"></a>
+## II. System Architecture
 
 Built on the robust **Next.js 14** framework, SeekEngine employs server-side route handlers as strict security proxies between client interfaces and sensitive API endpoints. The architecture is deliberately distinct from typical "chatbot" designs; the interface is treated as an experimental surface for communicating system trust, verification state, and data provenance.
 
@@ -832,7 +832,7 @@ In a security-first design, all external inputs—including search results and u
 
 ---
 
-## V. Comparative Evaluation: Grounded vs. Ungrounded Output <a id="benchmarks"></a>
+## V. Comparative Evaluation: Grounded vs. Ungrounded Output
 
 The qualitative difference between grounded and ungrounded responses is immediately observable in real-time factual queries, particularly those involving temporal data (e.g., stock prices, recent news). The following comparison illustrates the divergence between SeekEngine's source-referenced synthesis and standard LLM hallucination patterns.
 
@@ -916,7 +916,15 @@ This work is released as an open, inspectable system to encourage critical evalu
 export default function SeekEngineResearch() {
   const MarkdownComponents = {
     h1: ({ children }: any) => <h1 className="text-3xl font-bold mt-12 mb-6 text-zinc-900 dark:text-white border-b pb-2 border-zinc-200 dark:border-zinc-800 tracking-tight">{children}</h1>,
-    h2: ({ children }: any) => <h2 className="text-2xl font-bold mt-10 mb-5 text-zinc-900 dark:text-white uppercase tracking-wider">{children}</h2>,
+    h2: ({ children }: any) => {
+      const text = String(children).toLowerCase();
+      let id = undefined;
+      if (text.includes('introduction')) id = 'abstract';
+      else if (text.includes('architecture')) id = 'architecture';
+      else if (text.includes('comparative')) id = 'benchmarks';
+      
+      return <h2 id={id} className="text-2xl font-bold mt-16 mb-6 text-zinc-900 dark:text-white uppercase tracking-wider scroll-mt-32">{children}</h2>;
+    },
     h3: ({ children }: any) => <h3 className="text-xl font-bold mt-8 mb-4 text-zinc-800 dark:text-zinc-200">{children}</h3>,
     p: ({ children }: any) => <p className="text-lg leading-loose text-zinc-700 dark:text-zinc-300 mb-6 text-justify lg:text-left">{children}</p>,
     ul: ({ children }: any) => <ul className="list-disc list-inside space-y-3 mb-8 text-lg text-zinc-700 dark:text-zinc-300 ml-4">{children}</ul>,
