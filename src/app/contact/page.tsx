@@ -44,7 +44,7 @@ export default function ContactPage() {
               <h1 className="text-5xl sm:text-6xl font-bold text-apple-900 dark:text-white">Contact</h1>
             </div>
             <p className="text-lg sm:text-xl text-apple-600 dark:text-apple-300 max-w-3xl leading-relaxed animate-slide-up animate-delay-100">
-              Let's connect and explore opportunities, ideas, and collaborations together.
+              Let&apos;s connect and explore opportunities, ideas, and collaborations together.
             </p>
           </div>
           
@@ -77,7 +77,7 @@ export default function ContactPage() {
           {/* CTA Card */}
           <div className="apple-card-elevated p-8 text-center animate-slide-up animate-delay-300 border-2 border-blue-600 border-opacity-20 dark:border-opacity-30">
             <p className="text-apple-700 dark:text-apple-200 leading-relaxed text-lg font-medium mb-6">
-              I'm always excited about discussing new projects, exploring creative ideas, and collaborating on meaningful work.
+              I&apos;m always excited about discussing new projects, exploring creative ideas, and collaborating on meaningful work.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

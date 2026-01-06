@@ -45,7 +45,7 @@ export default function MITWPSPage() {
           <div className="prose prose-slate max-w-none text-slate-600 leading-relaxed space-y-4">
             <p>
               My time at <span className="text-slate-900 font-semibold">MIT World Peace School</span> in Alandi was a period of significant growth. 
-              The school's emphasis on holistic development and value-based education helped me build a strong foundation for my future studies.
+              The school&apos;s emphasis on holistic development and value-based education helped me build a strong foundation for my future studies.
             </p>
             <p>
               It was during these years that I started exploring my interest in technology and cybersecurity more seriously, 
