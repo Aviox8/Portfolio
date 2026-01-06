@@ -121,7 +121,7 @@ export default function BlogsPage() {
                      </div>
                      <div className="p-6 flex-1">
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2 leading-tight group-hover:text-red-600 dark:group-hover:text-red-400 transition-colors">
-                           Why Most Cyber Attacks Don’t Need Zero-Days
+                           Why Most Cyber Attacks Don&apos;t Need Zero-Days
                         </h3>
                         <p className="text-zinc-500 text-sm leading-relaxed line-clamp-3">
                            Most breaches happen because of things we already know are broken. A breakdown of real-world attack vectors.
@@ -166,7 +166,7 @@ export default function BlogsPage() {
                            Why Dependency Security Is a Bigger Problem
                         </h3>
                         <p className="text-zinc-500 text-sm leading-relaxed line-clamp-3">
-                           Modern apps fail because they trust code they didn't write. Exploring the hidden attack surface of npm and supply chains.
+                           Modern apps fail because they trust code they didn&apos;t write. Exploring the hidden attack surface of npm and supply chains.
                         </p>
                      </div>
                      <div className="px-6 pb-6 pt-0 mt-auto">

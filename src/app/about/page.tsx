@@ -67,7 +67,7 @@ When I'm not coding or studying security protocols, you can find me participatin
             </h1>
             <div className="text-xl sm:text-2xl text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-2xl font-medium">
               <ReactMarkdown components={MarkdownComponents}>
-                I'm a BCA Cybersecurity student and a passionate full-stack developer. I bridge the gap between secure infrastructure and beautiful, user-centric web applications.
+                I&apos;m a BCA Cybersecurity student and a passionate full-stack developer. I bridge the gap between secure infrastructure and beautiful, user-centric web applications.
               </ReactMarkdown>
             </div>
           </motion.div>

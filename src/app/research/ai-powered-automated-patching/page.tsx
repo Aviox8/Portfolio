@@ -725,7 +725,7 @@ const DesignRationale = () => (
       <div className="p-2 bg-blue-500/10 rounded-lg">
         <MessageSquare size={18} className="text-blue-500" />
       </div>
-      <h4 className="text-xs font-bold text-zinc-900 dark:text-white uppercase tracking-widest">Researcher's Design Decisions</h4>
+      <h4 className="text-xs font-bold text-zinc-900 dark:text-white uppercase tracking-widest">Researcher&apos;s Design Decisions</h4>
     </div>
     
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

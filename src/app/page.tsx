@@ -205,7 +205,7 @@ export default function Home() {
                      <Mail size={32} />
                    </div>
                   <h3 className="text-2xl font-bold">Get in Touch</h3>
-                  <p className="text-sm opacity-60 mt-2 mb-4">Have an idea? Let's build it.</p>
+                  <p className="text-sm opacity-60 mt-2 mb-4">Have an idea? Let&apos;s build it.</p>
                   <span className="px-4 py-2 border border-white/30 dark:border-black/30 rounded-full text-xs font-medium uppercase tracking-widest hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white transition-all">
                     Available for Hire
                   </span>
