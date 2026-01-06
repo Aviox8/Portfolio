@@ -98,77 +98,83 @@ export default function MindMeshProject() {
 
             <div className="prose prose-zinc dark:prose-invert max-w-none mb-12">
               <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed text-lg">
-                MindMesh Club is the official digital platform for our college's innovation cell. It serves as a centralized hub for organizing events, sharing knowledge through blogs, and fostering a community of thinkers and creators. 
+                MindMesh Club is the flagship digital platform for ADYPU's Innovation Cell. It's more than just a website; it's a living ecosystem designed to bridge the gap between abstract ideas and tangible projects. Built from the ground up to support a growing community of student innovators, the platform handles everything from lightning-fast event registrations to knowledge sharing through its high-performance markdown engine.
               </p>
-              <div className="mt-8 p-6 bg-purple-50 dark:bg-purple-900/10 rounded-2xl border border-purple-100 dark:border-purple-900/20">
-                <h3 className="text-purple-900 dark:text-purple-300 font-bold mb-2 flex items-center gap-2">
-                  <Users size={20} />
-                  Collaboration Story
+              
+              <div className="my-12 p-8 bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-purple-900/10 dark:to-indigo-900/10 rounded-3xl border border-purple-100 dark:border-purple-900/20 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <Users size={120} className="text-purple-600" />
+                </div>
+                <h3 className="text-purple-900 dark:text-purple-300 font-bold text-xl mb-4 flex items-center gap-2 relative z-10">
+                  <Users size={24} />
+                  The Collaboration Story
                 </h3>
-                <p className="text-zinc-600 dark:text-zinc-300 leading-relaxed italic">
-                  "This project holds a special place in my journey as it was built in close collaboration with my close friend and peer, <strong>Sahil Mane</strong>. We both pursued our B.Tech together and shared the same passion for engineering impactful solutions. Working with Sahil taught me the importance of peer-review, collaborative architecture, and the power of shared vision. We learned, failed, and succeeded together, making MindMesh more than just a code repository—it's a testament to our engineering friendship."
+                <p className="text-zinc-700 dark:text-zinc-300 leading-relaxed italic text-lg relative z-10">
+                  "This project was a defining chapter in my engineering journey, co-architected with my close friend and peer, <strong>Sahil Mane</strong>. As B.Tech peers in the same year, we treated MindMesh as our developmental playground. We didn't just write code; we debated architecture, optimized database schemas late into the night, and learned the nuances of full-stack collaboration. Working with Sahil taught me that the best software is built when there's trust, shared ambition, and a healthy dose of peer-to-peer challenge."
                 </p>
               </div>
             </div>
 
-            <div className="space-y-8">
-              <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500">Project Highlights</h2>
-              <div className="grid md:grid-cols-2 gap-6">
-                <motion.div 
-                  variants={featureVariants}
-                  whileHover={{ y: -5 }}
-                  className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50"
-                >
-                  <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center text-purple-600 dark:text-purple-400 mb-4">
-                    <Calendar size={20} />
-                  </div>
-                  <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Event Ecosystem</h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Integrated registration system with automated PDF ticket generation and email delivery via Resend.</p>
-                </motion.div>
-                <motion.div 
-                  variants={featureVariants}
-                  whileHover={{ y: -5 }}
-                  className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50"
-                >
-                  <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4">
-                    <FileText size={20} />
-                  </div>
-                  <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Markdown Blog</h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">A high-performance blog engine supporting GitHub Flavored Markdown (GFM) with admin moderation.</p>
-                </motion.div>
-                <motion.div 
-                  variants={featureVariants}
-                  whileHover={{ y: -5 }}
-                  className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50"
-                >
-                  <div className="w-10 h-10 bg-indigo-100 dark:bg-indigo-900/30 rounded-lg flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-4">
-                    <Users size={20} />
-                  </div>
-                  <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Appwrite Integration</h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Leveraged Appwrite for secure Auth, Database, and Storage, ensuring a robust serverless architecture.</p>
-                </motion.div>
-                <motion.div 
-                  variants={featureVariants}
-                  whileHover={{ y: -5 }}
-                  className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50"
-                >
-                  <div className="w-10 h-10 bg-pink-100 dark:bg-pink-900/30 rounded-lg flex items-center justify-center text-pink-600 dark:text-pink-400 mb-4">
-                    <Box size={20} />
-                  </div>
-                  <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Interactive 3D UI</h3>
-                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Enhanced user engagement with Three.js and GSAP for fluid 3D elements and smooth transitions.</p>
-                </motion.div>
+            <div className="space-y-12">
+              <div>
+                <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 mb-8 text-center">Engineering Highlights</h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <motion.div 
+                    variants={featureVariants}
+                    whileHover={{ y: -5 }}
+                    className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50 hover:shadow-md transition-all"
+                  >
+                    <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/40 rounded-xl flex items-center justify-center text-purple-600 dark:text-purple-400 mb-4">
+                      <Calendar size={24} />
+                    </div>
+                    <h3 className="font-bold text-zinc-900 dark:text-white mb-2 text-lg">Smart Event Ticketing</h3>
+                    <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">A seamless registration pipeline that generates unique QR-coded PDF tickets using jspdf and html2canvas, delivered instantly via Resend SMTP.</p>
+                  </motion.div>
+                  <motion.div 
+                    variants={featureVariants}
+                    whileHover={{ y: -5 }}
+                    className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50 hover:shadow-md transition-all"
+                  >
+                    <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/40 rounded-xl flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4">
+                      <FileText size={24} />
+                    </div>
+                    <h3 className="font-bold text-zinc-900 dark:text-white mb-2 text-lg">GFM Blog Engine</h3>
+                    <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Supports GitHub Flavored Markdown with syntax highlighting and live admin previews, allowing club members to share tech insights effortlessly.</p>
+                  </motion.div>
+                  <motion.div 
+                    variants={featureVariants}
+                    whileHover={{ y: -5 }}
+                    className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50 hover:shadow-md transition-all"
+                  >
+                    <div className="w-12 h-12 bg-indigo-100 dark:bg-indigo-900/40 rounded-xl flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-4">
+                      <Box size={24} />
+                    </div>
+                    <h3 className="font-bold text-zinc-900 dark:text-white mb-2 text-lg">Serverless Architecture</h3>
+                    <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Utilized Appwrite's robust suite for Auth, Realtime Databases, and Storage, enabling a scalable backend without the overhead of traditional servers.</p>
+                  </motion.div>
+                  <motion.div 
+                    variants={featureVariants}
+                    whileHover={{ y: -5 }}
+                    className="p-6 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl border border-zinc-200 dark:border-zinc-700/50 hover:shadow-md transition-all"
+                  >
+                    <div className="w-12 h-12 bg-pink-100 dark:bg-pink-900/40 rounded-xl flex items-center justify-center text-pink-600 dark:text-pink-400 mb-4">
+                      <Box size={24} />
+                    </div>
+                    <h3 className="font-bold text-zinc-900 dark:text-white mb-2 text-lg">Immersive 3D Exp</h3>
+                    <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">Integrated Three.js and GSAP for interactive 3D mesh backgrounds and smooth layout transitions that reflect the "MindMesh" identity.</p>
+                  </motion.div>
+                </div>
               </div>
-            </div>
 
-            <div className="mt-12 pt-12 border-t border-zinc-100 dark:border-zinc-800">
-              <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 mb-6">Technologies Used</h2>
-              <div className="flex flex-wrap gap-2">
-                {["Next.js 14", "TypeScript", "Appwrite", "Three.js", "GSAP", "Tailwind CSS", "Resend", "Lucide", "Framer Motion"].map((tech) => (
-                  <span key={tech} className="px-4 py-2 bg-zinc-50 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-300 text-sm font-medium rounded-xl border border-zinc-200 dark:border-zinc-700/50">
-                    {tech}
-                  </span>
-                ))}
+              <div className="pt-8">
+                <h2 className="text-xs font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 mb-6">Technologies Used</h2>
+                <div className="flex flex-wrap gap-2">
+                  {["Next.js 14", "TypeScript", "Appwrite", "Three.js", "GSAP", "Tailwind CSS", "Resend", "Lucide", "Framer Motion", "Zod"].map((tech) => (
+                    <span key={tech} className="px-4 py-2 bg-zinc-50 dark:bg-zinc-800/50 text-zinc-600 dark:text-zinc-300 text-sm font-medium rounded-xl border border-zinc-200 dark:border-zinc-700/50">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
