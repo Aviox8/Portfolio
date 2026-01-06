@@ -7,6 +7,16 @@ import { motion } from "framer-motion";
 export default function ProjectsPage() {
   const projects = [
     {
+      name: "MindMesh Club",
+      description: "A collaborative platform for the MindMesh community, featuring event management with PDF ticketing, a markdown-powered blog, and interactive 3D elements.",
+      tech: ["Next.js 14", "Appwrite", "Three.js", "GSAP", "Tailwind CSS", "Resend"],
+      link: "https://mindmeshclub.vercel.app",
+      slug: "/projects/mindmesh",
+      color: "from-purple-500/20 to-violet-500/20",
+      iconColor: "bg-purple-500",
+      accent: "text-purple-600 dark:text-purple-400"
+    },
+    {
       name: "SeekEngine",
       description: "Open-source search engine powered by Google Custom Search API with theme-aware design and playful teleport discovery feature.",
       tech: ["Next.js", "React 18", "Google Search API", "Tailwind CSS", "Vercel"],
@@ -85,7 +95,7 @@ export default function ProjectsPage() {
               <motion.div 
                 key={project.name} 
                 variants={itemVariants}
-                className={`apple-card group relative overflow-hidden flex flex-col justify-between h-full bg-gradient-to-br ${project.color} ${idx === 2 ? 'md:col-span-2' : ''}`}
+                className={`apple-card group relative overflow-hidden flex flex-col justify-between h-full bg-gradient-to-br ${project.color}`}
                 whileHover={{ y: -5, transition: { type: "spring", stiffness: 300 } }}
               >
                 <div className="relative z-10">
