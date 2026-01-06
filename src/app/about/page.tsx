@@ -84,7 +84,7 @@ When I'm not coding or studying security protocols, you can find me participatin
                   src="/About/pfp.png"
                   alt="Gaurav Yadav"
                   fill
-                  className="object-cover object-center hover:scale-105 transition-transform duration-700"
+                  className="object-cover object-center hover:scale-105 transition-transform duration-700 grayscale"
                   priority
                 />
              </div>
