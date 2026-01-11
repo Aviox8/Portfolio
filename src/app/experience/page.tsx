@@ -34,7 +34,7 @@ export default function ExperiencePage() {
       role: "Co-Founding Engineer",
       company: "Exeiv.in Digital Agency & Spydown.in Creative Studio",
       date: "2023 — 2025",
-      description: "Co-founded and led technical development for two joint ventures: Exeiv.in, a digital agency delivering end-to-end web solutions, and Spydown.in, a creative studio specializing in brand identity and digital experiences. Both ventures have since concluded.",
+      description: "Co-founded and led technical development for two joint ventures: Exeiv, a digital agency delivering end-to-end web solutions, and Spydown, a creative studio specializing in brand identity and digital experiences. Both ventures have since concluded.",
       location: "Remote",
       color: "bg-rose-100 dark:bg-rose-900/30",
       dotColor: "bg-rose-600 dark:bg-rose-500",
