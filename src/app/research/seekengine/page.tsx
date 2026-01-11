@@ -1682,145 +1682,477 @@ It demonstrates a way to reason about it.
 # — End of Ultra Draft —
 `;
 
+// --- Table of Contents Data ---
+const TOC_SECTIONS = [
+  { id: 'abstract', label: 'Abstract' },
+  { id: 'keywords', label: 'Keywords' },
+  { id: 'research-context', label: 'I. Research Context' },
+  { id: 'independent-research', label: 'II. Independent Research' },
+  { id: 'research-claim', label: 'III. Research Claim' },
+  { id: 'phase-1', label: 'Phase 1 — Grounding' },
+  { id: 'phase-2', label: 'Phase 2 — Retrieval' },
+  { id: 'phase-3', label: 'Phase 3 — Orchestration' },
+  { id: 'phase-4', label: 'Phase 4 — Verification' },
+  { id: 'phase-5', label: 'Phase 5 — Security' },
+  { id: 'architecture', label: 'IV. Architecture' },
+  { id: 'performance', label: 'V. Performance' },
+  { id: 'threat-model', label: 'VI. Threat Model' },
+  { id: 'limitations', label: 'VII. Limitations' },
+  { id: 'future-work', label: 'VIII. Future Work' },
+  { id: 'conclusion', label: 'IX. Conclusion' },
+];
+
 // --- Main Page Component ---
 
 export default function SeekEngineResearch() {
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const [activeSection, setActiveSection] = useState('abstract');
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Scroll progress tracking
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  
+  // Handle scroll-to-top visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 800);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+  
+  // Generate section ID from heading text
+  const generateId = (text: string) => {
+    const lower = text.toLowerCase();
+    if (lower.includes('abstract')) return 'abstract';
+    if (lower.includes('keywords')) return 'keywords';
+    if (lower.includes('research context')) return 'research-context';
+    if (lower.includes('independent research')) return 'independent-research';
+    if (lower.includes('research claim')) return 'research-claim';
+    if (lower.includes('phase 1')) return 'phase-1';
+    if (lower.includes('phase 2')) return 'phase-2';
+    if (lower.includes('phase 3')) return 'phase-3';
+    if (lower.includes('phase 4')) return 'phase-4';
+    if (lower.includes('phase 5')) return 'phase-5';
+    if (lower.includes('phase 6')) return 'phase-6';
+    if (lower.includes('phase 7')) return 'phase-7';
+    if (lower.includes('phase 8')) return 'phase-8';
+    if (lower.includes('system architecture') || lower.includes('iv. system')) return 'architecture';
+    if (lower.includes('operational behavior') || lower.includes('v. operational')) return 'performance';
+    if (lower.includes('threat model') || lower.includes('vi. threat')) return 'threat-model';
+    if (lower.includes('limitations') || lower.includes('vii. limitations')) return 'limitations';
+    if (lower.includes('future work') || lower.includes('viii. future')) return 'future-work';
+    if (lower.includes('conclusion') || lower.includes('ix. conclusion')) return 'conclusion';
+    if (lower.includes('bibliographic') || lower.includes('x. bibliographic')) return 'bibliography';
+    if (lower.includes('acknowledgments') || lower.includes('xi. acknowledgments')) return 'acknowledgments';
+    if (lower.includes('implementation') || lower.includes('xii. implementation')) return 'implementation';
+    if (lower.includes('citation') || lower.includes('xiii. citation')) return 'citation-meta';
+    if (lower.includes('appendix')) return 'appendix';
+    return undefined;
+  };
+
   const MarkdownComponents = {
-    h1: ({ children }: any) => <h1 className="text-3xl font-bold mt-12 mb-6 text-zinc-900 dark:text-white border-b pb-2 border-zinc-200 dark:border-zinc-800 tracking-tight">{children}</h1>,
-    h2: ({ children }: any) => {
-      const text = String(children).toLowerCase();
-      let id = undefined;
-      if (text.includes('introduction')) id = 'abstract';
-      else if (text.includes('architecture')) id = 'architecture';
-      else if (text.includes('comparative')) id = 'benchmarks';
-      
-      return <h2 id={id} className="text-2xl font-bold mt-16 mb-6 text-zinc-900 dark:text-white uppercase tracking-wider scroll-mt-32">{children}</h2>;
+    h1: ({ children }: any) => {
+      const id = generateId(String(children));
+      return (
+        <motion.h1 
+          id={id}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-3xl sm:text-4xl font-black mt-20 mb-8 text-zinc-900 dark:text-white border-b-2 pb-4 border-blue-500/20 dark:border-blue-500/10 tracking-tight scroll-mt-24 relative group"
+        >
+          <span className="absolute -left-8 opacity-0 group-hover:opacity-50 transition-opacity text-blue-500">#</span>
+          {children}
+        </motion.h1>
+      );
     },
-    h3: ({ children }: any) => <h3 className="text-xl font-bold mt-8 mb-4 text-zinc-800 dark:text-zinc-200">{children}</h3>,
-    p: ({ children }: any) => <p className="text-lg leading-loose text-zinc-700 dark:text-zinc-300 mb-6 text-justify lg:text-left">{children}</p>,
-    ul: ({ children }: any) => <ul className="list-disc list-inside space-y-3 mb-8 text-lg text-zinc-700 dark:text-zinc-300 ml-4">{children}</ul>,
-    ol: ({ children }: any) => <ol className="list-decimal list-inside space-y-3 mb-8 text-lg text-zinc-700 dark:text-zinc-300 ml-4">{children}</ol>,
-    li: ({ children }: any) => <li className="pl-2">{children}</li>,
+    h2: ({ children }: any) => {
+      const id = generateId(String(children));
+      return (
+        <motion.h2 
+          id={id}
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-2xl font-bold mt-16 mb-6 text-zinc-900 dark:text-white uppercase tracking-wider scroll-mt-24 relative group"
+        >
+          <span className="absolute -left-6 opacity-0 group-hover:opacity-50 transition-opacity text-blue-400 text-lg">#</span>
+          {children}
+        </motion.h2>
+      );
+    },
+    h3: ({ children }: any) => (
+      <h3 className="text-xl font-bold mt-10 mb-4 text-zinc-800 dark:text-zinc-200 flex items-center gap-3">
+        <span className="w-1 h-6 bg-blue-500/50 rounded-full"></span>
+        {children}
+      </h3>
+    ),
+    h4: ({ children }: any) => (
+      <h4 className="text-lg font-bold mt-8 mb-3 text-zinc-700 dark:text-zinc-300">
+        {children}
+      </h4>
+    ),
+    p: ({ children }: any) => (
+      <p className="text-lg leading-loose text-zinc-700 dark:text-zinc-300 mb-6 text-justify lg:text-left first-letter:text-2xl first-letter:font-serif first-letter:text-zinc-500">
+        {children}
+      </p>
+    ),
+    ul: ({ children }: any) => (
+      <ul className="list-none space-y-3 mb-8 text-lg text-zinc-700 dark:text-zinc-300 ml-4">
+        {children}
+      </ul>
+    ),
+    ol: ({ children }: any) => (
+      <ol className="list-decimal list-inside space-y-3 mb-8 text-lg text-zinc-700 dark:text-zinc-300 ml-4 marker:text-blue-500 marker:font-bold">
+        {children}
+      </ol>
+    ),
+    li: ({ children }: any) => (
+      <li className="pl-2 flex items-start gap-3">
+        <span className="w-1.5 h-1.5 bg-blue-500/60 rounded-full mt-3 shrink-0"></span>
+        <span>{children}</span>
+      </li>
+    ),
+    table: ({ children }: any) => (
+      <div className="my-10 overflow-x-auto">
+        <table className="w-full text-sm border-collapse bg-zinc-50 dark:bg-zinc-900/50 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+          {children}
+        </table>
+      </div>
+    ),
+    th: ({ children }: any) => (
+      <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800/50 border-b border-zinc-200 dark:border-zinc-700">
+        {children}
+      </th>
+    ),
+    td: ({ children }: any) => (
+      <td className="px-4 py-3 text-zinc-700 dark:text-zinc-300 border-b border-zinc-100 dark:border-zinc-800/50">
+        {children}
+      </td>
+    ),
     code: ({ node, inline, className, children, ...props }: any) => {
       const childrenStr = String(children).toLowerCase();
       const classStr = String(className || '').toLowerCase();
       const matchStr = childrenStr + ' ' + classStr;
       
-      if (matchStr.includes('latency_compare')) return <LatencyCompare />;
-      if (matchStr.includes('prompt_engineering')) return <PromptEngineering />;
-      if (matchStr.includes('flowchart') || matchStr.includes('rag')) return <UIFlowchart />;
-      if (matchStr.includes('wireframe') || matchStr.includes('dashboard')) return <UIWireframe />;
+      // Interactive component triggers with figure captions
+      if (matchStr.includes('latency_compare')) return (
+        <figure className="my-12">
+          <LatencyCompare />
+          <figcaption className="text-center text-xs text-zinc-500 mt-4 font-mono uppercase tracking-widest">Fig. — Latency Comparison Benchmark</figcaption>
+        </figure>
+      );
+      if (matchStr.includes('prompt_engineering')) return (
+        <figure className="my-12">
+          <PromptEngineering />
+          <figcaption className="text-center text-xs text-zinc-500 mt-4 font-mono uppercase tracking-widest">Fig. — System Prompt Architecture</figcaption>
+        </figure>
+      );
+      if (matchStr.includes('flowchart') || matchStr.includes('rag')) return (
+        <figure className="my-12">
+          <UIFlowchart />
+          <figcaption className="text-center text-xs text-zinc-500 mt-4 font-mono uppercase tracking-widest">Fig. — Parallel Orchestration Flow</figcaption>
+        </figure>
+      );
+      if (matchStr.includes('wireframe') || matchStr.includes('dashboard')) return (
+        <figure className="my-12">
+          <UIWireframe />
+          <figcaption className="text-center text-xs text-zinc-500 mt-4 font-mono uppercase tracking-widest">Fig. — Epistemic Interface Design</figcaption>
+        </figure>
+      );
       if (matchStr.includes('architecture')) {
-        // Disambiguate based on content keywords
-        if (matchStr.includes('orchestration') || matchStr.includes('flow')) return <UIFlowchart />;
-        return <ArchitectureDiagram />;
+        if (matchStr.includes('orchestration') || matchStr.includes('flow')) return (
+          <figure className="my-12">
+            <UIFlowchart />
+            <figcaption className="text-center text-xs text-zinc-500 mt-4 font-mono uppercase tracking-widest">Fig. — Orchestration Diagram</figcaption>
+          </figure>
+        );
+        return (
+          <figure className="my-12">
+            <ArchitectureDiagram />
+            <figcaption className="text-center text-xs text-zinc-500 mt-4 font-mono uppercase tracking-widest">Fig. — System Architecture</figcaption>
+          </figure>
+        );
       }
-      if (matchStr.includes('security_encryption')) return <SecurityEncryption />;
-      if (matchStr.includes('hallucination_comparison')) return <HallucinationComparison />;
-      if (matchStr.includes('data_sanitization')) return <DataSanitization />;
-      if (matchStr.includes('live_terminal')) return <LiveSearchTerminal />;
-      if (matchStr.includes('threat_model')) return <ThreatModelDiagram />;
-      if (matchStr.includes('limitations_matrix')) return <LimitationsMatrix />;
-      if (matchStr.includes('future_roadmap')) return <FutureWorkRoadmap />;
+      if (matchStr.includes('security_encryption')) return (
+        <figure className="my-12">
+          <SecurityEncryption />
+          <figcaption className="text-center text-xs text-zinc-500 mt-4 font-mono uppercase tracking-widest">Fig. — Trust Boundary & Credential Encapsulation</figcaption>
+        </figure>
+      );
+      if (matchStr.includes('hallucination_comparison')) return (
+        <figure className="my-12">
+          <HallucinationComparison />
+          <figcaption className="text-center text-xs text-zinc-500 mt-4 font-mono uppercase tracking-widest">Fig. — Grounded vs Ungrounded Output Comparison</figcaption>
+        </figure>
+      );
+      if (matchStr.includes('data_sanitization')) return (
+        <figure className="my-12">
+          <DataSanitization />
+          <figcaption className="text-center text-xs text-zinc-500 mt-4 font-mono uppercase tracking-widest">Fig. — Input Sanitization Pipeline</figcaption>
+        </figure>
+      );
+      if (matchStr.includes('live_terminal')) return (
+        <figure className="my-12">
+          <LiveSearchTerminal />
+          <figcaption className="text-center text-xs text-zinc-500 mt-4 font-mono uppercase tracking-widest">Fig. — Diagnostic Terminal Output</figcaption>
+        </figure>
+      );
+      if (matchStr.includes('threat_model')) return (
+        <figure className="my-12">
+          <ThreatModelDiagram />
+          <figcaption className="text-center text-xs text-zinc-500 mt-4 font-mono uppercase tracking-widest">Fig. — Adversarial Surface & Mitigation Matrix</figcaption>
+        </figure>
+      );
+      if (matchStr.includes('limitations_matrix')) return (
+        <figure className="my-12">
+          <LimitationsMatrix />
+          <figcaption className="text-center text-xs text-zinc-500 mt-4 font-mono uppercase tracking-widest">Fig. — Known Limitations Assessment</figcaption>
+        </figure>
+      );
+      if (matchStr.includes('future_roadmap')) return (
+        <figure className="my-12">
+          <FutureWorkRoadmap />
+          <figcaption className="text-center text-xs text-zinc-500 mt-4 font-mono uppercase tracking-widest">Fig. — Development Roadmap</figcaption>
+        </figure>
+      );
 
       return !inline ? (
         <div className="relative group my-8">
-          <div className="absolute -top-3 left-4 px-2 py-0.5 bg-zinc-800 text-[10px] text-zinc-500 rounded border border-zinc-700 uppercase font-mono tracking-tighter z-10">Code Reference</div>
-          <pre className="p-8 rounded-2xl bg-zinc-900 border border-zinc-800 overflow-x-auto text-sm font-mono text-zinc-300 leading-relaxed shadow-2xl">
+          <div className="absolute -top-3 left-4 px-3 py-1 bg-zinc-800 text-[9px] text-zinc-400 rounded-md border border-zinc-700 uppercase font-mono tracking-wider z-10 flex items-center gap-2">
+            <Terminal size={10} />
+            <span>Code Reference</span>
+          </div>
+          <pre className="p-8 pt-10 rounded-2xl bg-zinc-900 border border-zinc-800 overflow-x-auto text-sm font-mono text-zinc-300 leading-relaxed shadow-2xl">
             <code className={className} {...props}>
               {children}
             </code>
           </pre>
         </div>
       ) : (
-        <code className="px-1.5 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 font-mono text-sm text-blue-700 dark:text-blue-400" {...props}>
+        <code className="px-1.5 py-0.5 rounded-md bg-blue-50 dark:bg-blue-900/20 font-mono text-sm text-blue-700 dark:text-blue-400 border border-blue-100 dark:border-blue-800/30" {...props}>
           {children}
         </code>
       );
     },
-    hr: () => <hr className="my-16 border-zinc-200 dark:border-zinc-800" />,
+    hr: () => (
+      <div className="my-20 flex items-center justify-center gap-4">
+        <div className="h-px w-16 bg-gradient-to-r from-transparent to-zinc-300 dark:to-zinc-700"></div>
+        <div className="w-2 h-2 rounded-full bg-blue-500/30"></div>
+        <div className="h-px w-16 bg-gradient-to-l from-transparent to-zinc-300 dark:to-zinc-700"></div>
+      </div>
+    ),
     blockquote: ({ children }: any) => (
-      <blockquote className="border-l-4 border-blue-500 pl-8 my-10 italic text-zinc-600 dark:text-zinc-400 text-xl leading-relaxed">
+      <motion.blockquote 
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        className="relative border-l-4 border-blue-500 pl-8 pr-4 my-12 py-4 bg-blue-50/50 dark:bg-blue-900/10 rounded-r-2xl"
+      >
+        <div className="absolute -left-3 top-4 w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center">
+          <Hash size={12} className="text-white" />
+        </div>
+        <div className="italic text-zinc-600 dark:text-zinc-400 text-xl leading-relaxed font-serif">
+          {children}
+        </div>
+      </motion.blockquote>
+    ),
+    strong: ({ children }: any) => (
+      <strong className="font-bold text-zinc-900 dark:text-white">{children}</strong>
+    ),
+    em: ({ children }: any) => (
+      <em className="italic text-zinc-600 dark:text-zinc-400">{children}</em>
+    ),
+    a: ({ children, href }: any) => (
+      <a 
+        href={href} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="text-blue-600 dark:text-blue-400 underline decoration-blue-300/50 dark:decoration-blue-600/50 underline-offset-2 hover:decoration-blue-500 transition-colors"
+      >
         {children}
-      </blockquote>
+      </a>
     )
   };
 
   return (
     <main className="min-h-screen bg-white dark:bg-zinc-950 font-serif selection:bg-blue-100 selection:text-blue-900 dark:selection:bg-blue-900/40 dark:selection:text-blue-200">
       
+      {/* Scroll Progress Bar */}
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-1 bg-blue-600 origin-left z-[60]"
+        style={{ scaleX }}
+      />
+      
       {/* Scroll Progress & Sticky Nav */}
       <motion.div 
-        className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800"
+        className="fixed top-1 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800"
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ delay: 0.5 }}
       >
-        <div className="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between font-sans text-xs font-bold uppercase tracking-widest text-zinc-500">
-          <Link href="/research" className="hover:text-blue-600 transition-colors">
-            ← Repository
+        <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between font-sans text-xs font-bold uppercase tracking-widest text-zinc-500">
+          <Link href="/research" className="hover:text-blue-600 transition-colors flex items-center gap-2">
+            <ArrowLeft size={14} />
+            <span className="hidden sm:inline">Repository</span>
           </Link>
-          <div className="flex gap-6">
-            <a href="#abstract" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Papers</a>
-            <a href="#architecture" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Architecture</a>
-            <a href="#benchmarks" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Benchmarks</a>
+          <div className="flex gap-4 sm:gap-6">
+            <a href="#abstract" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Abstract</a>
+            <a href="#architecture" className="hover:text-zinc-900 dark:hover:text-white transition-colors hidden sm:block">Architecture</a>
+            <a href="#conclusion" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Conclusion</a>
           </div>
         </div>
       </motion.div>
+      
+      {/* Scroll to Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-2xl shadow-blue-500/30 flex items-center justify-center transition-colors"
+            aria-label="Scroll to top"
+          >
+            <ArrowUp size={20} />
+          </motion.button>
+        )}
+      </AnimatePresence>
 
-      <div className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12 pt-32 pb-32 text-zinc-900 dark:text-zinc-100">
+      <div ref={containerRef} className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12 pt-32 pb-32 text-zinc-900 dark:text-zinc-100">
         
         {/* Paper Header */}
         <article className="animate-fade-in relative">
            
            <header className="mb-24 font-sans text-center">
-              <div className="inline-flex items-center gap-2 px-3 py-1 mb-6 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-500">
-                <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                Independent Research
-              </div>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200/50 dark:border-blue-800/30 text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400"
+              >
+                <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></div>
+                Independent Research • {DOCUMENT_VERSION}
+              </motion.div>
               
-              <h1 className="text-4xl sm:text-6xl font-black text-zinc-900 dark:text-white mb-8 leading-[1.1] tracking-tight">
-                 SeekEngine: Hybrid RAG for Truthful Search
-              </h1>
+              <motion.h1 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="text-4xl sm:text-6xl font-black text-zinc-900 dark:text-white mb-6 leading-[1.1] tracking-tight"
+              >
+                 SeekEngine
+              </motion.h1>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-sm font-medium text-zinc-600 dark:text-zinc-400">
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="text-xl sm:text-2xl text-zinc-500 dark:text-zinc-400 font-light mb-10 max-w-xl mx-auto leading-relaxed"
+              >
+                Grounded Hybrid Retrieval for Truthful Search
+              </motion.p>
+              
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm font-medium text-zinc-600 dark:text-zinc-400"
+              >
                  <div className="flex items-center gap-2">
-                    <User size={16} />
+                    <User size={14} className="text-blue-500" />
                     <span>Gaurav Yadav & Aditya Yadav</span>
                  </div>
                  <div className="flex items-center gap-2">
-                    <Calendar size={16} />
-                    <span>Jan 2026</span>
+                    <Calendar size={14} className="text-blue-500" />
+                    <span>January 2026</span>
                  </div>
                  <div className="flex items-center gap-2">
-                    <Shield size={16} />
-                    <span>Systems Security</span>
+                    <Clock size={14} className="text-blue-500" />
+                    <span>{ESTIMATED_READ_TIME}</span>
                  </div>
-              </div>
+                 <div className="flex items-center gap-2">
+                    <BookOpen size={14} className="text-blue-500" />
+                    <span>{WORD_COUNT}</span>
+                 </div>
+              </motion.div>
 
-              <div className="mt-10 flex justify-center gap-4">
-                  <Link href="https://seekengine.vercel.app" target="_blank" className="px-6 py-2.5 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-lg text-xs font-bold uppercase tracking-widest hover:scale-105 transition-transform">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="mt-10 flex flex-wrap justify-center gap-3"
+              >
+                  <Link href="https://seekengine.vercel.app" target="_blank" className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-2 shadow-lg shadow-blue-500/20">
+                    <Zap size={14} />
                     Live Demo
                   </Link>
-                  <Link href="https://github.com/archduke1337/SeekEngine" target="_blank" className="px-6 py-2.5 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors">
+                  <Link href="https://github.com/archduke1337/SeekEngine" target="_blank" className="px-6 py-2.5 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors flex items-center gap-2">
+                    <Code size={14} />
                     Source Code
                   </Link>
-              </div>
+              </motion.div>
+              
+              {/* Keywords Pills */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.7 }}
+                className="mt-10 flex flex-wrap justify-center gap-2"
+              >
+                {['RAG', 'Hallucination', 'Distributed Systems', 'Zero-Trust', 'Verification'].map((tag, i) => (
+                  <span key={i} className="px-3 py-1 bg-zinc-100 dark:bg-zinc-900 text-[10px] font-bold uppercase tracking-wider text-zinc-500 rounded-full border border-zinc-200 dark:border-zinc-800">
+                    {tag}
+                  </span>
+                ))}
+              </motion.div>
            </header>
 
-           <hr className="my-16 border-zinc-100 dark:border-zinc-900 w-24 mx-auto" />
+           <div className="my-20 flex items-center justify-center gap-4">
+             <div className="h-px w-20 bg-gradient-to-r from-transparent to-zinc-300 dark:to-zinc-700"></div>
+             <FileText size={16} className="text-zinc-400" />
+             <div className="h-px w-20 bg-gradient-to-l from-transparent to-zinc-300 dark:to-zinc-700"></div>
+           </div>
 
            {/* Paper Body */}
-           <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-sans prose-headings:tracking-tight prose-p:font-serif prose-p:text-lg prose-p:opacity-80 prose-p:leading-8 prose-li:text-lg prose-figure:my-12">
+           <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-sans prose-headings:tracking-tight prose-p:font-serif prose-p:text-lg prose-p:leading-8 prose-li:text-lg prose-figure:my-12">
               <ReactMarkdown components={MarkdownComponents}>
                  {content}
               </ReactMarkdown>
            </div>
            
            {/* BibTeX Citation Section */}
-           <div className="mt-32 pt-12 border-t border-zinc-200 dark:border-zinc-900 font-sans">
-              <h3 className="font-bold text-sm uppercase tracking-widest text-zinc-500 mb-6">Citation</h3>
-              <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-xl border border-zinc-100 dark:border-zinc-800 overflow-x-auto">
+           <motion.div 
+             initial={{ opacity: 0 }}
+             whileInView={{ opacity: 1 }}
+             viewport={{ once: true }}
+             className="mt-32 pt-12 border-t-2 border-zinc-200 dark:border-zinc-800 font-sans"
+           >
+              <h3 className="font-bold text-sm uppercase tracking-widest text-zinc-500 mb-6 flex items-center gap-2">
+                <FileCode size={16} className="text-blue-500" />
+                Citation
+              </h3>
+              <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-2xl border border-zinc-100 dark:border-zinc-800 overflow-x-auto relative group">
+                 <button 
+                   onClick={() => navigator.clipboard.writeText(`@article{yadav2026seekengine,
+  title={SeekEngine: Grounded Hybrid Retrieval for Truthful Search},
+  author={Yadav, Gaurav and Yadav, Aditya},
+  year={2026},
+  note={Independent Research},
+  url={https://seekengine.vercel.app},
+}`)}
+                   className="absolute top-4 right-4 px-3 py-1.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-lg text-[10px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity hover:bg-blue-500/20"
+                 >
+                   Copy
+                 </button>
                  <pre className="text-xs text-zinc-600 dark:text-zinc-400 font-mono leading-relaxed">
 {`@article{yadav2026seekengine,
   title={SeekEngine: Grounded Hybrid Retrieval for Truthful Search},
@@ -1831,15 +2163,23 @@ export default function SeekEngineResearch() {
 }`}
                  </pre>
               </div>
-           </div>
+           </motion.div>
 
            {/* Personal Footer */}
-           <div className="mt-24 pt-16 text-center border-t border-dashed border-zinc-200 dark:border-zinc-900">
-              <p className="font-serif italic text-zinc-500 dark:text-zinc-400 text-lg">
+           <div className="mt-24 pt-16 text-center border-t border-dashed border-zinc-200 dark:border-zinc-800">
+              <p className="font-serif italic text-zinc-500 dark:text-zinc-400 text-xl leading-relaxed max-w-md mx-auto">
                 &quot;Grounding is not a feature—it&apos;s a constraint.&quot;
               </p>
-              <div className="mt-8 text-[10px] font-bold text-zinc-300 dark:text-zinc-700 uppercase tracking-[0.3em]">
-                  Research • 2026
+              <div className="mt-6 flex items-center justify-center gap-4 text-zinc-400">
+                <div className="w-8 h-px bg-zinc-300 dark:bg-zinc-700"></div>
+                <Shield size={16} />
+                <div className="w-8 h-px bg-zinc-300 dark:bg-zinc-700"></div>
+              </div>
+              <div className="mt-6 text-[10px] font-bold text-zinc-300 dark:text-zinc-700 uppercase tracking-[0.3em]">
+                  Independent Systems Research • January 2026
+              </div>
+              <div className="mt-2 text-[9px] font-mono text-zinc-300 dark:text-zinc-800">
+                  Document Freeze: 2026-01-11 • {DOCUMENT_VERSION}
               </div>
            </div>
 
@@ -1848,3 +2188,4 @@ export default function SeekEngineResearch() {
     </main>
   );
 }
+
