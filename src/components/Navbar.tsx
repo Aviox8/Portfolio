@@ -63,16 +63,16 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Menu (Floating Bubble) */}
+      {/* Mobile Menu (Full Width Dropdown) */}
       {isOpen && (
-        <div className="absolute top-full left-0 w-full mt-4 px-2 md:hidden">
-          <div className="glass-panel rounded-3xl p-4 flex flex-col gap-2 animate-slide-up origin-top">
+        <div className="fixed top-20 left-0 right-0 w-full px-4 md:hidden z-50">
+          <div className="glass-panel rounded-2xl p-3 flex flex-col gap-1 animate-slide-up origin-top max-h-[70vh] overflow-y-auto">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="px-6 py-4 rounded-2xl text-lg font-medium text-center hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+                className="px-4 py-3 rounded-xl text-base font-medium text-center hover:bg-black/5 dark:hover:bg-white/5 transition-colors active:scale-95"
               >
                 {link.name}
               </Link>

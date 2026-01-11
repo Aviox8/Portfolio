@@ -61,7 +61,7 @@ export default function Home() {
               initial={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
               animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
               transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}
-              className="text-7xl sm:text-8xl lg:text-9xl font-bold tracking-tighter text-zinc-900 dark:text-white leading-[0.9]"
+              className="text-5xl sm:text-7xl lg:text-9xl font-bold tracking-tighter text-zinc-900 dark:text-white leading-[0.9]"
             >
               Gaurav<br/>Yadav
             </motion.h1>
@@ -70,7 +70,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-2xl sm:text-3xl text-zinc-500 dark:text-zinc-400 font-medium max-w-2xl leading-snug"
+              className="text-lg sm:text-2xl lg:text-3xl text-zinc-500 dark:text-zinc-400 font-medium max-w-2xl leading-snug px-4 sm:px-0"
             >
               Architecting secure, beautiful digital experiences.
             </motion.p>
@@ -80,7 +80,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.8 }}
-              className="flex justify-center flex-wrap gap-4 pt-8"
+              className="flex justify-center flex-wrap gap-3 sm:gap-4 pt-8 px-4 sm:px-0"
             >
               {socialLinks.map((social, idx) => {
                 const Icon = social.icon;
@@ -92,10 +92,10 @@ export default function Home() {
                     rel={social.name !== "Email" ? "noopener noreferrer" : undefined}
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
-                    className="apple-btn-secondary rounded-full px-8 py-4 text-lg"
+                    className="apple-btn-secondary rounded-full px-5 sm:px-8 py-3 sm:py-4 text-sm sm:text-lg"
                   >
-                    <Icon size={24} />
-                    {social.name}
+                    <Icon size={20} className="sm:w-6 sm:h-6" />
+                    <span className="hidden xs:inline sm:inline">{social.name}</span>
                   </motion.a>
                 );
               })}
