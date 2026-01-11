@@ -1821,19 +1821,34 @@ export default function SeekEngineResearch() {
       </li>
     ),
     table: ({ children }: any) => (
-      <div className="my-10 overflow-x-auto">
-        <table className="w-full text-sm border-collapse bg-zinc-50 dark:bg-zinc-900/50 rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800">
+      <div className="my-12 overflow-x-auto apple-card p-0 overflow-hidden">
+        <table className="w-full text-sm border-collapse">
           {children}
         </table>
       </div>
     ),
+    thead: ({ children }: any) => (
+      <thead className="bg-gradient-to-r from-orange-50 to-amber-50 dark:from-orange-900/20 dark:to-amber-900/20">
+        {children}
+      </thead>
+    ),
+    tbody: ({ children }: any) => (
+      <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
+        {children}
+      </tbody>
+    ),
+    tr: ({ children }: any) => (
+      <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/30 transition-colors">
+        {children}
+      </tr>
+    ),
     th: ({ children }: any) => (
-      <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-widest text-zinc-500 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800/50 border-b border-zinc-200 dark:border-zinc-700">
+      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest text-orange-700 dark:text-orange-400 border-b-2 border-orange-200 dark:border-orange-800/50">
         {children}
       </th>
     ),
     td: ({ children }: any) => (
-      <td className="px-4 py-3 text-zinc-700 dark:text-zinc-300 border-b border-zinc-100 dark:border-zinc-800/50">
+      <td className="px-6 py-4 text-zinc-700 dark:text-zinc-300 font-medium">
         {children}
       </td>
     ),
