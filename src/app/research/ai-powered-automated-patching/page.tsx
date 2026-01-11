@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { 
   ArrowLeft, 
@@ -24,11 +24,24 @@ import {
   Layers,
   GitMerge,
   Search,
-  MessageSquare
+  MessageSquare,
+  Clock,
+  BookOpen,
+  FileText,
+  Hash,
+  ArrowUp,
+  Calendar,
+  Zap,
+  Code
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring } from 'framer-motion';
+
+// --- Reading Time & Meta ---
+const ESTIMATED_READ_TIME = "35 min read";
+const WORD_COUNT = "~9,500 words";
+const DOCUMENT_VERSION = "v1.0.0";
 
 // ============================================
 // LIVE UI DIAGRAM COMPONENTS
@@ -1267,89 +1280,246 @@ This work is informed by publicly available industry research on AI-assisted vul
       );
     },
     hr: () => <hr className="my-12 border-zinc-200 dark:border-zinc-800" />,
+    table: ({ children }: any) => (
+      <div className="my-12 overflow-x-auto apple-card p-0 overflow-hidden">
+        <table className="w-full text-sm border-collapse">
+          {children}
+        </table>
+      </div>
+    ),
+    thead: ({ children }: any) => (
+      <thead className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20">
+        {children}
+      </thead>
+    ),
+    tbody: ({ children }: any) => (
+      <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
+        {children}
+      </tbody>
+    ),
+    tr: ({ children }: any) => (
+      <tr className="hover:bg-zinc-50 dark:hover:bg-zinc-800/30 transition-colors">
+        {children}
+      </tr>
+    ),
+    th: ({ children }: any) => (
+      <th className="px-6 py-4 text-left text-xs font-bold uppercase tracking-widest text-blue-700 dark:text-blue-400 border-b-2 border-blue-200 dark:border-blue-800/50">
+        {children}
+      </th>
+    ),
+    td: ({ children }: any) => (
+      <td className="px-6 py-4 text-zinc-700 dark:text-zinc-300 font-medium">
+        {children}
+      </td>
+    ),
+  };
+
+  const [showScrollTop, setShowScrollTop] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Scroll progress tracking
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  
+  // Handle scroll-to-top visibility
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 800);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
+  // Scroll to top function
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <main className="min-h-screen pt-24 pb-32 bg-apple-gradient text-zinc-900 dark:text-zinc-50 selection:bg-blue-500/30">
-      <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
+    <main className="min-h-screen pt-24 pb-16 bg-apple-gradient text-zinc-900 dark:text-zinc-50 selection:bg-blue-500/30">
+      
+      {/* Scroll Progress Bar */}
+      <motion.div 
+        className="fixed top-0 left-0 right-0 h-1 bg-blue-600 origin-left z-[60]"
+        style={{ scaleX }}
+      />
+      
+      {/* Scroll to Top Button */}
+      <AnimatePresence>
+        {showScrollTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            onClick={scrollToTop}
+            className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-2xl shadow-blue-500/30 flex items-center justify-center transition-colors"
+            aria-label="Scroll to top"
+          >
+            <ArrowUp size={20} />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
+      <div ref={containerRef} className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-32 text-zinc-900 dark:text-zinc-100">
         
-        {/* Navigation & Actions */}
+        {/* Back Navigation */}
         <motion.div 
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex items-center justify-between mb-16 font-sans"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="mb-12"
         >
-          <Link href="/research" className="inline-flex items-center gap-2.5 text-zinc-500 hover:text-blue-600 transition-all group">
-            <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-            <span className="font-semibold text-sm">Return to Repository</span>
+          <Link 
+            href="/research" 
+            className="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors group"
+          >
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+            Back to Research
           </Link>
-          <div className="flex gap-4">
-            <button className="p-2.5 text-zinc-500 hover:text-zinc-900 dark:hover:text-white bg-zinc-50 dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 transition-all" title="Export as PDF">
-              <Download size={18} />
-            </button>
-            <button className="p-2.5 text-zinc-500 hover:text-zinc-900 dark:hover:text-white bg-zinc-50 dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 transition-all" title="Share">
-              <Share2 size={18} />
-            </button>
+        </motion.div>
+        
+        {/* Page Header with Icon */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="mb-16"
+        >
+          <div className="inline-flex items-center gap-3 mb-6">
+            <div className="p-3 rounded-xl bg-blue-100 dark:bg-blue-900/30">
+              <Shield size={24} className="text-blue-600 dark:text-blue-400" />
+            </div>
+            <h1 className="text-4xl sm:text-5xl font-bold text-zinc-900 dark:text-white">AI-Assisted Remediation</h1>
           </div>
+          <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-300 max-w-3xl leading-relaxed">
+            A Research Perspective on Automated Patch Generation under Human Supervision
+          </p>
         </motion.div>
 
-        {/* Paper Header */}
-        <article className="animate-fade-in">
-          <header className="mb-20 text-center font-sans relative">
-            <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-40 h-40 bg-purple-500/10 dark:bg-purple-500/5 blur-[100px] pointer-events-none"></div>
-            
-            <div className="inline-block px-5 py-2 mb-8 text-[11px] font-black tracking-[0.2em] text-purple-600 uppercase bg-purple-50/50 dark:bg-purple-950/30 border border-purple-200/50 dark:border-purple-800/30 rounded-2xl">
-              Independent Systems Security Research
-            </div>
-            
-            <h1 className="text-4xl sm:text-5xl font-black text-zinc-900 dark:text-white mb-10 leading-[1.1] tracking-tight">
-              AI-Powered Automated Patching <br className="hidden sm:block"/> for Software Vulnerabilities
-            </h1>
-            
-            <div className="flex flex-col items-center justify-center gap-6 text-zinc-600 dark:text-zinc-400 mb-12">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                  <User size={20} className="text-zinc-800 dark:text-zinc-200" />
-                </div>
-                <div className="text-left">
-                  <span className="font-black text-zinc-900 dark:text-white block leading-none">Gaurav Yadav & Aditya Yadav</span>
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-purple-600 dark:text-purple-400">Equal Contribution — Independent Research</span>
-                </div>
-              </div>
+        {/* Paper Header Card */}
+        <article className="animate-fade-in relative">
+           
+           <header className="mb-16 font-sans apple-card p-8 sm:p-12 text-center relative overflow-hidden">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200/50 dark:border-blue-800/30 text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400"
+              >
+                <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></div>
+                Independent Research • {DOCUMENT_VERSION}
+              </motion.div>
               
-              <div className="text-sm max-w-sm text-center leading-relaxed font-medium">
-                BCA Cybersecurity, Ajeenkya DY Patil University, Pune <br/>
-                <span className="text-zinc-400 dark:text-zinc-600">January 2026 — Pune, India</span>
-              </div>
-            </div>
+              <motion.h1 
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="text-3xl sm:text-5xl font-black text-zinc-900 dark:text-white mb-6 leading-[1.1] tracking-tight"
+              >
+                 AI-Powered Automated Patching<br className="hidden sm:block"/> for Software Vulnerabilities
+              </motion.h1>
+              
+              <motion.p 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="text-lg sm:text-xl text-zinc-500 dark:text-zinc-400 font-light mb-8 max-w-xl mx-auto leading-relaxed"
+              >
+                 A Research Perspective on Automated Patch Generation under Human Supervision
+              </motion.p>
 
-            {/* Tags */}
-            <div className="flex flex-wrap justify-center gap-3">
-              {["AI-Assisted Security", "Automated Patching", "LLM Safety", "Secure SDLC", "Human-in-the-Loop"].map((tag) => (
-                <span key={tag} className="px-3.5 py-1.5 bg-zinc-50 dark:bg-zinc-900/50 text-zinc-500 dark:text-zinc-500 text-[10px] font-black uppercase tracking-[0.1em] rounded-xl border border-zinc-200 dark:border-zinc-800/50">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </header>
+              {/* Metadata */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm font-medium text-zinc-600 dark:text-zinc-400"
+              >
+                 <div className="flex items-center gap-2">
+                    <User size={14} className="text-blue-500" />
+                    <span>Gaurav Yadav & Aditya Yadav</span>
+                 </div>
+                 <div className="flex items-center gap-2">
+                    <Calendar size={14} className="text-blue-500" />
+                    <span>January 2026</span>
+                 </div>
+                 <div className="flex items-center gap-2">
+                    <Clock size={14} className="text-blue-500" />
+                    <span>{ESTIMATED_READ_TIME}</span>
+                 </div>
+                 <div className="flex items-center gap-2">
+                    <BookOpen size={14} className="text-blue-500" />
+                    <span>{WORD_COUNT}</span>
+                 </div>
+              </motion.div>
 
-          <hr className="my-16 border-zinc-100 dark:border-zinc-900" />
+              {/* Action Buttons */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6 }}
+                className="mt-10 flex flex-wrap justify-center gap-4"
+              >
+                  <span className="apple-btn-secondary rounded-full px-6 py-2 text-sm">
+                    <FileText size={16} />
+                    Domain: AI + Security
+                  </span>
+              </motion.div>
+              
+              {/* Keywords Pills */}
+              <motion.div 
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.7 }}
+                className="mt-10 flex flex-wrap justify-center gap-2"
+              >
+                {['Automated Remediation', 'LLMs', 'Human-in-the-Loop', 'Secure SDLC', 'CI/CD'].map((tag, i) => (
+                  <span key={i} className="px-3 py-1 bg-zinc-100 dark:bg-zinc-900 text-[10px] font-bold uppercase tracking-wider text-zinc-500 rounded-full border border-zinc-200 dark:border-zinc-800">
+                    {tag}
+                  </span>
+                ))}
+              </motion.div>
+           </header>
 
-          {/* Paper Body */}
-          <div className="prose prose-lg dark:prose-invert max-w-none prose-p:font-serif prose-p:opacity-90 prose-p:leading-loose">
-            <ReactMarkdown remarkPlugins={[remarkGfm]} components={MarkdownComponents}>
-              {content}
-            </ReactMarkdown>
-          </div>
-          
-          {/* BibTeX Citation */}
-          <div className="mt-24 pt-12 border-t border-zinc-200 dark:border-zinc-900 font-sans">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="w-1.5 h-6 bg-purple-600 rounded-full"></div>
-              <p className="font-black uppercase tracking-[0.2em] text-xs text-zinc-500">Scholarly Citation (BibTeX)</p>
-            </div>
-            <div className="bg-zinc-50 dark:bg-zinc-900/30 p-8 rounded-[2rem] font-mono text-[11px] sm:text-xs overflow-x-auto border border-zinc-100 dark:border-zinc-800">
-              <pre className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
+           <div className="my-20 flex items-center justify-center gap-4">
+             <div className="h-px w-20 bg-gradient-to-r from-transparent to-zinc-300 dark:to-zinc-700"></div>
+             <FileText size={16} className="text-zinc-400" />
+             <div className="h-px w-20 bg-gradient-to-l from-transparent to-zinc-300 dark:to-zinc-700"></div>
+           </div>
+
+           {/* Paper Body */}
+           <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-sans prose-headings:tracking-tight prose-p:text-lg prose-p:leading-8 prose-li:text-lg prose-figure:my-12">
+              <ReactMarkdown remarkPlugins={[remarkGfm]} components={MarkdownComponents}>
+                 {content}
+              </ReactMarkdown>
+           </div>
+           
+           {/* BibTeX Citation Section */}
+           <motion.div 
+             initial={{ opacity: 0 }}
+             whileInView={{ opacity: 1 }}
+             viewport={{ once: true }}
+             className="mt-32 pt-12 border-t-2 border-zinc-200 dark:border-zinc-800 font-sans"
+           >
+              <h3 className="font-bold text-sm uppercase tracking-widest text-zinc-500 mb-6 flex items-center gap-2">
+                <Code size={16} className="text-blue-500" />
+                Citation
+              </h3>
+              <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-2xl border border-zinc-100 dark:border-zinc-800 overflow-x-auto relative group">
+                 <button 
+                   onClick={() => navigator.clipboard.writeText(`@article{yadav2026aipatching,
+  title={AI-Powered Automated Patching for Software Vulnerabilities},
+  author={Yadav, Gaurav and Yadav, Aditya},
+  journal={Independent Research - Cybersecurity},
+  year={2026},
+  note={Equal Contribution — Independent Research},
+  location={Pune, India},
+  institution={Ajeenkya DY Patil University}
+}`)}
+                   className="absolute top-4 right-4 px-3 py-1.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-lg text-[10px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity hover:bg-blue-500/20"
+                 >
+                   Copy
+                 </button>
+                 <pre className="text-xs text-zinc-600 dark:text-zinc-400 font-mono leading-relaxed">
 {`@article{yadav2026aipatching,
   title={AI-Powered Automated Patching for Software Vulnerabilities},
   author={Yadav, Gaurav and Yadav, Aditya},
@@ -1359,31 +1529,28 @@ This work is informed by publicly available industry research on AI-assisted vul
   location={Pune, India},
   institution={Ajeenkya DY Patil University}
 }`}
-              </pre>
-            </div>
-          </div>
+                 </pre>
+              </div>
+           </motion.div>
 
-          {/* Footer */}
-          <div className="mt-24 pt-16 font-sans text-center border-t border-dashed border-zinc-200 dark:border-zinc-900 relative">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-4 bg-white dark:bg-zinc-950">
-              <Shield size={24} className="text-zinc-200 dark:text-zinc-800" />
-            </div>
-            
-            <p className="italic text-lg text-zinc-500 dark:text-zinc-400 max-w-lg mx-auto leading-relaxed">
-              &quot;Human authority is not a constraint on AI—it is the foundation of trustworthy automation.&quot;
-            </p>
-            
-            <p className="mt-6 text-[10px] text-zinc-400 dark:text-zinc-600 max-w-md mx-auto">
-              No generative model was permitted to make architectural decisions in this work.
-            </p>
-            
-            <div className="mt-12 text-[9px] font-bold text-zinc-300 dark:text-zinc-800 uppercase tracking-[0.5em]">
-              © 2026 GAURAV YADAV • ARCHDUKE
-            </div>
-          </div>
+           {/* Personal Footer */}
+           <div className="mt-24 pt-16 text-center border-t border-dashed border-zinc-200 dark:border-zinc-800">
+              <p className="italic text-zinc-500 dark:text-zinc-400 text-xl leading-relaxed max-w-md mx-auto">
+                &quot;Human authority is not a constraint on AI—it is the foundation of trustworthy automation.&quot;
+              </p>
+              <div className="mt-6 flex items-center justify-center gap-4 text-zinc-400">
+                <div className="w-8 h-px bg-zinc-300 dark:bg-zinc-700"></div>
+                <Shield size={16} />
+                <div className="w-8 h-px bg-zinc-300 dark:bg-zinc-700"></div>
+              </div>
+              <div className="mt-6 text-[10px] font-bold text-zinc-300 dark:text-zinc-700 uppercase tracking-[0.3em]">
+                  Independent Systems Security Research • January 2026
+              </div>
+           </div>
 
         </article>
       </div>
     </main>
   );
 }
+
