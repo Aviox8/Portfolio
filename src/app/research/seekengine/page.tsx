@@ -86,7 +86,7 @@ const LiveSearchTerminal = () => {
             <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
           </div>
           <div className="text-zinc-600 flex items-center gap-2">
-             <Activity size={10} className={status === 'running' ? 'animate-pulse text-blue-500' : ''} />
+             <Activity size={10} className={status === 'running' ? 'animate-pulse text-orange-500' : ''} />
              <span className="uppercase tracking-[0.2em] font-black">System_Terminal</span>
           </div>
         </div>
@@ -97,7 +97,7 @@ const LiveSearchTerminal = () => {
               key={i}
               initial={{ opacity: 0, x: -5 }}
               animate={{ opacity: 1, x: 0 }}
-              className={line.includes('result') ? 'text-green-500 font-bold' : line.includes('seekengine') ? 'text-blue-500 font-black pt-4' : 'text-zinc-400'}
+              className={line.includes('result') ? 'text-green-500 font-bold' : line.includes('seekengine') ? 'text-orange-500 font-black pt-4' : 'text-zinc-400'}
             >
               {line}
             </motion.div>
@@ -106,7 +106,7 @@ const LiveSearchTerminal = () => {
             <motion.div 
               animate={{ opacity: [0, 1] }} 
               transition={{ repeat: Infinity, duration: 0.8 }}
-              className="w-2 h-4 bg-blue-500 inline-block align-middle ml-1"
+              className="w-2 h-4 bg-orange-500 inline-block align-middle ml-1"
             />
           )}
         </div>
@@ -116,13 +116,13 @@ const LiveSearchTerminal = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             onClick={runSimulation}
-            className="mt-8 px-4 py-2 bg-blue-600/10 text-blue-500 text-[10px] font-black uppercase tracking-widest rounded-lg border border-blue-500/20 hover:bg-blue-600 hover:text-white transition-all flex items-center gap-2"
+            className="mt-8 px-4 py-2 bg-orange-600/10 text-orange-500 text-[10px] font-black uppercase tracking-widest rounded-lg border border-orange-500/20 hover:bg-orange-600 hover:text-white transition-all flex items-center gap-2"
            >
              <RefreshCw size={12} /> Rerun Diagnostics
            </motion.button>
         )}
       </div>
-      <div className="absolute -inset-1 bg-gradient-to-r from-blue-500/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+      <div className="absolute -inset-1 bg-gradient-to-r from-orange-500/10 to-transparent blur-2xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
     </div>
   );
 };
@@ -1983,33 +1983,13 @@ export default function SeekEngineResearch() {
   };
 
   return (
-    <main className="min-h-screen bg-white dark:bg-zinc-950 font-serif selection:bg-blue-100 selection:text-blue-900 dark:selection:bg-blue-900/40 dark:selection:text-blue-200">
+    <main className="min-h-screen pt-24 pb-16 bg-apple-gradient text-zinc-900 dark:text-zinc-50 selection:bg-blue-500/30">
       
       {/* Scroll Progress Bar */}
       <motion.div 
-        className="fixed top-0 left-0 right-0 h-1 bg-blue-600 origin-left z-[60]"
+        className="fixed top-0 left-0 right-0 h-1 bg-orange-500 origin-left z-[60]"
         style={{ scaleX }}
       />
-      
-      {/* Scroll Progress & Sticky Nav */}
-      <motion.div 
-        className="fixed top-1 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ delay: 0.5 }}
-      >
-        <div className="max-w-4xl mx-auto px-6 h-14 flex items-center justify-between font-sans text-xs font-bold uppercase tracking-widest text-zinc-500">
-          <Link href="/research" className="hover:text-blue-600 transition-colors flex items-center gap-2">
-            <ArrowLeft size={14} />
-            <span className="hidden sm:inline">Repository</span>
-          </Link>
-          <div className="flex gap-4 sm:gap-6">
-            <a href="#abstract" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Abstract</a>
-            <a href="#architecture" className="hover:text-zinc-900 dark:hover:text-white transition-colors hidden sm:block">Architecture</a>
-            <a href="#conclusion" className="hover:text-zinc-900 dark:hover:text-white transition-colors">Conclusion</a>
-          </div>
-        </div>
-      </motion.div>
       
       {/* Scroll to Top Button */}
       <AnimatePresence>
@@ -2019,7 +1999,7 @@ export default function SeekEngineResearch() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-2xl shadow-blue-500/30 flex items-center justify-center transition-colors"
+            className="fixed bottom-8 right-8 z-50 w-12 h-12 bg-orange-600 hover:bg-orange-700 text-white rounded-full shadow-2xl shadow-orange-500/30 flex items-center justify-center transition-colors"
             aria-label="Scroll to top"
           >
             <ArrowUp size={20} />
@@ -2027,19 +2007,52 @@ export default function SeekEngineResearch() {
         )}
       </AnimatePresence>
 
-      <div ref={containerRef} className="max-w-3xl mx-auto px-6 sm:px-8 lg:px-12 pt-32 pb-32 text-zinc-900 dark:text-zinc-100">
+      <div ref={containerRef} className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-32 text-zinc-900 dark:text-zinc-100">
         
+        {/* Back Navigation */}
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="mb-12"
+        >
+          <Link 
+            href="/research" 
+            className="inline-flex items-center gap-2 text-sm font-medium text-zinc-500 hover:text-orange-600 dark:hover:text-orange-400 transition-colors group"
+          >
+            <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+            Back to Research
+          </Link>
+        </motion.div>
+        
+        {/* Page Header with Icon */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="mb-16"
+        >
+          <div className="inline-flex items-center gap-3 mb-6">
+            <div className="p-3 rounded-xl bg-orange-100 dark:bg-orange-900/30">
+              <SearchIcon size={24} className="text-orange-600 dark:text-orange-400" />
+            </div>
+            <h1 className="text-5xl sm:text-6xl font-bold text-zinc-900 dark:text-white">SeekEngine</h1>
+          </div>
+          <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-300 max-w-3xl leading-relaxed">
+            A Hybrid RAG Approach to Truthful Search — Independent Systems Research
+          </p>
+        </motion.div>
+
         {/* Paper Header */}
         <article className="animate-fade-in relative">
            
-           <header className="mb-24 font-sans text-center">
+           <header className="mb-16 font-sans apple-card p-8 sm:p-12 text-center relative overflow-hidden">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-200/50 dark:border-blue-800/30 text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400"
+                className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-gradient-to-r from-orange-500/10 to-amber-500/10 border border-orange-200/50 dark:border-orange-800/30 text-[10px] font-bold uppercase tracking-[0.2em] text-orange-600 dark:text-orange-400"
               >
-                <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></div>
+                <div className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse"></div>
                 Independent Research • {DOCUMENT_VERSION}
               </motion.div>
               
@@ -2068,19 +2081,19 @@ export default function SeekEngineResearch() {
                 className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-sm font-medium text-zinc-600 dark:text-zinc-400"
               >
                  <div className="flex items-center gap-2">
-                    <User size={14} className="text-blue-500" />
+                    <User size={14} className="text-orange-500" />
                     <span>Gaurav Yadav & Aditya Yadav</span>
                  </div>
                  <div className="flex items-center gap-2">
-                    <Calendar size={14} className="text-blue-500" />
+                    <Calendar size={14} className="text-orange-500" />
                     <span>January 2026</span>
                  </div>
                  <div className="flex items-center gap-2">
-                    <Clock size={14} className="text-blue-500" />
+                    <Clock size={14} className="text-orange-500" />
                     <span>{ESTIMATED_READ_TIME}</span>
                  </div>
                  <div className="flex items-center gap-2">
-                    <BookOpen size={14} className="text-blue-500" />
+                    <BookOpen size={14} className="text-orange-500" />
                     <span>{WORD_COUNT}</span>
                  </div>
               </motion.div>
@@ -2089,14 +2102,14 @@ export default function SeekEngineResearch() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                className="mt-10 flex flex-wrap justify-center gap-3"
+                className="mt-10 flex flex-wrap justify-center gap-4"
               >
-                  <Link href="https://seekengine.vercel.app" target="_blank" className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold uppercase tracking-widest transition-colors flex items-center gap-2 shadow-lg shadow-blue-500/20">
-                    <Zap size={14} />
+                  <Link href="https://seekengine.vercel.app" target="_blank" className="apple-btn-primary rounded-full px-8">
+                    <Zap size={16} />
                     Live Demo
                   </Link>
-                  <Link href="https://github.com/archduke1337/SeekEngine" target="_blank" className="px-6 py-2.5 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors flex items-center gap-2">
-                    <Code size={14} />
+                  <Link href="https://github.com/archduke1337/SeekEngine" target="_blank" className="apple-btn-secondary rounded-full px-8">
+                    <Code size={16} />
                     Source Code
                   </Link>
               </motion.div>
@@ -2123,7 +2136,7 @@ export default function SeekEngineResearch() {
            </div>
 
            {/* Paper Body */}
-           <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-sans prose-headings:tracking-tight prose-p:font-serif prose-p:text-lg prose-p:leading-8 prose-li:text-lg prose-figure:my-12">
+           <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-sans prose-headings:tracking-tight prose-p:text-lg prose-p:leading-8 prose-li:text-lg prose-figure:my-12">
               <ReactMarkdown components={MarkdownComponents}>
                  {content}
               </ReactMarkdown>
@@ -2137,7 +2150,7 @@ export default function SeekEngineResearch() {
              className="mt-32 pt-12 border-t-2 border-zinc-200 dark:border-zinc-800 font-sans"
            >
               <h3 className="font-bold text-sm uppercase tracking-widest text-zinc-500 mb-6 flex items-center gap-2">
-                <FileCode size={16} className="text-blue-500" />
+                <FileCode size={16} className="text-orange-500" />
                 Citation
               </h3>
               <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-2xl border border-zinc-100 dark:border-zinc-800 overflow-x-auto relative group">
@@ -2149,7 +2162,7 @@ export default function SeekEngineResearch() {
   note={Independent Research},
   url={https://seekengine.vercel.app},
 }`)}
-                   className="absolute top-4 right-4 px-3 py-1.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-lg text-[10px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity hover:bg-blue-500/20"
+                   className="absolute top-4 right-4 px-3 py-1.5 bg-orange-500/10 text-orange-600 dark:text-orange-400 rounded-lg text-[10px] font-bold uppercase tracking-wider opacity-0 group-hover:opacity-100 transition-opacity hover:bg-orange-500/20"
                  >
                    Copy
                  </button>
@@ -2167,7 +2180,7 @@ export default function SeekEngineResearch() {
 
            {/* Personal Footer */}
            <div className="mt-24 pt-16 text-center border-t border-dashed border-zinc-200 dark:border-zinc-800">
-              <p className="font-serif italic text-zinc-500 dark:text-zinc-400 text-xl leading-relaxed max-w-md mx-auto">
+              <p className="italic text-zinc-500 dark:text-zinc-400 text-xl leading-relaxed max-w-md mx-auto">
                 &quot;Grounding is not a feature—it&apos;s a constraint.&quot;
               </p>
               <div className="mt-6 flex items-center justify-center gap-4 text-zinc-400">
