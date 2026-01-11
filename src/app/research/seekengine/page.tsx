@@ -37,6 +37,7 @@ import {
   ArrowUp
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 
 // --- Reading Time & Meta ---
 const ESTIMATED_READ_TIME = "45 min read";
@@ -2152,7 +2153,7 @@ export default function SeekEngineResearch() {
 
            {/* Paper Body */}
            <div className="prose prose-lg dark:prose-invert max-w-none prose-headings:font-sans prose-headings:tracking-tight prose-p:text-lg prose-p:leading-8 prose-li:text-lg prose-figure:my-12">
-              <ReactMarkdown components={MarkdownComponents}>
+              <ReactMarkdown remarkPlugins={[remarkGfm]} components={MarkdownComponents}>
                  {content}
               </ReactMarkdown>
            </div>
