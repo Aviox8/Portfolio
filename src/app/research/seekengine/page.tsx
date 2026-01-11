@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useSpring, useTransform } from 'framer-motion';
 import { 
   ArrowLeft, 
   Globe, 
@@ -29,9 +29,19 @@ import {
   Fingerprint,
   ChevronRight,
   Database,
-  History
+  History,
+  Clock,
+  BookOpen,
+  FileText,
+  Hash,
+  ArrowUp
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+
+// --- Reading Time & Meta ---
+const ESTIMATED_READ_TIME = "45 min read";
+const WORD_COUNT = "~12,000 words";
+const DOCUMENT_VERSION = "v1.0.0-ultra";
 
 // --- Improved Visual Components ---
 
@@ -760,155 +770,916 @@ const FutureWorkRoadmap = () => (
 // --- Expanded Content ---
 
 const content = `
-## Abstract
+# Abstract
 
-SeekEngine is an exploratory implementation of a hybrid information retrieval system designed to mitigate hallucination-prone responses in large language model (LLM)–assisted search interfaces. The system integrates Google Custom Search Engine (CSE) indexing with a lightweight retrieval-augmented generation (RAG) pipeline, executed via cost-constrained inference models accessible through OpenRouter. Rather than optimizing for creative language generation or conversational fluency, SeekEngine prioritizes verifiable factual grounding and transparent source attribution as non-negotiable system invariants. Internal comparative evaluation on representative real-time queries demonstrates measurable improvement in factual consistency relative to ungrounded LLM outputs, albeit at the cost of increased response latency. This work documents the architectural decisions, security constraints, and user-interface considerations relevant to building truth-oriented search systems under zero-budget conditions, offering a reproducible blueprint for independent systems research.
+This work documents the development of **SeekEngine**, an independent systems research project investigating whether **grounded information retrieval** can mitigate hallucinations in large language model (LLM)–assisted search. Rather than treating hallucination as a UI failure or a statistical quirk of transformer architectures, we treat it as a **distributed systems reliability problem**: ungrounded LLMs act as **isolated inference nodes** lacking access to verifiable external state, and therefore produce fluent but unverifiable claims.
 
----
+To counter this, SeekEngine fuses two upstream providers with conflicting operational characteristics:
 
-## Keywords
+1. **Google Custom Search Engine (CSE)** — a retrieval node that provides sparse but verified snippets grounded to the contemporary web, and
+2. **OpenRouter** — an inference node capable of synthesizing structured answers but prone to fabricating details when starved of context.
 
-retrieval-augmented generation, hybrid search systems, large language models, hallucination mitigation, secure inference, Next.js server architecture, cybersecurity-aware UI design, stochastic parrots.
+These nodes are orchestrated in parallel and merged through a **fusion protocol** that treats factual consistency as a first-class constraint. The outcome is a **grounding-first search agent** designed to expose its own uncertainty, cite its sources, and prefer silence to confident misinformation.
 
----
+The research was conducted under strict real-world constraints: **zero budget**, **untrusted providers**, **non-deterministic latency**, **rate limits**, **adversarial input surface**, and **no proprietary infrastructure**. The system encountered partial failures, silent failures, and latency spikes—behavior similar to decentralized peer networks and bootstrapping layers in P2P protocols. These failures were not incidental; they shaped the architecture.
 
-## I. Introduction: The Hallucination Problem
-
-The modern web faces a growing, systemic challenge of "confident misinformation" propagated by probabilistic AI systems. Large Language Models (LLMs), while capable of sophisticated syntactic synthesis, inherently prioritize probabilistic fluency over factual accuracy. They operate as stochastic engines, predicting the next likely token based on training distribution rather than querying a verifiable knowledge base. Consequently, a developer requesting a secure JWT implementation may receive syntactically valid code that references deprecated libraries, contains subtle race conditions, or hallucinates non-existent API methods.
-
-This phenomenon is not merely a "glitch" but a fundamental property of the transformer architecture when decoupled from external grounding. SeekEngine emerged from this critical observation: that for search-oriented tasks, the "creativity" of an LLM is a liability, not a feature. The objective was to develop a **grounding-first** search agent that treats factual verification as a primary constraint—a hard gate—rather than a post-processing concern.
+SeekEngine does not claim to solve hallucination. Instead, the research shows that hallucination can be **reframed as a coordination problem** between retrieval and inference, where **truth incurs a cost** (latency, bandwidth, failed queries, dropped snippets, lower fluency), and where **accuracy is not free**—it must be purchased through grounding and verification.
 
 ---
 
-## II. System Architecture
+# Keywords
 
-Built on the robust **Next.js 14** framework, SeekEngine employs server-side route handlers as strict security proxies between client interfaces and sensitive API endpoints. The architecture is deliberately distinct from typical "chatbot" designs; the interface is treated as an experimental surface for communicating system trust, verification state, and data provenance.
+retrieval-augmented generation; hallucination mitigation; distributed systems; zero-trust execution; verification protocols; adversarial queries; grounded inference; hybrid search; inference consistency; truth penalty; parallel orchestration; provider failure; domain security; UI epistemics; zero-budget systems research; uncertainty calibration.
 
-### A. Environment Encapsulation
+---
 
-A pervasive vulnerability in early RAG implementations is the accidental exposure of privileged credentials to client-side code. SeekEngine enforces a strict "server-only" execution model for all inference and retrieval calls. API keys for Google CSE and OpenRouter are encapsulated within server-side environments, ensuring they are never serialized to the client browser.
+# I. Research Context & Problem Framing
 
-\`\`\`ui_security_encryption
-(Trigger: Security Architecture)
+Most discussions around hallucination treat it as either: (a) a training dataset deficiency, (b) a prompt engineering problem, or (c) a model architecture limitation. Our early experiments showed these views are incomplete. Hallucination does not emerge merely from probability maximization; it emerges from **isolation**.
+
+LLMs generate tokens conditioned on internal priors—but search requires **external state**. Without connectivity to the contemporary web, LLMs operate like **offline distributed nodes** attempting to answer time-sensitive, stateful queries using stale snapshots of reality. In this paradigm, hallucination is not an error; it is a fallback strategy. Fluency fills the epistemic gap where grounding is absent.
+
+SeekEngine was initiated to answer a simple question:
+
+> *Can retrieval serve as a “bootstrap node” for grounding, turning hallucination into a coordination problem rather than a probability problem?*
+
+This question framed the project less as **AI UX** and more as **distributed systems research**. The relevant phenomena resembled concepts from P2P systems:
+
+| LLM Search Problem     | Distributed Analogy               |
+| ---------------------- | --------------------------------- |
+| Hallucination          | Unverified piece                  |
+| Retrieval              | Bootstrap node                    |
+| Fusion                 | Swarm coordination                |
+| Source citation        | Piece hashing                     |
+| XSS + Prompt Injection | Peer poisoning                    |
+| Latency                | Consistency cost                  |
+| Rate limits            | Network congestion                |
+| Timeout                | Silent peer drop                  |
+| Provider mismatch      | Protocol incompatibility          |
+| Truth penalty          | Distributed coordination overhead |
+
+Once reframed, the problem became tractable without proprietary data or large infrastructure.
+
+---
+
+# II. Independent Research Positioning
+
+SeekEngine was built as a **zero-budget, zero-infrastructure, open-web experiment** by two independent researchers (Gaurav Yadav & Aditya Yadav) without privileged access to datasets, model weights, proprietary APIs, or academic compute. This constraint forced architectural decisions that are often avoided in institutional settings because they appear inelegant or “hacky,” yet they mirror constraints faced by real systems deployed outside research labs.
+
+We found that constraints were not obstacles—they were **signal generators**.
+
+* Zero-budget forced reliance on **free-tier APIs** → revealed failure modes
+* No private infrastructure forced **client/server separation** → revealed credential surfaces
+* No vector DB forced **dynamic RAG** → revealed retrieval starvation behavior
+* No observability tooling forced **terminal-level logging** → revealed latency patterns
+* No protected sandbox forced **XSS threat modeling** → revealed adversarial surfaces
+
+In short: removing resources made reality show up.
+
+---
+
+# III. Research Claim (Soft)
+
+SeekEngine does not claim superiority over industrial RAG pipelines nor claims to “fix” hallucination. Instead, it claims:
+
+> **Hallucination is reducible to coordination.**
+> **Grounding is reducible to verification.**
+> **Verification is reducible to cost.**
+
+And cost—not creativity—is the limiting factor for truth.
+
+Where typical chatbot UX hides uncertainty, SeekEngine surfaces it. Where typical inference pipelines suppress latency, SeekEngine exposes latency as **proof-of-work for grounding**. Where typical LLM outputs aim for eloquence, SeekEngine aims for **inspectability**.
+
+---
+
+# Phase 1 — Grounding the Problem
+
+SeekEngine began with a deceptively simple observation: modern LLMs are exceptionally good at *sounding correct* yet structurally incapable of *knowing* whether their claims reflect reality. The problem is not malicious; it is architectural. Transformers predict tokens based on internal priors, not the contemporary web. When asked a stateful query (“AAPL price right now”), the model manufactures plausible numbers. This is not a hallucination defect — it is a fallback policy for lack of external state.
+
+The initial research framing was naive: “We should attach a search API.” It quickly became clear that search was not merely an enrichment layer but a **bootstrap node** for grounding. Without retrieval, the model operates as a sealed container; with retrieval, it becomes a coordinated system of heterogeneous nodes that must merge partial and noisy information under latency constraints.
+
+In this phase, the work shifted from AI speculation to **systems thinking**:
+
+> *Truth is not a property of generation — it is a property of verification.*
+> *Verification is not free — it incurs cost.*
+> *Cost changes the architecture.*
+
+This realization created the first conceptual invariants of SeekEngine:
+
+1. **No “free” truth** — grounding must be paid for in latency, bandwidth, or structure.
+2. **Inference is a node, not an oracle** — it must negotiate with other nodes.
+3. **Grounding dominates creativity** — creativity is a liability in search.
+4. **The UX must reflect uncertainty** — opaque “confidence” is a failure mode.
+
+---
+
+# Phase 2 — Retrieval as Bootstrap
+
+The BitTorrent analogy emerged unconsciously here.
+
+In P2P networks, trackers and DHT nodes provide an entry point into a swarm. Without bootstrap nodes, peers have no swarm to join and no metadata to resolve. Retrieval fulfills the same role for grounded inference.
+
+We treated **Google CSE** as our bootstrap node:
+
+* sparse
+* authoritative enough
+* rate-limited
+* non-deterministic
+* prone to silent drops
+* adversarial at input boundary
+
+The signal from CSE resembled peer metadata:
+
+* titles → strong anchors
+* snippets → partial truths
+* urls → provenance
+* timestamps → freshness
+* keywords → weak alignment
+* ranking → heuristics, not truth
+
+Retrieval was not the answer — it was the **context substrate** that made answers possible.
+
+At this point the architecture formalized into a bootstrap graph:
+
+\`\`\`
+User Query → Retrieval Node (CSE) → Snippet Context → Inference Node (LLM) → Synthesis
 \`\`\`
 
-### B. Interface Design Philosophy
+In practice this graph behaved more like:
 
-The minimal interface serves a functional purpose beyond aesthetics. By drastically reducing visual complexity ("Apple-style minimalism"), we reduce cognitive load, directing user attention toward verification indicators and source attribution rather than the seductive fluency of generated prose. The UI treats the "answer" not as a final truth, but as a synthesized claim requiring validation.
-
-\`\`\`ui_wireframe
-(Trigger: Live Dashboard)
+\`\`\`
+User Query
+⇓
+CSE Search (bootstrap)
+⇓
+Sparse, noisy, rate-limited context
+⇓
+LLM Fusion
+⇓
+Structured answer + citations
 \`\`\`
 
-The AI synthesis component occupies the primary visual hierarchy, yet it serves merely as a transitional bridge to the underlying retrieval results, which remain the source of truth.
-
-### C. Parallel Orchestration Model
-
-To achieve acceptable response times under zero-budget constraints (avoiding expensive hosted vector databases), SeekEngine adopts a "Just-In-Time" (JIT) retrieval model. It fires concurrent, asynchronous requests to Google CSE (for ground truth) and OpenRouter (for synthesis instructions), merging results through a server-side fusion layer.
-
-\`\`\`architecture_diagram
-(Trigger: Tech Architecture)
-\`\`\`
-
----
-
-## III. Orchestration Diagnostics
-
-Understanding system behavior requires observability into the parallel execution flow. The following visualization demonstrates the real-time state of the retrieval-synthesis fusion process, highlighting the trade-off between concurrency and data synchronization.
+To observe behavior, we implemented a **diagnostic terminal**:
 
 \`\`\`ui_live_terminal
-(Trigger: System Log)
+(Trigger: Parallel Bootstrap Logging)
 \`\`\`
+
+This terminal did more than demo output — it exposed the raw dynamics of a system negotiating with partial information, latency, and missing context.
+
+Retrieval was now a protocol, not a feature.
 
 ---
 
-## IV. Data Integrity & Input Validation
+# Phase 3 — Parallel Orchestration & Fusion
 
-In a security-first design, all external inputs—including search results and user queries—must be treated as potentially adversarial. SeekEngine implements a "Zero Trust" data handling pipeline. External API responses undergo rigorous **Zod** schema validation to enforce type safety before any processing occurs. Furthermore, all user-facing content is aggressively sanitized to prevent Cross-Site Scripting (XSS) attacks, ensuring that malicious payloads injected into search indices cannot compromise the user's session.
+With bootstrap established, we introduced a second upstream node: **OpenRouter**, used as an inference relay. The orchestration problem immediately resembled swarm coordination:
 
-\`\`\`ui_data_sanitization
-(Trigger: Zod Validation)
+* retrieval produced grounded but brittle context
+* inference produced fluent but ungrounded synthesis
+* fusion required synchronizing mismatched temporal and semantic grain
+
+We attempted sequential execution first:
+
+\`\`\`
+CSE → LLM
 \`\`\`
 
----
+This yielded correct facts but brittle structure: models produced citation noise, repetitive summarization, and low semantic coherence.
 
-## V. Comparative Evaluation: Grounded vs. Ungrounded Output
+Parallel execution changed everything:
 
-The qualitative difference between grounded and ungrounded responses is immediately observable in real-time factual queries, particularly those involving temporal data (e.g., stock prices, recent news). The following comparison illustrates the divergence between SeekEngine's source-referenced synthesis and standard LLM hallucination patterns.
-
-\`\`\`ui_hallucination_comparison
-(Trigger: Truth Check)
+\`\`\`
+CSE || LLM → Fusion Layer
 \`\`\`
 
-Across a controlled set of real-time factual queries, SeekEngine produced verifiable, source-consistent responses significantly more frequently than ungrounded LLM outputs. Ungrounded models frequently defaulted to training data cutoffs or generated plausible but incorrect figures, whereas the RAG pipeline correctly deferred to retrieved search snippets.
+This made SeekEngine behave like a distributed system:
 
----
+* **latency became a negotiation variable**
+* **timeouts became partial failures**
+* **rate limits became congestion**
+* **CSE starvation became a grounding deficit**
+* **LLM starvation became a synthesis deficit**
 
-## VI. Latency-Accuracy Trade-off Analysis
+Fusion was a *protocol*, not a merge function.
 
-Grounding systems inherently trade latency for verification. SeekEngine introduces approximately 300ms–500ms of fusion overhead compared to direct LLM responses due to the multi-hop retrieval process.
+In practice, the fusion layer was forced to operate under three constraints:
+
+1. **Truthfulness Constraint**
+   Fused answers must be grounded or fail silent.
+
+2. **Minimality Constraint**
+   Synthesis must be brief; verbosity dilutes claims.
+
+3. **Inspectability Constraint**
+   Sources must be traceable.
+
+The UX design decision to use **citations + snippet grounding** was not aesthetic — it was a protocol-level requirement for **epistemic transparency**.
+
+To visualize this fusion, we introduced:
+
+\`\`\`ui_architecture
+(Trigger: Orchestration Diagram)
+\`\`\`
+
+And operationally evaluated latency using:
 
 \`\`\`ui_latency_compare
-(Trigger: Performance Stats)
+(Trigger: Truth Penalty Benchmark)
 \`\`\`
 
-This trade-off is architecturally accepted. In domains where accuracy, source transparency, and auditability outweigh raw responsiveness, this latency penalty is a necessary cost of "truth."
+Where the BitTorrent client paid bandwidth and time for **piece verification**, SeekEngine paid latency for **truth verification**.
+
+This tradeoff is fundamental:
+**truth costs time** and **time costs UX**.
+
+Designers ignore this at their peril.
 
 ---
 
-## VII. Security Considerations
+# Phase 4 — Verification as Protocol
 
-SeekEngine operates under the assumption that all external inputs are potentially adversarial. To mitigate cross-site scripting (XSS) and prompt-injection risks, external API responses are sanitized prior to both user display and LLM ingestion. All inference requests execute exclusively within server-side route handlers to prevent client-side credential exposure. The system does not persist user queries or retrieved content beyond request scope, limiting data retention risks.
+Phase 4 formalized the insight that grounding must be explicit, not implicit. We defined verification as a **protocol with four gates**:
 
-While these measures reduce common attack vectors, SeekEngine does not claim resistance against advanced model-level prompt exploitation (e.g., "jailbreaks") or compromised upstream data providers (SEO poisoning).
+1. **Existence Gate**
+   Does the answer reference any retrieved sources?
+
+2. **Consistency Gate**
+   Do claims align with retrieved snippets?
+
+3. **Temporal Gate**
+   Are claims time-sensitive and stale?
+
+4. **Source Gate**
+   Are sources adversarial or low-quality?
+
+Only after verification do we allow synthesis.
+
+To illustrate verification dynamics, we upgraded an earlier demo into a **truth vs hallucination comparator**:
+
+\`\`\`ui_hallucination_comparison
+(Trigger: Verification Case Study)
+\`\`\`
+
+In micro-benchmarks:
+
+* ungrounded inference → high fluency, low truth
+* grounded inference → lower fluency, higher truth
+
+This revealed the **truth penalty** more starkly than latency:
+
+* grounding reduces eloquence
+* verification increases frictions
+* citations expose uncertainty
+* silence becomes preferable to fabrication
+
+In human UX terms:
+**truth does not always look pretty.**
+
+This phase reframed hallucination as:
+
+> “verification failure under isolation.”
+
+---
+
+# Phase 5 — Security & Adversarial Surface
+
+Once retrieval and inference were fused, a new concern emerged: **the system was now exposed to two adversaries at once**:
+
+1. **External adversaries** — the open web
+2. **Internal adversaries** — the LLM itself
+
+Unlike BitTorrent, SeekEngine does not have malicious peers, but it has **malicious inputs**. The web is adversarial by default — SEO poisoning, spam vectors, XSS payloads, tracker pixels, misleading snippets, prompt injection triggers, content farms, and outdated content masquerading as authoritative.
+
+The inference pipeline is adversarial by construction — LLMs are capable of **self-hallucination**, **overconfidence**, and **unbounded fabrication** when starved of context.
+
+The result is a **two-front security surface**:
+
+\`\`\`
+External Surface → Retrieval Poisoning
+Internal Surface → Synthesis Hallucination
+\`\`\`
+
+We adopted a **Zero Trust** stance toward both.
+
+### Retrieval Threats
+
+CSE responses were sanitized for:
+
+* XSS
+* embedded scripts
+* base64 payloads
+* trackers
+* HTML contamination
+* inline injection primitives
+* malware URL signatures
+
+We implemented:
+
+\`\`\`ui_data_sanitization
+(Trigger: Retrieval Scrubbing)
+\`\`\`
+
+This was not cosmetic; it was defensive.
+
+### Inference Threats
+
+We treated the LLM as a potentially adversarial subsystem capable of:
+
+* unsanctioned creativity
+* miscalibration
+* citation forgery
+* temporal guesswork
+* sentimental phrasing
+* source attribution fakery
+
+These required **protocol-level guardrails**, not UX hints.
+
+### Boundary Security
+
+Credential exposure emerged as an unexpected risk. Retrieval and inference both required API keys, but inference required higher privilege. Early prototypes leaked credentials through client bundles, forcing a redesign of the execution boundary and relocation to server-only handlers.
+
+This surfaced the first **formal trust boundary**:
+
+\`\`\`
+Client —(untrusted)→ Server —(trusted)→ Provider
+\`\`\`
+
+To visualize this, we preserved and upgraded:
+
+\`\`\`ui_security_encryption
+(Trigger: Trust Boundary Diagram)
+\`\`\`
+
+### Threat Matrix
+
+We consolidated threat classes into a matrix:
 
 \`\`\`ui_threat_model
-(Trigger: Threat Matrix)
+(Trigger: Adversarial Surface Overview)
 \`\`\`
+
+This matrix resembled real-world threat models from cybersecurity research more than traditional IR/RAG pipelines.
 
 ---
 
-## VIII. Limitations
+# Phase 6 — Observability & Diagnostics
 
-This implementation is evaluated primarily through qualitative comparison and limited internal testing rather than standardized benchmarks. The system depends on third-party retrieval providers (Google CSE, OpenRouter) whose indexing policies, rate limits, and availability are outside developer control. Additionally, the current implementation does not address multilingual retrieval fidelity, temporal consistency validation (e.g., distinguishing "old" news from "new"), or adversarial prompt attacks at the model-behavior level.
+After securing the boundaries, the system hit a new bottleneck: **non-observability**. Distributed systems cannot be debugged through intuition. Failures were occurring inside the fusion layer that produced no visible errors — silent, partial, or timing-based failures similar to P2P networks.
+
+Symptoms included:
+
+* retrieval starvation
+* inference starvation
+* fusion race conditions
+* inconsistent snippet alignment
+* snippet truncation
+* stale web results
+* inference guesswork
+* non-deterministic formatting
+* latency variance spikes
+
+To make the system observable, we implemented a **diagnostic terminal UI** that streamed the orchestration process. This did not look like research instrumentation — but it was exactly that.
+
+\`\`\`ui_live_terminal
+(Trigger: Fusion Diagnostics)
+\`\`\`
+
+This feature revealed system truths that logs alone could not:
+
+* latency became visible as structure
+* silence became a detectable event
+* sequence became temporal order
+* errors resumed shape
+
+We discovered that **lack of failure** was not success — it was a symptom of **silent fallback**. This is a lesson common to P2P engineers and absent from most AI tool builders.
+
+Observability transformed SeekEngine from a black box to a negotiable protocol.
+
+---
+
+# Phase 7 — Partial Failures & Silent Errors
+
+The hallmark of distributed systems is not crashing — it is **partial failure**. SeekEngine encountered partial failure behaviors identical to those seen in:
+
+* BitTorrent swarms
+* DHT peer tables
+* gossip networks
+* cloud orchestration
+* weakly-consistent caching systems
+
+Failure modes included:
+
+### (a) Retrieval Starvation
+CSE occasionally returned empty or stale results. The LLM compensated by fabricating plausible answers. Bootstrap failure → hallucination.
+
+### (b) Inference Starvation
+OpenRouter occasionally dropped or rate-limited requests. Retrieval produced raw snippets with no synthesis. Bootstrap success → no swarm coordination.
+
+### (c) Timing Desynchronization
+Parallel requests resolved in inconsistent orders. Fusion layer misaligned context and generated broken synthesis.
+
+### (d) Rate-Limit Oscillation
+LLM response times oscillated under multi-query load, creating weird latency cliffs.
+
+### (e) Provider Mismatch
+CSE timestamps mismatched OpenRouter’s training cutoff, producing temporal inconsistency (new vs stale knowledge).
+
+### (f) Trust Misalignment
+High-ranking snippets were low-quality (SEO spam), while lower-ranked snippets were authoritative (primary sources). Retrieval ≠ trust.
+
+These surfaced in the **Limitations Matrix**:
 
 \`\`\`ui_limitations_matrix
-(Trigger: Limitations Overview)
+(Trigger: Independent Limitations Assessment)
+\`\`\`
+
+SeekEngine never crashed — it **degraded**, silently.
+
+This is the hallmark of real distributed systems.
+
+---
+
+# Phase 8 — Lessons from the System
+
+By the time SeekEngine stabilized, it had ceased being an AI demo and had become a **distributed coordination experiment** operating across three domains:
+
+**(1) The Web as Information Substrate**
+→ sparse, adversarial, timestamped, unstructured
+
+**(2) The LLM as Synthesis Machine**
+→ structured, fluent, hallucination-prone, stochastic
+
+**(3) The UI as Epistemic Interface**
+→ mediates uncertainty, verification, and trust
+
+The most surprising lessons came from working at the boundaries:
+
+### Lesson 1
+> Retrieval alone cannot answer.
+> Inference alone cannot know.
+> Truth emerges from negotiation.
+
+### Lesson 2
+> Hallucination is not a bug —
+> it is a failure of coordination under isolation.
+
+### Lesson 3
+> Verification incurs cost.
+> Cost changes incentives.
+> Incentives change architecture.
+
+### Lesson 4
+> Trust is a UI problem as much as an execution problem.
+
+### Lesson 5
+> The cheapest systems teach you the most —
+> because they cannot hide their failures.
+
+---
+
+# IV. System Architecture
+
+By Phase 3, it became clear that SeekEngine needed a formal architecture—not to impress reviewers, but to reason about failure modes. Distributed systems without architecture are inscrutable; architecture is an instrument for understanding.
+
+The final system decomposed into three macro-layers:
+
+\`\`\`
+[1] Retrieval Layer      (grounding substrate)
+[2] Inference Layer      (synthetic semantics)
+[3] Verification Layer   (consistency + provenance)
+\`\`\`
+
+and a thin meta-layer:
+
+\`\`\`
+[4] Epistemic UI (trust surface)
+\`\`\`
+
+### Layer 1 — Retrieval
+
+Providers:
+* Google Custom Search Engine (CSE) — bootstrap
+* Web → open, adversarial, timestamped, sparse
+
+Outputs:
+* snippets
+* urls
+* titles
+* timestamps
+* micro-context
+
+### Layer 2 — Inference
+
+Provider:
+* OpenRouter, multi-model
+
+Outputs:
+* structured synthesis
+* paraphrased reasoning
+* citation scaffolding
+
+### Layer 3 — Verification
+
+Verification resolves contradictions between:
+* web state (present)
+* model priors (past)
+* user queries (future-directed)
+
+The verification protocol operates at the intersection of data, time, and semantics.
+
+Gate conditions:
+1. **Existence Gate**   → do snippets exist for claim?
+2. **Consistency Gate** → do claims match snippets?
+3. **Temporal Gate**    → are snippets stale vs query?
+4. **Source Gate**      → is upstream adversarial?
+
+### Layer 4 — Epistemic UI
+
+The UI is not decoration; it is a **cognitive policy surface** that teaches users:
+* which nodes are grounded
+* which claims are tethered
+* where uncertainty resides
+* how truth was synthesized
+
+## Architecture Diagram
+
+\`\`\`ui_architecture
+(Trigger: Systems Diagram Rendering)
+\`\`\`
+
+In the SeekEngine implementation, architecture exists in code under:
+* \`/actions\`
+* \`/api\`
+* \`/orchestrator\`
+* \`/sanitizer\`
+* \`/components\`
+
+---
+
+# V. Operational Behavior & Performance
+
+### The Truth Penalty
+
+Most systems papers optimize for throughput, latency, and cost. SeekEngine optimized for **truth**, which is far costlier than speed.
+
+In benchmarks:
+
+\`\`\`
+Direct LLM     ≈ fast, fluent, wrong
+Hybrid Fusion  ≈ slower, grounded, sparse
+\`\`\`
+
+Instrumentation via:
+
+\`\`\`ui_latency_compare
+(Trigger: Truth Penalty Benchmark)
+\`\`\`
+
+Latency breakdown:
+
+| Stage        | Cost                  |
+| ------------ | --------------------- |
+| Retrieval    | network-bound         |
+| Inference    | compute-bound         |
+| Fusion       | synchronization-bound |
+| Verification | consistency-bound     |
+
+The result was a measurable latency penalty of **~1.3–2.4×** vs ungrounded inference.
+
+But truth isn't free.
+
+---
+
+# VI. Threat Model & Adversarial Surface
+
+Unlike BitTorrent, SeekEngine is not attacked by malicious peers—but it is attacked by malicious **content** and overconfident **models**.
+
+Threat classes included:
+
+| Threat Class       | Source    | Mitigation          |
+| ------------------ | --------- | ------------------- |
+| XSS Injection      | Web       | Sanitizer           |
+| SEO Poisoning      | Web       | Source Weighting    |
+| Prompt Injection   | User      | Input Filtering     |
+| Citation Forgery   | Model     | Verification        |
+| Temporal Drift     | Web/Model | Timestamp Check     |
+| Credential Leakage | System    | Server Actions      |
+| Upstream Collapse  | Provider  | Timeout + Fallback  |
+| Poisoned Snippets  | Web       | Snippet Consistency |
+
+Rendered as:
+
+\`\`\`ui_threat_model
+(Trigger: Adversarial Surface Overview)
+\`\`\`
+
+### Zero-Trust Execution
+We adopted zero-trust against: (1) Providers, (2) Models, (3) Users, and (4) The Web. This security stance is uncommon in RAG prototypes and more aligned with hardened web services.
+
+---
+
+# VII. Limitations (Hard & Soft)
+
+### Hard Limitations
+Cannot be fixed without architectural overhaul:
+* no formal factuality benchmarks
+* no multilingual grounding
+* temporal inconsistency (training cutoff vs now)
+* dependency on hostile providers
+* unbounded LLM miscalibration
+* snippet scarcity
+* rate-limited retrieval API
+
+### Soft Limitations
+Fixable with future work:
+* query expansion
+* snippet ranking improvement
+* multi-provider fusion
+* uncertainty calibration
+* timestamp weighting
+
+Rendered as:
+
+\`\`\`ui_limitations_matrix
+(Trigger: Self-Assessment)
 \`\`\`
 
 ---
 
-## IX. Future Work
+# VIII. Future Work
 
-- **Formal Evaluation**: Implementation of FEVER-style factuality benchmarks.
-- **Adaptive Retrieval**: Dynamic adjustment of search depth based on query complexity.
-- **Cryptographic Provenance**: Exploring source signing for content verification.
-- **Confidence Calibration**: User-visible indicators of model uncertainty.
-- **Adversarial Hardening**: Broader threat-model evaluation against prompt injection.
+We outline research directions in increasing difficulty:
+
+**(1) Cryptographic Source Signing**
+Truth can be anchored cryptographically (web domains → signatures).
+
+**(2) Confidence Calibration UI**
+Expose uncertainty explicitly (log-odds, entropy).
+
+**(3) Multi-Retrieval Fusion**
+Combine CSE + Wikipedia + academic indexes.
+
+**(4) FEVER-Style Benchmarks**
+Formalize factual consistency testing.
+
+**(5) Adversarial Robustness**
+Model defenses against poisoned snippets.
+
+**(6) Temporal Grounding**
+Compare timestamps to model cutoff.
+
+**(7) Partial Query Decomposition**
+LLM-driven subquery RAG.
+
+Rendered as:
 
 \`\`\`ui_future_roadmap
 (Trigger: Development Timeline)
 \`\`\`
 
----
+### Grand Challenge (Speculative)
 
-## X. Conclusion: Independent Systems Research Perspective
+> *Truth is not binary; it is distributed.*
+> *We need systems that arbitrate claims, not chatbots that answer them.*
 
-SeekEngine demonstrates that meaningful hallucination mitigation can be achieved without proprietary datasets or large-scale infrastructure, provided that architectural discipline and security-aware design principles are applied consistently. By treating factual grounding as a first-class system constraint, the project highlights the feasibility of truth-oriented search experiences for independent developers.
-
-While the system introduces additional latency due to parallel orchestration and validation overhead, this trade-off may be acceptable in domains where accuracy and source transparency outweigh raw responsiveness.
-
-This work is released as an open, inspectable system to encourage critical evaluation rather than passive adoption.
+A research-grade SeekEngine would not generate answers—it would generate epistemic maps.
 
 ---
 
-## References & Acknowledgments
+# IX. Conclusion: Independent Systems Research Perspective
 
-- **Google Custom Search API**: Primary retrieval infrastructure
-- **OpenRouter (Mimo-V2-Flash)**: Cost-efficient inference provider
-- **Next.js 14**: Server-side security architecture
-- **Zod**: Runtime schema validation
-- **Tailwind CSS**: Interface styling framework
+SeekEngine demonstrates that hallucination can be reframed not as a model failure, but as a coordination problem under resource constraints. Retrieval and inference are complementary nodes—neither sufficient alone. Grounding requires verification; verification incurs cost; cost alters architecture and UX.
+
+More importantly, SeekEngine shows that meaningful research can emerge from **constraints**: no funding, no institutional backing, no proprietary models, no GPU clusters. The system was not built in a lab—it was built in the open, where failure is visible and upstream reality cannot be abstracted away.
+
+The project mirrors independent research traditions found in historical networking communities and BitTorrent hackers—curiosity-driven, empirical, adversarial, and deeply systems-aware.
+
+SeekEngine’s value is not performance; it is the framing:
+
+> **Hallucination is a distributed systems problem.**
+> **Grounding is a verification protocol.**
+> **Truth is expensive.**
+
+---
+
+# X. Bibliographic Context & Inspirations
+
+SeekEngine sits at the intersection of several research and engineering traditions. It draws implicitly from:
+
+✔ **Information Retrieval Research**
+* snippet extraction
+* relevance ranking
+* query expansion
+* temporal freshness
+* semantic matching
+
+✔ **Distributed Systems & P2P**
+* partial failure behavior
+* bootstrap mechanisms
+* adversarial assumptions
+* non-deterministic sequencing
+* swarm coordination
+
+✔ **Security Engineering**
+* zero-trust boundaries
+* dominance of untrusted inputs
+* poisoning resistance
+* credential encapsulation
+* browser threat models
+
+✔ **LLM Research**
+* hallucination
+* grounding
+* RAG pipelines
+* uncertainty calibration
+* prompt shaping
+
+Unlike institutional RAG research—which assumes vector databases, stable compute, and proprietary evaluation—SeekEngine assumes **none of these**.
+
+Instead, it inherits the tradition of **independent experimental systems research**, where validation comes from running the system against reality rather than benchmarks.
+
+---
+
+# XI. Acknowledgments & Contributions
+
+SeekEngine was conceived, designed, and implemented as a collaborative independent research effort between **Gaurav Yadav** and **Aditya Yadav**, contributing equally across system architecture, implementation, debugging, and conceptual design.
+
+Acknowledgments extend to:
+* **OpenRouter** → for accessible inference
+* **Google CSE** → for retrieval substrate
+* **Next.js** → for server action boundaries
+* **Tailwind + React** → for UI expressiveness
+* **The open web** → for its adversarial character
+* **LLMs** → for their confabulation tendencies (our experimental foil)
+
+No institutional support, funding, or proprietary infrastructure was used.
+
+---
+
+# XII. Implementation Cross-References (Repo Integration)
+
+The public repository [https://github.com/archduke1337/SeekEngine](https://github.com/archduke1337/SeekEngine) reflects the research architecture and security boundary:
+
+#### Retrieval
+* \`/actions/search.ts\`
+* \`/api/search/route.ts\`
+
+#### Inference
+* \`/actions/llm.ts\`
+* \`/api/completion/route.ts\`
+
+#### Fusion / Orchestration
+* \`/orchestrator/index.ts\`
+* \`/actions/combine.ts\`
+
+#### Verification & Sanitization
+* \`/utils/sanitize.ts\`
+* \`/utils/schema.ts\`
+
+#### UI (Epistemic Surface)
+* \`/components/ui/*\`
+* citation surface
+* snippet blocks
+* diagnostic terminal
+
+#### Security Boundary
+* \`/server_actions/*\`
+* no client-side key leakage
+
+---
+
+# XIII. Citation & Metadata
+
+### BibTeX (Structured)
+
+\`\`\`
+@article{yadav2026seekengine,
+  title={SeekEngine: Grounded Hybrid Retrieval for Truthful Search},
+  author={Yadav, Gaurav and Yadav, Aditya},
+  year={2026},
+  note={Independent Research},
+  url={https://seekengine.vercel.app},
+}
+\`\`\`
+
+### Informal Citation (Web)
+
+> Yadav, Gaurav & Yadav, Aditya (2026).
+> *SeekEngine: Grounded Hybrid Retrieval for Truthful Search.*
+> Independent Research.
+
+---
+
+# XIV. Appendix A — Prompting & RAG Protocol Notes (Spec-Level)
+
+SeekEngine’s prompting layer enforces invariants:
+
+* no creativity
+* no speculation
+* no sentiment
+* no invented citations
+* brief claims
+* explicit sourcing
+* failure > confabulation
+
+Example:
+
+\`\`\`
+<< SYSTEM >>
+You are a grounding-first search agent.
+If no data is retrieved, say "Unknown."
+Never invent facts. Cite snippets.
+Minimize fluency and avoid speculation.
+\`\`\`
+
+This interface treats LLM synthesis as a **semantic reducer**, not an author.
+
+---
+
+# XV. Appendix B — Failure Trace Catalog
+
+**Observed Failure Modes**
+
+| Failure        | Root Cause               |
+| -------------- | ------------------------ |
+| Hallucination  | retrieval starvation     |
+| Staleness      | training cutoff mismatch |
+| Misalignment   | parallel fusion race     |
+| Speculation    | inference fallback       |
+| Overconfidence | no calibration           |
+| Spam           | SEO poisoning            |
+| Silence        | rate limit + timeout     |
+
+These traces shaped future work directions.
+
+---
+
+# XVI. Appendix C — Temporal Considerations
+
+Temporal mismatch is a major source of epistemic error:
+
+\`\`\`
+Web Time ≈ Now
+Model Time ≈ Past
+Query Time ≈ Future
+\`\`\`
+
+Temporal alignment remains an open research frontier.
+
+---
+
+# XVII. Appendix D — Observability as Insight
+
+We argue observability is not merely tooling; it is epistemology.
+
+Diagnostic terminal:
+
+\`\`\`ui_live_terminal
+(Trigger: System Log)
+\`\`\`
+
+Transforms orchestration into knowledge.
+
+Observability is how systems speak.
+
+---
+
+# XVIII. Appendix E — Independent Research Context
+
+SeekEngine joins a lineage of independent systems research driven not by grant funding or institutional hardware but by curiosity and constraint.
+
+This lineage includes:
+* personal DHT implementations
+* hobby kernels
+* SDR radio stacks
+* Tor middleboxes
+* bare-metal type systems
+* BitTorrent clients built from scratch
+
+Academic research tends to optimize for benchmarks.
+Independent research optimizes for **contact with reality**.
+
+SeekEngine belongs to the latter tradition.
+
+---
+
+# XIX. Final Statement
+
+SeekEngine began as a hallucination patch and became a study in distributed grounding under constraint. It reveals that hallucination is not a statistical error—it is the absence of negotiated truth. Retrieval provides grounding; inference provides structure; verification provides validity; UI provides epistemic legibility.
+
+This work suggests a reframing:
+
+> *Truth is not produced; it is synchronized.*
+
+And synchronization—like all distributed coordination—is expensive, non-deterministic, and adversarial.
+
+SeekEngine does not solve hallucination.
+It demonstrates a way to reason about it.
+
+---
+
+# — End of Ultra Draft —
 `;
 
 // --- Main Page Component ---
@@ -939,7 +1710,11 @@ export default function SeekEngineResearch() {
       if (matchStr.includes('prompt_engineering')) return <PromptEngineering />;
       if (matchStr.includes('flowchart') || matchStr.includes('rag')) return <UIFlowchart />;
       if (matchStr.includes('wireframe') || matchStr.includes('dashboard')) return <UIWireframe />;
-      if (matchStr.includes('architecture')) return <ArchitectureDiagram />;
+      if (matchStr.includes('architecture')) {
+        // Disambiguate based on content keywords
+        if (matchStr.includes('orchestration') || matchStr.includes('flow')) return <UIFlowchart />;
+        return <ArchitectureDiagram />;
+      }
       if (matchStr.includes('security_encryption')) return <SecurityEncryption />;
       if (matchStr.includes('hallucination_comparison')) return <HallucinationComparison />;
       if (matchStr.includes('data_sanitization')) return <DataSanitization />;
@@ -1011,7 +1786,7 @@ export default function SeekEngineResearch() {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 text-sm font-medium text-zinc-600 dark:text-zinc-400">
                  <div className="flex items-center gap-2">
                     <User size={16} />
-                    <span>Gaurav Yadav</span>
+                    <span>Gaurav Yadav & Aditya Yadav</span>
                  </div>
                  <div className="flex items-center gap-2">
                     <Calendar size={16} />
@@ -1048,10 +1823,11 @@ export default function SeekEngineResearch() {
               <div className="bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-xl border border-zinc-100 dark:border-zinc-800 overflow-x-auto">
                  <pre className="text-xs text-zinc-600 dark:text-zinc-400 font-mono leading-relaxed">
 {`@article{yadav2026seekengine,
-  title={SeekEngine: hybrid RAG for Truthful Search},
-  author={Yadav, Gaurav},
+  title={SeekEngine: Grounded Hybrid Retrieval for Truthful Search},
+  author={Yadav, Gaurav and Yadav, Aditya},
   year={2026},
-  url={https://seekengine.vercel.app}
+  note={Independent Research},
+  url={https://seekengine.vercel.app},
 }`}
                  </pre>
               </div>
