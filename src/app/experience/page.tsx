@@ -31,6 +31,16 @@ export default function ExperiencePage() {
       accentColor: "text-amber-600 dark:text-amber-400"
     },
     {
+      role: "Co-Founding Engineer",
+      company: "Exeiv.in Digital Agency & Spydown.in Creative Studio",
+      date: "2023 — 2025",
+      description: "Co-founded and led technical development for two joint ventures: Exeiv.in, a digital agency delivering end-to-end web solutions, and Spydown.in, a creative studio specializing in brand identity and digital experiences. Both ventures have since concluded.",
+      location: "Remote",
+      color: "bg-rose-100 dark:bg-rose-900/30",
+      dotColor: "bg-rose-600 dark:bg-rose-500",
+      accentColor: "text-rose-600 dark:text-rose-400"
+    },
+    {
       role: "Marketing Associate",
       company: "JioCinema | IPL Field Marketing",
       date: "2023",
@@ -66,7 +76,7 @@ export default function ExperiencePage() {
                 className="apple-card-elevated group hover:shadow-elevation-3 transition-smooth border-l-4 border-transparent hover:border-blue-600 pl-6 animate-slide-up"
                 style={{ 
                   borderLeftColor: 'var(--accent-color)',
-                  '--accent-color': exp.accentColor === 'text-blue-600' ? '#2563eb' : exp.accentColor === 'text-purple-600' ? '#9333ea' : exp.accentColor === 'text-amber-600' ? '#b45309' : '#16a34a'
+                  '--accent-color': exp.accentColor === 'text-blue-600 dark:text-blue-400' ? '#2563eb' : exp.accentColor === 'text-purple-600 dark:text-purple-400' ? '#9333ea' : exp.accentColor === 'text-amber-600 dark:text-amber-400' ? '#d97706' : exp.accentColor === 'text-rose-600 dark:text-rose-400' ? '#e11d48' : '#16a34a'
                 } as any}
               >
                 {/* Timeline Dot */}
