@@ -27,6 +27,7 @@ import {
   MessageSquare
 } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import { motion } from 'framer-motion';
 
 // ============================================
@@ -811,19 +812,17 @@ export default function AIResearchPaper() {
   const content = `
 ## Abstract
 
-The rapid advancement of vulnerability detection mechanisms—such as runtime sanitizers, fuzzing engines, and AI-assisted testing—has significantly improved the discovery of software defects. However, the remediation of these vulnerabilities remains predominantly manual, resulting in prolonged time-to-fix and accumulated security debt.
+Automated vulnerability detection has become highly effective due to advances in fuzzing, sanitizers, and static analysis. However, remediation remains disproportionately manual, slow, and dependent on scarce security expertise. This imbalance increases mean time-to-fix, broadens exposure windows, and accumulates long-term security debt.
 
-This research investigates the feasibility of integrating Large Language Models (LLMs) into an automated vulnerability remediation pipeline. We present a structured analysis of an AI-powered patch generation framework, examine its effectiveness in addressing post-merge runtime vulnerabilities, and discuss the associated security risks, limitations, and future research directions.
+This research investigates whether Large Language Models (LLMs) can meaningfully assist in post-detection remediation without assuming autonomy or replacing human judgment. We analyze the feasibility of a hybrid remediation pipeline in which LLMs propose candidate patches that undergo automated validation and human approval. The study is based on architectural reasoning, failure analysis, and security threat modeling rather than empirical benchmarking.
 
-The findings suggest that LLM-assisted patching, when combined with rigorous validation and human oversight, can substantially improve remediation efficiency without compromising software security.
-
-*Note: This paper presents architectural analysis and reasoned evidence rather than controlled experimental evaluation.*
+Findings indicate that LLM-generated patches exhibit non-trivial value for structurally simple vulnerabilities, but introduce semantic and behavioral risks that require strict validation and human oversight. Negative results demonstrate that naive approaches to autonomous patching fail under realistic conditions, supporting a more conservative, assistive design philosophy.
 
 ---
 
 ## Keywords
 
-automated patching, vulnerability remediation, large language models, secure software engineering, human-in-the-loop systems, semantic security.
+automated remediation, vulnerability patching, secure software engineering, LLMs, human-in-the-loop systems, semantic security, CI/CD, operational security.
 
 ---
 
@@ -1271,7 +1270,7 @@ This work is informed by publicly available industry research on AI-assisted vul
   };
 
   return (
-    <main className="min-h-screen pt-24 pb-32 bg-white dark:bg-zinc-950 font-serif selection:bg-blue-100 selection:text-blue-900 dark:selection:bg-blue-900/40 dark:selection:text-blue-200">
+    <main className="min-h-screen pt-24 pb-32 bg-apple-gradient text-zinc-900 dark:text-zinc-50 selection:bg-blue-500/30">
       <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
         
         {/* Navigation & Actions */}
@@ -1313,14 +1312,14 @@ This work is informed by publicly available industry research on AI-assisted vul
                   <User size={20} className="text-zinc-800 dark:text-zinc-200" />
                 </div>
                 <div className="text-left">
-                  <span className="font-black text-zinc-900 dark:text-white block leading-none">Gaurav Yadav</span>
-                  <span className="text-[10px] uppercase font-bold tracking-widest text-purple-600 dark:text-purple-400">Independent Researcher, Secure Systems</span>
+                  <span className="font-black text-zinc-900 dark:text-white block leading-none">Gaurav Yadav & Aditya Yadav</span>
+                  <span className="text-[10px] uppercase font-bold tracking-widest text-purple-600 dark:text-purple-400">Equal Contribution — Independent Research</span>
                 </div>
               </div>
               
               <div className="text-sm max-w-sm text-center leading-relaxed font-medium">
                 BCA Cybersecurity, Ajeenkya DY Patil University, Pune <br/>
-                <span className="text-zinc-400 dark:text-zinc-600">January 04, 2026 — Pune, India</span>
+                <span className="text-zinc-400 dark:text-zinc-600">January 2026 — Pune, India</span>
               </div>
             </div>
 
@@ -1338,7 +1337,7 @@ This work is informed by publicly available industry research on AI-assisted vul
 
           {/* Paper Body */}
           <div className="prose prose-lg dark:prose-invert max-w-none prose-p:font-serif prose-p:opacity-90 prose-p:leading-loose">
-            <ReactMarkdown components={MarkdownComponents}>
+            <ReactMarkdown remarkPlugins={[remarkGfm]} components={MarkdownComponents}>
               {content}
             </ReactMarkdown>
           </div>
@@ -1353,9 +1352,10 @@ This work is informed by publicly available industry research on AI-assisted vul
               <pre className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
 {`@article{yadav2026aipatching,
   title={AI-Powered Automated Patching for Software Vulnerabilities},
-  author={Yadav, Gaurav},
+  author={Yadav, Gaurav and Yadav, Aditya},
   journal={Independent Research - Cybersecurity},
   year={2026},
+  note={Equal Contribution — Independent Research},
   location={Pune, India},
   institution={Ajeenkya DY Patil University}
 }`}
