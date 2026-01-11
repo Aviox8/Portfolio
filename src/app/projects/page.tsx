@@ -59,26 +59,26 @@ export default function ProjectsPage() {
   };
 
   return (
-    <main className="min-h-screen bg-apple-gradient text-zinc-900 dark:text-zinc-50">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
+    <main className="min-h-screen bg-apple-gradient text-zinc-900 dark:text-zinc-50 overflow-x-hidden">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
         <section id="projects">
           {/* Header */}
-          <div className="mb-16">
+          <div className="mb-10 sm:mb-12 lg:mb-16">
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-3 mb-6"
+              className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6"
             >
-              <div className="p-3 rounded-2xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
-                <Code size={24} />
+              <div className="p-2.5 sm:p-3 rounded-xl sm:rounded-2xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400">
+                <Code size={20} className="sm:w-6 sm:h-6" />
               </div>
-              <h1 className="text-5xl sm:text-6xl font-bold tracking-tight">Projects</h1>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight">Projects</h1>
             </motion.div>
             <motion.p 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.2 }}
-              className="text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl leading-relaxed"
+              className="text-base sm:text-lg lg:text-xl text-zinc-500 dark:text-zinc-400 max-w-2xl leading-relaxed"
             >
               A collection of digital craftsmanship, focused on user experience and robust architecture.
             </motion.p>
@@ -89,7 +89,7 @@ export default function ProjectsPage() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5 lg:gap-6"
           >
             {projects.map((project, idx) => (
               <motion.div 
@@ -99,32 +99,32 @@ export default function ProjectsPage() {
                 whileHover={{ y: -5, transition: { type: "spring", stiffness: 300 } }}
               >
                 <div className="relative z-10">
-                  <div className="flex justify-between items-start mb-4">
-                    <div className={`w-12 h-12 rounded-2xl ${project.iconColor} flex items-center justify-center text-white shadow-lg`}>
-                       <Code size={24} />
+                  <div className="flex justify-between items-start mb-3 sm:mb-4">
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl ${project.iconColor} flex items-center justify-center text-white shadow-lg`}>
+                       <Code size={20} className="sm:w-6 sm:h-6" />
                     </div>
                     <a href={project.link} target="_blank" className="p-2 bg-white/50 dark:bg-black/20 rounded-full hover:bg-white dark:hover:bg-black/40 transition-colors">
-                      <ExternalLink size={20} className="text-zinc-700 dark:text-zinc-300" />
+                      <ExternalLink size={16} className="sm:w-5 sm:h-5 text-zinc-700 dark:text-zinc-300" />
                     </a>
                   </div>
                   
-                  <h3 className="text-3xl font-bold mb-2">{project.name}</h3>
-                  <p className="text-zinc-600 dark:text-zinc-300 mb-6 leading-relaxed">
+                  <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2">{project.name}</h3>
+                  <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 mb-4 sm:mb-6 leading-relaxed">
                     {project.description}
                   </p>
                   
-                  <div className="flex flex-wrap gap-2 mb-8">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-6 sm:mb-8">
                     {project.tech.map((tech) => (
-                      <span key={tech} className="px-3 py-1 bg-white/60 dark:bg-black/20 rounded-full text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
+                      <span key={tech} className="px-2 sm:px-3 py-0.5 sm:py-1 bg-white/60 dark:bg-black/20 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
                         {tech}
                       </span>
                     ))}
                   </div>
                 </div>
 
-                <div className="relative z-10 pt-4 border-t border-black/5 dark:border-white/5">
-                   <Link href={project.slug} className="flex items-center gap-2 font-semibold text-lg hover:gap-3 transition-all">
-                     View Case Study <ArrowRight size={20} />
+                <div className="relative z-10 pt-3 sm:pt-4 border-t border-black/5 dark:border-white/5">
+                   <Link href={project.slug} className="flex items-center gap-2 font-semibold text-sm sm:text-base lg:text-lg hover:gap-3 transition-all">
+                     View Case Study <ArrowRight size={16} className="sm:w-5 sm:h-5" />
                    </Link>
                 </div>
               </motion.div>

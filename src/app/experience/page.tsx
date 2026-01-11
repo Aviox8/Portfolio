@@ -52,24 +52,24 @@ export default function ExperiencePage() {
   ];
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white via-apple-50 to-white dark:from-apple-950 dark:via-apple-900 dark:to-apple-950 text-apple-900 dark:text-apple-50 font-sans selection:bg-blue-100 dark:selection:bg-blue-900 selection:text-apple-900 dark:selection:text-white transition-colors duration-500">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-32">
+    <main className="min-h-screen bg-gradient-to-br from-white via-apple-50 to-white dark:from-apple-950 dark:via-apple-900 dark:to-apple-950 text-apple-900 dark:text-apple-50 font-sans selection:bg-blue-100 dark:selection:bg-blue-900 selection:text-apple-900 dark:selection:text-white transition-colors duration-500 overflow-x-hidden">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
         <section id="experience" className="scroll-mt-24">
           {/* Header */}
-          <div className="mb-16">
-            <div className="inline-flex items-center gap-3 mb-6 animate-fade-in">
-              <div className={`p-3 rounded-xl bg-amber-100 dark:bg-amber-900/30`}>
-                <Briefcase size={24} className="text-amber-600 dark:text-amber-400" />
+          <div className="mb-10 sm:mb-12 lg:mb-16">
+            <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 animate-fade-in">
+              <div className={`p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-amber-100 dark:bg-amber-900/30`}>
+                <Briefcase size={20} className="sm:w-6 sm:h-6 text-amber-600 dark:text-amber-400" />
               </div>
-              <h1 className="text-5xl sm:text-6xl font-bold text-apple-900 dark:text-white">Experience</h1>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-apple-900 dark:text-white">Experience</h1>
             </div>
-            <p className="text-lg sm:text-xl text-apple-600 dark:text-apple-300 max-w-3xl leading-relaxed animate-slide-up animate-delay-100">
+            <p className="text-base sm:text-lg lg:text-xl text-apple-600 dark:text-apple-300 max-w-3xl leading-relaxed animate-slide-up animate-delay-100">
               My professional journey shaped by diverse roles and meaningful contributions.
             </p>
           </div>
           
           {/* Timeline */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-5 lg:space-y-6">
             {experiences.map((exp, idx) => (
               <div 
                 key={exp.role}

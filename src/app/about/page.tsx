@@ -51,21 +51,21 @@ When I'm not coding or studying security protocols, you can find me participatin
   };
 
   return (
-    <main className="min-h-screen pt-24 pb-16 bg-apple-gradient text-zinc-900 dark:text-zinc-50">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
+    <main className="min-h-screen pt-20 sm:pt-24 pb-12 sm:pb-16 bg-apple-gradient text-zinc-900 dark:text-zinc-50 overflow-x-hidden">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16 sm:space-y-20 lg:space-y-24">
         
         {/* HEADER SECTION */}
-        <section className="flex flex-col md:flex-row gap-12 items-center md:items-start">
+        <section className="flex flex-col md:flex-row gap-8 sm:gap-10 lg:gap-12 items-center md:items-start">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-6 flex-1 pt-8"
+            className="space-y-4 sm:space-y-6 flex-1 pt-4 sm:pt-6 lg:pt-8 text-center md:text-left"
           >
-            <h1 className="text-6xl sm:text-7xl font-bold tracking-tight text-zinc-900 dark:text-white">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-zinc-900 dark:text-white">
               About Me
             </h1>
-            <div className="text-xl sm:text-2xl text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-2xl font-medium">
+            <div className="text-base sm:text-lg lg:text-xl xl:text-2xl text-zinc-500 dark:text-zinc-400 leading-relaxed max-w-2xl font-medium">
               <ReactMarkdown components={MarkdownComponents}>
                 I&apos;m a BCA Cybersecurity student and a passionate full-stack developer. I bridge the gap between secure infrastructure and beautiful, user-centric web applications.
               </ReactMarkdown>
@@ -76,10 +76,10 @@ When I'm not coding or studying security protocols, you can find me participatin
             initial={{ opacity: 0, scale: 0.9, rotate: -3 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             transition={{ duration: 0.8, delay: 0.2, type: "spring" }}
-            className="relative w-72 h-72 md:w-96 md:h-96 shrink-0"
+            className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 shrink-0"
           >
-             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-[2.5rem] blur-3xl animate-pulse"></div>
-             <div className="relative h-full w-full rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
+             <div className="absolute inset-0 bg-gradient-to-br from-blue-500/30 to-purple-500/30 rounded-[2rem] sm:rounded-[2.5rem] blur-3xl animate-pulse"></div>
+             <div className="relative h-full w-full rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
                 <Image
                   src="/About/pfp.png"
                   alt="Gaurav Yadav"

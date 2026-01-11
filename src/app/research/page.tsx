@@ -3,31 +3,31 @@ import Link from "next/link";
 
 export default function ResearchPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-br from-white via-apple-50 to-white dark:from-apple-950 dark:via-apple-900 dark:to-apple-950 text-apple-900 dark:text-apple-50 font-sans selection:bg-blue-100 dark:selection:bg-blue-900 selection:text-apple-900 dark:selection:text-white transition-colors duration-500">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-32">
+    <main className="min-h-screen bg-gradient-to-br from-white via-apple-50 to-white dark:from-apple-950 dark:via-apple-900 dark:to-apple-950 text-apple-900 dark:text-apple-50 font-sans selection:bg-blue-100 dark:selection:bg-blue-900 selection:text-apple-900 dark:selection:text-white transition-colors duration-500 overflow-x-hidden">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24 lg:py-32">
         <section id="research" className="scroll-mt-24">
           {/* Header */}
-          <div className="mb-16">
-            <div className="inline-flex items-center gap-3 mb-6 animate-fade-in">
-              <div className="p-3 rounded-xl bg-orange-100 dark:bg-orange-900/30">
-                <Search size={24} className="text-orange-600 dark:text-orange-400" />
+          <div className="mb-10 sm:mb-12 lg:mb-16">
+            <div className="inline-flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6 animate-fade-in">
+              <div className="p-2.5 sm:p-3 rounded-lg sm:rounded-xl bg-orange-100 dark:bg-orange-900/30">
+                <Search size={20} className="sm:w-6 sm:h-6 text-orange-600 dark:text-orange-400" />
               </div>
-              <h1 className="text-5xl sm:text-6xl font-bold text-apple-900 dark:text-white">Research</h1>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-apple-900 dark:text-white">Research</h1>
             </div>
-            <p className="text-lg sm:text-xl text-apple-600 dark:text-apple-300 max-w-3xl leading-relaxed animate-slide-up animate-delay-100">
+            <p className="text-base sm:text-lg lg:text-xl text-apple-600 dark:text-apple-300 max-w-3xl leading-relaxed animate-slide-up animate-delay-100">
               Foundational research in cybersecurity, network defense, and emerging security paradigms.
             </p>
           </div>
           
           {/* Research Grid */}
-          <div className="grid gap-8 animate-slide-up animate-delay-200">
+          <div className="grid gap-6 sm:gap-7 lg:gap-8 animate-slide-up animate-delay-200">
 
             {/* AI Patching Research Card */}
             <Link href="/research/ai-powered-automated-patching" className="group relative block w-full">
-               <div className="relative overflow-hidden rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
-                  <div className="flex flex-col md:flex-row h-full">
+               <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                  <div className="flex flex-col sm:flex-row h-full">
                      {/* Graphic Side */}
-                     <div className="relative w-full md:w-1/3 min-h-[250px] bg-blue-50 dark:bg-blue-900/10 border-r border-zinc-200 dark:border-zinc-800 flex items-center justify-center p-8">
+                     <div className="relative w-full sm:w-1/3 min-h-[180px] sm:min-h-[250px] bg-blue-50 dark:bg-blue-900/10 sm:border-r border-b sm:border-b-0 border-zinc-200 dark:border-zinc-800 flex items-center justify-center p-6 sm:p-8">
                         <div className="relative w-48 h-64 bg-white dark:bg-zinc-900 shadow-2xl border border-zinc-200 dark:border-zinc-800 rounded-sm flex flex-col p-4 group-hover:scale-105 transition-transform duration-500">
                            <div className="flex items-center gap-2 mb-4">
                               <Shield size={16} className="text-blue-600" />
