@@ -101,7 +101,7 @@ export default function Home() {
               <Link href="/projects" className="block h-full apple-card-elevated group relative overflow-hidden min-h-[260px] sm:min-h-[320px] lg:min-h-[400px] flex flex-col justify-between hover:scale-[1.01] transition-transform duration-500">
                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 transition-colors"></div>
                  <div className="relative z-10">
-                   <div className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-600 rounded-xl sm:rounded-2xl flex items-center justify-center text-white mb-4 sm:mb-6 shadow-xl shadow-blue-600/20 group-hover:scale-110 transition-transform">
+                   <div className="w-12 h-12 sm:w-14 sm:h-14 bg-blue-600 rounded-2xl flex items-center justify-center text-white mb-4 sm:mb-6 shadow-xl shadow-blue-600/20 group-hover:scale-110 transition-transform">
                      <Code size={24} className="sm:w-7 sm:h-7" />
                    </div>
                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-zinc-900 dark:text-white mb-3 sm:mb-4">Projects</h3>
@@ -130,7 +130,7 @@ export default function Home() {
               <Link href="/about" className="block h-full apple-card group relative overflow-hidden hover:scale-[1.02] transition-transform duration-500">
                 <div className="relative z-10 h-full flex flex-col justify-between min-h-[180px] sm:min-h-[200px] lg:min-h-[220px] group-hover:text-orange-600 dark:group-hover:text-orange-400 transition-colors">
                   <div className="flex justify-between items-start">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-500 rounded-xl sm:rounded-2xl flex items-center justify-center text-white shadow-lg shadow-orange-500/30 group-hover:scale-110 transition-transform">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-orange-500/30 group-hover:scale-110 transition-transform">
                        <User size={20} className="sm:w-6 sm:h-6" />
                     </div>
                     <span className="text-[10px] sm:text-xs font-semibold uppercase opacity-50 group-hover:opacity-100 transition-opacity tracking-wider">Profile</span>
@@ -153,7 +153,7 @@ export default function Home() {
                  <div className="absolute inset-0 bg-gradient-to-tr from-rose-50 to-transparent dark:from-rose-900/10 opacity-50"></div>
                 <div className="relative z-10 h-full flex flex-col justify-between min-h-[180px] sm:min-h-[200px] lg:min-h-[220px] group-hover:text-rose-600 dark:group-hover:text-rose-400 transition-colors">
                   <div className="flex justify-between items-start">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-rose-500 rounded-xl sm:rounded-2xl flex items-center justify-center text-white shadow-lg shadow-rose-500/30 group-hover:scale-110 transition-transform">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-rose-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-rose-500/30 group-hover:scale-110 transition-transform">
                        <GraduationCap size={20} className="sm:w-6 sm:h-6" />
                     </div>
                     <span className="text-[10px] sm:text-xs font-semibold uppercase opacity-50 group-hover:opacity-100 transition-opacity tracking-wider">Studies</span>
@@ -175,7 +175,7 @@ export default function Home() {
                <Link href="/experience" className="block h-full apple-card group relative overflow-hidden hover:scale-[1.02] transition-transform duration-500">
                 <div className="relative z-10 h-full flex flex-col justify-between min-h-[180px] sm:min-h-[200px] lg:min-h-[220px] group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">
                   <div className="flex justify-between items-start">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500 rounded-xl sm:rounded-2xl flex items-center justify-center text-white shadow-lg shadow-green-500/30 group-hover:scale-110 transition-transform">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-green-500/30 group-hover:scale-110 transition-transform">
                        <Briefcase size={20} className="sm:w-6 sm:h-6" />
                     </div>
                     <span className="text-[10px] sm:text-xs font-semibold uppercase opacity-50 group-hover:opacity-100 transition-opacity tracking-wider">Work</span>

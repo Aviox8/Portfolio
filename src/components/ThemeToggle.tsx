@@ -25,7 +25,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={handleToggle}
-      className="p-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-200"
+      className="p-1.5 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-200"
       aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
       title={`Current: ${resolvedTheme}`}
     >

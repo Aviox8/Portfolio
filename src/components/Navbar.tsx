@@ -53,7 +53,7 @@ export default function Navbar() {
             <Link
               key={link.name}
               href={link.href}
-              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 relative group ${
+              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 relative group ${
                 isActive(link.href)
                   ? 'text-blue-600 dark:text-blue-300 bg-blue-100/80 dark:bg-blue-500/20'
                   : 'text-zinc-600 dark:text-zinc-300 hover:text-zinc-900 dark:hover:text-white'
@@ -77,7 +77,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-500/20 text-zinc-900 dark:text-white transition-all duration-200"
+            className="md:hidden p-2 rounded-xl hover:bg-blue-100 dark:hover:bg-blue-500/20 text-zinc-900 dark:text-white transition-all duration-200"
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isOpen}
           >
@@ -97,14 +97,14 @@ export default function Navbar() {
           onClick={() => setIsOpen(false)}
         >
           <div 
-            className="glass-panel rounded-2xl p-3 sm:p-4 flex flex-col gap-1 backdrop-blur-xl border border-white/20 dark:border-white/10 space-y-1"
+            className="glass-panel rounded-3xl p-3 sm:p-4 flex flex-col gap-1 backdrop-blur-xl border border-white/20 dark:border-white/10 space-y-1"
             onClick={(e) => e.stopPropagation()}
           >
             {NAVIGATION_LINKS.map((link) => (
               <Link
                 key={link.name}
                 href={link.href}
-                className={`px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 relative group overflow-hidden ${
+                className={`px-4 py-3 rounded-xl text-base font-medium transition-all duration-300 relative group overflow-hidden ${
                   isActive(link.href)
                     ? 'bg-blue-100 dark:bg-blue-500/20 text-blue-600 dark:text-blue-300'
                     : 'hover:bg-zinc-100 dark:hover:bg-white/5 text-zinc-900 dark:text-white'
