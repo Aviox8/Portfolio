@@ -1,7 +1,5 @@
 'use client';
 
-
-
 import { Book, Code, Globe, Terminal, Award, Heart, Cpu, Shield, ArrowRight } from "lucide-react";
 import Link from 'next/link';
 import Image from 'next/image';

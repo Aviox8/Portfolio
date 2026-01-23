@@ -1,16 +1,62 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, FormEvent } from 'react';
 import { Mail, Github, Linkedin, Send, Loader2, CheckCircle2, AlertCircle, User, MessageSquare } from "lucide-react";
 import emailjs from '@emailjs/browser';
 
+interface FormData {
+  name: string;
+  email: string;
+  message: string;
+}
+
+type FormStatus = 'idle' | 'loading' | 'success' | 'error';
+
 export default function ContactPage() {
   const form = useRef<HTMLFormElement>(null);
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [status, setStatus] = useState<FormStatus>('idle');
+  const [error, setError] = useState<string>('');
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    email: '',
+    message: '',
+  });
 
-  const sendEmail = (e: React.FormEvent) => {
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validateForm = (): string | null => {
+    if (!formData.name.trim()) {
+      return 'Name is required';
+    }
+    if (!formData.email.trim()) {
+      return 'Email is required';
+    }
+    if (!validateEmail(formData.email)) {
+      return 'Please enter a valid email address';
+    }
+    if (!formData.message.trim()) {
+      return 'Message is required';
+    }
+    if (formData.message.trim().length < 10) {
+      return 'Message must be at least 10 characters';
+    }
+    return null;
+  };
+
+  const sendEmail = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
+    // Validate form
+    const validationError = validateForm();
+    if (validationError) {
+      setStatus('error');
+      setError(validationError);
+      return;
+    }
+
     if (!form.current) return;
 
     // Environment variables for EmailJS
@@ -19,23 +65,35 @@ export default function ContactPage() {
     const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
 
     if (!serviceId || !templateId || !publicKey || serviceId === 'your_service_id_here') {
-      alert("Please configure EmailJS credentials in .env.local");
+      setStatus('error');
+      setError('Please configure EmailJS credentials in .env.local');
       return;
     }
 
     setStatus('loading');
+    setError('');
 
-    emailjs.sendForm(serviceId, templateId, form.current, publicKey)
-      .then((result) => {
-          console.log(result.text);
-          setStatus('success');
-          form.current?.reset();
-          setTimeout(() => setStatus('idle'), 5000);
-      }, (error) => {
-          console.log(error.text);
-          setStatus('error');
-          setTimeout(() => setStatus('idle'), 5000);
-      });
+    try {
+      const result = await emailjs.sendForm(serviceId, templateId, form.current, publicKey);
+      console.log('Email sent successfully:', result.text);
+      setStatus('success');
+      setFormData({ name: '', email: '', message: '' });
+      form.current?.reset();
+      
+      setTimeout(() => {
+        setStatus('idle');
+      }, 5000);
+    } catch (err) {
+      console.error('Error sending email:', err);
+      const errorMessage = err instanceof Error ? err.message : 'Failed to send email. Please try again.';
+      setStatus('error');
+      setError(errorMessage);
+      
+      setTimeout(() => {
+        setStatus('idle');
+        setError('');
+      }, 5000);
+    }
   };
 
   const contacts = [
@@ -135,9 +193,11 @@ export default function ContactPage() {
                         type="text" 
                         name="user_name" 
                         id="user_name"
-                        required
+                        value={formData.name}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/60 dark:bg-black/30 backdrop-blur-md border border-apple-200 dark:border-apple-800 hover:border-blue-400/50 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all duration-300 placeholder:text-apple-400/70 dark:placeholder:text-apple-600"
                         placeholder="Your Name"
+                        disabled={status === 'loading'}
                       />
                     </div>
                   </div>
@@ -152,9 +212,11 @@ export default function ContactPage() {
                         type="email" 
                         name="user_email" 
                         id="user_email"
-                        required
+                        value={formData.email}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/60 dark:bg-black/30 backdrop-blur-md border border-apple-200 dark:border-apple-800 hover:border-blue-400/50 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all duration-300 placeholder:text-apple-400/70 dark:placeholder:text-apple-600"
                         placeholder="name@example.com"
+                        disabled={status === 'loading'}
                       />
                     </div>
                   </div>
@@ -169,12 +231,30 @@ export default function ContactPage() {
                         name="message" 
                         id="message" 
                         rows={4}
-                        required
+                        value={formData.message}
+                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                         className="w-full pl-11 pr-4 py-3 rounded-xl bg-white/60 dark:bg-black/30 backdrop-blur-md border border-apple-200 dark:border-apple-800 hover:border-blue-400/50 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all duration-300 placeholder:text-apple-400/70 dark:placeholder:text-apple-600 resize-none"
                         placeholder="How can we help you?"
+                        disabled={status === 'loading'}
                       />
                     </div>
                   </div>
+
+                  {/* Error Message */}
+                  {(status === 'error' && error) && (
+                    <div className="flex items-center gap-3 p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+                      <AlertCircle size={20} className="text-red-600 dark:text-red-400 shrink-0" />
+                      <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+                    </div>
+                  )}
+
+                  {/* Success Message */}
+                  {status === 'success' && (
+                    <div className="flex items-center gap-3 p-4 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
+                      <CheckCircle2 size={20} className="text-green-600 dark:text-green-400 shrink-0" />
+                      <p className="text-sm text-green-600 dark:text-green-400">Message sent successfully! I&apos;ll get back to you soon.</p>
+                    </div>
+                  )}
 
                   <button 
                     type="submit" 

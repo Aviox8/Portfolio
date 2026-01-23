@@ -3,6 +3,8 @@
 import { Code, ExternalLink, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
+import { containerVariants, itemVariants } from "@/types/animations";
 
 export default function ProjectsPage() {
   const projects = [
@@ -47,16 +49,6 @@ export default function ProjectsPage() {
       accent: "text-rose-600 dark:text-rose-400"
     }
   ];
-
-  const containerVariants: any = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
-  };
-
-  const itemVariants: any = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 }
-  };
 
   return (
     <main className="min-h-screen bg-apple-gradient text-zinc-900 dark:text-zinc-50 overflow-x-hidden">

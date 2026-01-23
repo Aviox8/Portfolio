@@ -1,9 +1,12 @@
 'use client';
 
-import { Github, Linkedin, Mail, Code, User, ArrowRight, GraduationCap, Briefcase } from "lucide-react";
+import { Github, Linkedin, Mail, Code, User, ArrowRight, GraduationCap, Briefcase, Mail as MailIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
+import { containerVariants, itemVariants } from "@/types/animations";
+import { SOCIAL_LINKS, SITE_CONFIG } from "@/config/site";
 
 export default function Home() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -11,44 +14,6 @@ export default function Home() {
   useEffect(() => {
     setIsLoaded(true);
   }, []);
-
-  const socialLinks = [
-    {
-      name: "GitHub",
-      icon: Github,
-      href: "https://github.com/archduke1337",
-    },
-    {
-      name: "LinkedIn",
-      icon: Linkedin,
-      href: "https://www.linkedin.com/in/gurvv/",
-    },
-    {
-      name: "Email",
-      icon: Mail,
-      href: "mailto:gauravramyadav@gmail.com",
-    },
-  ];
-
-  const containerVariants: any = {
-    hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1,
-      transition: { 
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
-  };
-
-  const itemVariants: any = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { type: "spring", stiffness: 50, damping: 20 }
-    }
-  };
 
   return (
     <main className="min-h-screen bg-apple-gradient text-zinc-900 dark:text-zinc-50 selection:bg-blue-500/30 overflow-x-hidden">
@@ -82,17 +47,25 @@ export default function Home() {
               transition={{ delay: 0.6, duration: 0.8 }}
               className="flex justify-center flex-wrap gap-2 sm:gap-3 lg:gap-4 pt-4 sm:pt-6 lg:pt-8"
             >
-              {socialLinks.map((social, idx) => {
-                const Icon = social.icon;
+              {SOCIAL_LINKS.map((social, idx) => {
+                const IconMap = {
+                  GitHub: Github,
+                  LinkedIn: Linkedin,
+                  Email: MailIcon,
+                };
+                const Icon = IconMap[social.name as keyof typeof IconMap];
+                const isEmail = social.name === 'Email';
+                
                 return (
                   <motion.a
                     key={social.name}
                     href={social.href}
-                    target={social.name !== "Email" ? "_blank" : undefined}
-                    rel={social.name !== "Email" ? "noopener noreferrer" : undefined}
+                    target={!isEmail ? "_blank" : undefined}
+                    rel={!isEmail ? "noopener noreferrer" : undefined}
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     className="apple-btn-secondary rounded-full px-4 sm:px-5 lg:px-8 py-2.5 sm:py-3 lg:py-4 text-xs sm:text-sm lg:text-base"
+                    aria-label={social.label}
                   >
                     <Icon size={16} className="sm:w-5 sm:h-5 lg:w-6 lg:h-6" />
                     {social.name}
