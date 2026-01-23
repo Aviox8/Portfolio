@@ -5,6 +5,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import LenisProvider from "@/components/LenisProvider";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { SkipLink } from "@/components/SkipLink";
 
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -44,12 +46,17 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <ThemeProvider>
-          <LenisProvider>
-            <Navbar />
-            {children}
-          </LenisProvider>
-        </ThemeProvider>
+        <SkipLink />
+        <ErrorBoundary>
+          <ThemeProvider>
+            <LenisProvider>
+              <Navbar />
+              <div id="main-content">
+                {children}
+              </div>
+            </LenisProvider>
+          </ThemeProvider>
+        </ErrorBoundary>
         <Analytics />
       </body>
     </html>

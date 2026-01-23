@@ -28,21 +28,40 @@ export default function ContactPage() {
   };
 
   const validateForm = (): string | null => {
+    // Name validation
+    const nameRegex = /^[a-zA-Z\s'-]{2,50}$/;
     if (!formData.name.trim()) {
       return 'Name is required';
     }
+    if (!nameRegex.test(formData.name.trim())) {
+      return 'Name should only contain letters, spaces, hyphens, or apostrophes';
+    }
+    
+    // Email validation
     if (!formData.email.trim()) {
       return 'Email is required';
     }
     if (!validateEmail(formData.email)) {
       return 'Please enter a valid email address';
     }
+    
+    // Message validation
     if (!formData.message.trim()) {
       return 'Message is required';
     }
     if (formData.message.trim().length < 10) {
       return 'Message must be at least 10 characters';
     }
+    if (formData.message.length > 5000) {
+      return 'Message must not exceed 5000 characters';
+    }
+    
+    // XSS prevention
+    const xssPatterns = /<script|<iframe|javascript:|onerror=/gi;
+    if (xssPatterns.test(formData.name) || xssPatterns.test(formData.message)) {
+      return 'Invalid content detected. Please remove suspicious patterns.';
+    }
+    
     return null;
   };
 
@@ -242,7 +261,11 @@ export default function ContactPage() {
 
                   {/* Error Message */}
                   {(status === 'error' && error) && (
-                    <div className="flex items-center gap-3 p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
+                    <div 
+                      className="flex items-center gap-3 p-4 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800"
+                      role="alert"
+                      aria-live="polite"
+                    >
                       <AlertCircle size={20} className="text-red-600 dark:text-red-400 shrink-0" />
                       <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
                     </div>
@@ -250,7 +273,11 @@ export default function ContactPage() {
 
                   {/* Success Message */}
                   {status === 'success' && (
-                    <div className="flex items-center gap-3 p-4 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
+                    <div 
+                      className="flex items-center gap-3 p-4 rounded-xl bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800"
+                      role="status"
+                      aria-live="polite"
+                    >
                       <CheckCircle2 size={20} className="text-green-600 dark:text-green-400 shrink-0" />
                       <p className="text-sm text-green-600 dark:text-green-400">Message sent successfully! I&apos;ll get back to you soon.</p>
                     </div>
