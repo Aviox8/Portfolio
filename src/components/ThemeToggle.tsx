@@ -20,18 +20,19 @@ export function ThemeToggle() {
     }
   };
 
-  if (!mounted) return null;
+  if (!mounted) return <div className="w-10 h-10" />;
 
   return (
     <button
       onClick={handleToggle}
-      className="p-2 rounded-lg hover:bg-apple-100 dark:hover:bg-apple-800 transition-colors"
-      aria-label="Toggle theme"
+      className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 active:scale-95 hover:scale-110"
+      aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
+      title={`Current theme: ${resolvedTheme}`}
     >
       {resolvedTheme === 'dark' ? (
-        <Sun size={20} className="text-amber-400" />
+        <Sun size={20} className="text-amber-400 transition-transform duration-300 hover:rotate-180" />
       ) : (
-        <Moon size={20} className="text-amber-600" />
+        <Moon size={20} className="text-amber-600 transition-transform duration-300 hover:rotate-180" />
       )}
     </button>
   );
