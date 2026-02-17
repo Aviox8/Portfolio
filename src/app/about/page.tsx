@@ -80,7 +80,7 @@ When I'm not coding or studying security protocols, you can find me participatin
              <div className="relative h-full w-full rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden shadow-2xl ring-1 ring-black/5 dark:ring-white/10">
                 <Image
                   src="/About/pfp.png"
-                  alt="Gaurav Yadav"
+                  alt="Aditya Yadav"
                   fill
                   className="object-cover object-center hover:scale-105 transition-transform duration-700 grayscale"
                   priority
@@ -134,9 +134,20 @@ When I'm not coding or studying security protocols, you can find me participatin
               
               <div className="relative pl-10 group">
                 <div className="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-white dark:bg-zinc-900 border-4 border-purple-500 z-10 group-hover:scale-110 transition-transform"></div>
-                <h3 className="font-bold text-xl group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">Industry Training</h3>
-                <p className="text-zinc-500 dark:text-zinc-400 font-medium">SeamEdu</p>
-                <p className="text-sm text-zinc-400 mt-1">Specialized Curriculum in Network Security & Forensics</p>
+                <h3 className="font-bold text-xl group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">MIT WPS</h3>
+                <p className="text-zinc-500 dark:text-zinc-400 font-medium">MIT - World Peace School, Alandi</p>
+                <div className="inline-block mt-2 px-3 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-xs font-bold uppercase tracking-wide">
+                  2023 – 2025
+                </div>
+              </div>
+
+              <div className="relative pl-10 group">
+                <div className="absolute left-0 top-1.5 w-6 h-6 rounded-full bg-white dark:bg-zinc-900 border-4 border-green-500 z-10 group-hover:scale-110 transition-transform"></div>
+                <h3 className="font-bold text-xl group-hover:text-green-600 dark:group-hover:text-green-400 transition-colors">Cambridge School</h3>
+                <p className="text-zinc-500 dark:text-zinc-400 font-medium">Canbridge International School, Khadki</p>
+                <div className="inline-block mt-2 px-3 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300 rounded-full text-xs font-bold uppercase tracking-wide">
+                  2010 – 2023
+                </div>
               </div>
             </div>
           </motion.div>
@@ -153,7 +164,7 @@ When I'm not coding or studying security protocols, you can find me participatin
             <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-2xl">
               <Cpu size={28} className="text-zinc-900 dark:text-white" />
             </div>
-            <h2 className="text-3xl font-bold tracking-tight">Technical Arsenal</h2>
+            <h2 className="text-3xl font-bold tracking-tight">Technical Skills</h2>
           </motion.div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">

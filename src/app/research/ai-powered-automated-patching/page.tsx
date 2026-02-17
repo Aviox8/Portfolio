@@ -1436,7 +1436,7 @@ This work is informed by publicly available industry research on AI-assisted vul
               >
                  <div className="flex items-center gap-2">
                     <User size={14} className="text-blue-500" />
-                    <span>Gaurav Yadav & Aditya Yadav</span>
+                    <span>Aditya Yadav</span>
                  </div>
                  <div className="flex items-center gap-2">
                     <Calendar size={14} className="text-blue-500" />

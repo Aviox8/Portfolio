@@ -70,7 +70,7 @@ export default function MindMeshProject() {
                   <span>Live Site</span>
                 </a>
                 <a 
-                  href="https://github.com/archduke1337/mindmesh" 
+                  href="https://github.com/Aviox8/mindmesh" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="p-3 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-xl hover:bg-zinc-800 dark:hover:bg-zinc-100 transition-colors shadow-sm"

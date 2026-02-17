@@ -29,7 +29,7 @@ export default function EducationPage() {
       image: "/MIT WPS/1000023951.png"
     },
     {
-      name: "Spicer Higher Secondary School",
+      name: "Cambridge School",
       level: "Secondary School",
       location: "Pune, Maharashtra",
       dates: "2010 — 2023",

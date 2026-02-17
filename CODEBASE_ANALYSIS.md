@@ -104,9 +104,9 @@ export const itemVariants: Variants = {
 
 // src/components/SocialLinks.tsx
 export const SOCIAL_LINKS = [
-  { name: "GitHub", icon: Github, href: "https://github.com/archduke1337" },
-  { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/gurvv/" },
-  { name: "Email", icon: Mail, href: "mailto:gauravramyadav@gmail.com" }
+  { name: "GitHub", icon: Github, href: "https://github.com/Aviox8" },
+  { name: "LinkedIn", icon: Linkedin, href: "https://www.linkedin.com/in/avioxdiii/" },
+  { name: "Email", icon: Mail, href: "mailto:adityayadav@gmail.com" }
 ];
 
 export function SocialLinksRow({ className }: { className?: string }) {
@@ -220,10 +220,10 @@ const HeavyComponent = dynamic(() => import('./HeavyComponent'), {
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Projects | Gaurav Yadav',
+  title: 'Projects | Aditya Yadav',
   description: 'Explore my latest projects in full-stack development and cybersecurity.',
   openGraph: {
-    title: 'Projects | Gaurav Yadav',
+    title: 'Projects | Aditya Yadav',
     description: 'Explore my latest projects in full-stack development and cybersecurity.',
     type: 'website',
   },
@@ -242,11 +242,11 @@ export default function ProjectsPage() { ... }
 ```tsx
 // src/config/constants.ts
 export const SITE_CONFIG = {
-  name: 'Gaurav Yadav',
+  name: 'Aditya Yadav',
   title: 'BCA Cybersecurity Student & Full Stack Developer',
-  email: 'gauravramyadav@gmail.com',
-  github: 'https://github.com/archduke1337',
-  linkedin: 'https://www.linkedin.com/in/gurvv/',
+  email: 'adityayadav@gmail.com',
+  github: 'https://github.com/Aviox8',
+  linkedin: 'https://www.linkedin.com/in/avioxdiii/',
 } as const;
 
 export const ANIMATION_TIMING = {

@@ -3,7 +3,7 @@ import { Briefcase } from "lucide-react";
 export default function ExperiencePage() {
   const experiences = [
     {
-      role: "Co-Founder",
+      role: "Founder",
       company: "Zocav",
       date: "2026",
       description: "Focused on learning and early-stage exploration of product development and security architecture.",
@@ -12,10 +12,10 @@ export default function ExperiencePage() {
       accentColor: "text-blue-600 dark:text-blue-400"
     },
     {
-      role: "Head of Technical Operations",
+      role: "Head of Pr & Outreach operations",
       company: "Mind Mesh Club, ADYPU",
       date: "2025",
-      description: "Leading technical initiatives and managing infrastructure for the university's tech community.",
+      description: "Leading marketing and outreach initiatives and collaborating on infrastructures for the university's tech community.",
       color: "bg-purple-100 dark:bg-purple-900/30",
       dotColor: "bg-purple-600 dark:bg-purple-500",
       accentColor: "text-purple-600 dark:text-purple-400"
@@ -30,16 +30,16 @@ export default function ExperiencePage() {
       dotColor: "bg-amber-600 dark:bg-amber-500",
       accentColor: "text-amber-600 dark:text-amber-400"
     },
-    {
-      role: "Co-Founding Engineer",
-      company: "Exeiv.in Digital Agency & Spydown.in Creative Studio",
+ {
+      role: "Sales & Marketing Lead",
+      company: "Nitro Gym, Pimpri Chinchwad",
       date: "2023 — 2025",
-      description: "Co-founded and led technical development for two joint ventures: Exeiv, a digital agency delivering end-to-end web solutions, and Spydown, a creative studio specializing in brand identity and digital experiences. Both ventures have since concluded.",
-      location: "Remote",
+      description: "Managed brand identity and digital marketing services for Nitro Gym. Oversaw sales and marketing operations, driving growth and customer engagement.",
+      location: "Pimpri",
       color: "bg-rose-100 dark:bg-rose-900/30",
       dotColor: "bg-rose-600 dark:bg-rose-500",
       accentColor: "text-rose-600 dark:text-rose-400"
-    },
+    }, 
     {
       role: "Marketing Associate",
       company: "JioCinema | IPL Field Marketing",

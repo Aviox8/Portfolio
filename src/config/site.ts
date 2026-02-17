@@ -1,11 +1,11 @@
 export const SITE_CONFIG = {
-  name: 'Gaurav Yadav',
+  name: 'Aditya Yadav',
   title: 'BCA Cybersecurity Student & Full Stack Developer',
-  description: 'Portfolio of Gaurav Yadav, a BCA Cybersecurity student and Web Developer specializing in full-stack development and cybersecurity.',
-  email: 'gauravramyadav@gmail.com',
-  github: 'https://github.com/archduke1337',
-  linkedin: 'https://www.linkedin.com/in/gurvv/',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://gauravyadav.dev',
+  description: 'Portfolio of Aditya Yadav, a BCA Cybersecurity student and Web Developer specializing in full-stack development and cybersecurity.',
+  email: 'adityayadav@gmail.com',
+  github: 'https://github.com/Aviox8',
+  linkedin: 'https://www.linkedin.com/in/avioxdiii/',
+  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://adityayadav.dev',
 } as const;
 
 export const NAVIGATION_LINKS = [

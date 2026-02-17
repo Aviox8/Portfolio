@@ -825,7 +825,7 @@ Once reframed, the problem became tractable without proprietary data or large in
 
 # II. Independent Research Positioning
 
-SeekEngine was built as a **zero-budget, zero-infrastructure, open-web experiment** by two independent researchers (Gaurav Yadav & Aditya Yadav) without privileged access to datasets, model weights, proprietary APIs, or academic compute. This constraint forced architectural decisions that are often avoided in institutional settings because they appear inelegant or “hacky,” yet they mirror constraints faced by real systems deployed outside research labs.
+SeekEngine was built as a **zero-budget, zero-infrastructure, open-web experiment** by an independent researcher (Aditya Yadav) without privileged access to datasets, model weights, proprietary APIs, or academic compute. This constraint forced architectural decisions that are often avoided in institutional settings because they appear inelegant or “hacky,” yet they mirror constraints faced by real systems deployed outside research labs.
 
 We found that constraints were not obstacles—they were **signal generators**.
 
@@ -1504,7 +1504,7 @@ Instead, it inherits the tradition of **independent experimental systems researc
 
 # XI. Acknowledgments & Contributions
 
-SeekEngine was conceived, designed, and implemented as a collaborative independent research effort between **Gaurav Yadav** and **Aditya Yadav**, contributing equally across system architecture, implementation, debugging, and conceptual design.
+SeekEngine was conceived, designed, and implemented as an independent research effort by **Aditya Yadav**.
 
 Acknowledgments extend to:
 * **OpenRouter** → for accessible inference
@@ -1520,7 +1520,7 @@ No institutional support, funding, or proprietary infrastructure was used.
 
 # XII. Implementation Cross-References (Repo Integration)
 
-The public repository [https://github.com/archduke1337/SeekEngine](https://github.com/archduke1337/SeekEngine) reflects the research architecture and security boundary:
+The public repository [https://github.com/Aviox8/SeekEngine](https://github.com/Aviox8/SeekEngine) reflects the research architecture and security boundary:
 
 #### Retrieval
 * \`/actions/search.ts\`
@@ -2098,7 +2098,7 @@ export default function SeekEngineResearch() {
               >
                  <div className="flex items-center gap-2">
                     <User size={14} className="text-orange-500" />
-                    <span>Gaurav Yadav & Aditya Yadav</span>
+                    <span>Aditya Yadav</span>
                  </div>
                  <div className="flex items-center gap-2">
                     <Calendar size={14} className="text-orange-500" />
@@ -2124,7 +2124,7 @@ export default function SeekEngineResearch() {
                     <Zap size={16} />
                     Live Demo
                   </Link>
-                  <Link href="https://github.com/archduke1337/SeekEngine" target="_blank" className="apple-btn-secondary rounded-full px-8">
+                  <Link href="https://github.com/Aviox8/SeekEngine" target="_blank" className="apple-btn-secondary rounded-full px-8">
                     <Code size={16} />
                     Source Code
                   </Link>

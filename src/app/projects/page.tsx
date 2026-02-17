@@ -22,32 +22,13 @@ export default function ProjectsPage() {
       name: "SeekEngine",
       description: "Open-source search engine powered by Google Custom Search API with theme-aware design and playful teleport discovery feature.",
       tech: ["Next.js", "React 18", "Google Search API", "Tailwind CSS", "Vercel"],
-      link: "https://github.com/archduke1337/SeekEngine",
+      link: "https://github.com/Aviox8/SeekEngine",
       slug: "/projects/seekengine",
       color: "from-green-500/20 to-emerald-500/20",
       iconColor: "bg-green-500",
       accent: "text-green-600 dark:text-green-400"
     },
-    {
-      name: "Ro0m",
-      description: "Modern video conferencing app as a Zoom alternative with real-time video/audio, screen sharing, and instant shareable meeting rooms.",
-      tech: ["Next.js", "React 18", "WebRTC", "Stream.io SDK", "Tailwind CSS"],
-      link: "https://github.com/archduke1337/Ro0m",
-      slug: "/projects/ro0m",
-      color: "from-blue-500/20 to-indigo-500/20",
-      iconColor: "bg-blue-500",
-      accent: "text-blue-600 dark:text-blue-400"
-    },
-    {
-      name: "Gil Project",
-      description: "Professional diamond certification and verification platform with 3D gem analysis, secure admin panel, and comprehensive gemstone encyclopedia.",
-      tech: ["React 18", "Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL"],
-      link: "https://github.com/archduke1337/Gil",
-      slug: "/projects/gil",
-      color: "from-rose-500/20 to-pink-500/20",
-      iconColor: "bg-rose-500",
-      accent: "text-rose-600 dark:text-rose-400"
-    }
+    
   ];
 
   return (

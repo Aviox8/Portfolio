@@ -31,7 +31,7 @@ export default function Home() {
               transition={{ duration: 0.8, ease: [0.32, 0.72, 0, 1] }}
               className="relative text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold tracking-tighter text-zinc-900 dark:text-white leading-[0.85]"
             >
-              Gaurav<br/>Yadav
+              Aditya<br/>Yadav
             </motion.h1>
             
             <motion.p 
@@ -221,7 +221,7 @@ export default function Home() {
           </a>
           
           <p className="text-xs sm:text-sm text-zinc-400 font-medium">
-            © {new Date().getFullYear()} Gaurav Yadav. Built with Next.js, React & Tailwind CSS.
+            © {new Date().getFullYear()} Aditya Yadav. Built with Next.js, React & Tailwind CSS.
           </p>
         </footer>
       </div>

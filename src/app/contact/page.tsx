@@ -118,8 +118,8 @@ export default function ContactPage() {
   const contacts = [
     {
       name: "Email",
-      value: "gauravramyadav@gmail.com",
-      href: "mailto:gauravramyadav@gmail.com",
+      value: "aviox.is.a.dev@gmail.com",
+      href: "mailto:aviox.is.a.dev@gmail.com",
       icon: Mail,
       color: "bg-rose-100 dark:bg-rose-900/30",
       accentColor: "text-rose-600 dark:text-rose-400",
@@ -127,8 +127,8 @@ export default function ContactPage() {
     },
     {
       name: "GitHub",
-      value: "@archduke1337",
-      href: "https://github.com/archduke1337",
+      value: "@Aviox8",
+      href: "https://github.com/Aviox8",
       icon: Github,
       color: "bg-slate-100 dark:bg-slate-800",
       accentColor: "text-slate-700 dark:text-slate-300",
@@ -136,8 +136,8 @@ export default function ContactPage() {
     },
     {
       name: "LinkedIn",
-      value: "@gurvv",
-      href: "https://www.linkedin.com/in/gurvv/",
+      value: "@avioxdiii",
+      href: "https://www.linkedin.com/in/avioxdiii/",
       icon: Linkedin,
       color: "bg-blue-100 dark:bg-blue-900/30",
       accentColor: "text-blue-600 dark:text-blue-400",

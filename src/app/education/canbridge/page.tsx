@@ -4,12 +4,12 @@ import Image from "next/image";
 
 export default function SpicerPage() {
   const images = [
-    { src: "/Spicer/100_1676.JPG", alt: "Spicer Higher Secondary School", caption: "Early school memories" },
-    { src: "/Spicer/20160224_092340.jpg", alt: "Spicer Childhood", caption: "Nostalgic classroom moments" },
-    { src: "/Spicer/20180228_104243.jpg", alt: "Spicer School Event", caption: "Participating in school activities" },
-    { src: "/Spicer/20190228_112146.jpg", alt: "Spicer Campus", caption: "Campus life and friends" },
-    { src: "/Spicer/IMG_20230717_150232_474.jpg", alt: "Spicer Farewell/Event", caption: "Final years at Spicer" },
-    { src: "/Spicer/Screenshot_20230712_130154_Instagram.jpg", alt: "Spicer Instagram Memory", caption: "Sharing moments from school days" },
+    { src: "/Spicer/100_1676.JPG", alt: "Cambridge School", caption: "Early school memories" },
+    { src: "/Spicer/20160224_092340.jpg", alt: "Cambridge Childhood", caption: "Nostalgic classroom moments" },
+    { src: "/Spicer/20180228_104243.jpg", alt: "Cambridge School Event", caption: "Participating in school activities" },
+    { src: "/Spicer/20190228_112146.jpg", alt: "Cambridge Campus", caption: "Campus life and friends" },
+    { src: "/Spicer/IMG_20230717_150232_474.jpg", alt: "Cambridge Farewell/Event", caption: "Final years at Cambridge" },
+    { src: "/Spicer/Screenshot_20230712_130154_Instagram.jpg", alt: "Cambridge Instagram Memory", caption: "Sharing moments from school days" },
   ];
 
   return (
@@ -26,7 +26,7 @@ export default function SpicerPage() {
         <section className="mb-12">
           <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-6">
             <div>
-              <h1 className="text-3xl font-bold text-apple-900 dark:text-white mb-2">Spicer Higher Secondary School</h1>
+              <h1 className="text-3xl font-bold text-apple-900 dark:text-white mb-2">Cambridge School</h1>
               <div className="flex flex-wrap gap-4 text-apple-500 dark:text-apple-400 text-sm">
                 <span className="flex items-center gap-1">
                   <MapPin size={14} />
@@ -45,7 +45,7 @@ export default function SpicerPage() {
 
           <div className="prose prose-slate dark:prose-invert max-w-none text-apple-600 dark:text-apple-300 leading-relaxed space-y-4">
             <p>
-              <span className="text-apple-900 dark:text-white font-semibold">Spicer Higher Secondary School</span> is where my academic journey truly began to take shape. 
+              <span className="text-apple-900 dark:text-white font-semibold">Canbridge School</span> is where my academic journey truly began to take shape. 
               The school provided a nurturing environment that encouraged curiosity and a love for learning.
             </p>
             <p>
