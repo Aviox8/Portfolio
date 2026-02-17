@@ -20,6 +20,16 @@ export default function ExperiencePage() {
       dotColor: "bg-purple-600 dark:bg-purple-500",
       accentColor: "text-purple-600 dark:text-purple-400"
     },
+   { 
+      role: "Sales & Marketing Lead",
+      company: "Nitro Gym, Pimpri Chinchwad",
+      date: "2025",
+      description: "Managed brand identity and digital marketing services for Nitro Gym. Oversaw sales and marketing operations, driving growth and customer engagement.",
+      location: "Pimpri",
+      color: "bg-rose-100 dark:bg-rose-900/30",
+      dotColor: "bg-rose-600 dark:bg-rose-500",
+      accentColor: "text-rose-600 dark:text-rose-400"
+    }, 
     {
       role: "Exam Operations Manager & Server Administrator",
       company: "MHTCET 2025 Exams | Maharashtra Government",
@@ -30,16 +40,6 @@ export default function ExperiencePage() {
       dotColor: "bg-amber-600 dark:bg-amber-500",
       accentColor: "text-amber-600 dark:text-amber-400"
     },
- {
-      role: "Sales & Marketing Lead",
-      company: "Nitro Gym, Pimpri Chinchwad",
-      date: "2023 — 2025",
-      description: "Managed brand identity and digital marketing services for Nitro Gym. Oversaw sales and marketing operations, driving growth and customer engagement.",
-      location: "Pimpri",
-      color: "bg-rose-100 dark:bg-rose-900/30",
-      dotColor: "bg-rose-600 dark:bg-rose-500",
-      accentColor: "text-rose-600 dark:text-rose-400"
-    }, 
     {
       role: "Marketing Associate",
       company: "JioCinema | IPL Field Marketing",
